@@ -22,7 +22,7 @@ const Image = ({
 }) => {
   const imageClassName = new ClassName(styles.image);
   imageClassName.addIf(className, className);
-  const slidesImages = allImages.map(({ sourceUrl, title }) => ({
+  const slidesImages = allImages?.map(({ sourceUrl, title }) => ({
     src: sourceUrl,
     title: title,
   }));
