@@ -1,9 +1,9 @@
-import { EXAMPLE_PATH } from "../lib/constants"
-import Image from "next/image"
-import styled from "styled-components"
-import { Container } from "./layoutComponents"
-import { Icon } from "@chakra-ui/react"
-import { PhoneIcon, AtSignIcon, TimeIcon } from "@chakra-ui/icons"
+import { EXAMPLE_PATH } from "../lib/constants";
+import Image from "next/image";
+import styled from "styled-components";
+import { Container } from "./layoutComponents";
+import { Icon } from "@chakra-ui/react";
+import { PhoneIcon, AtSignIcon, TimeIcon } from "@chakra-ui/icons";
 import {
   IoLogoPinterest,
   IoLogoInstagram,
@@ -11,34 +11,72 @@ import {
   IoLogoFacebook,
   IoLogoLinkedin,
   IoLogoYoutube,
-} from "react-icons/io"
-import Link from "next/link"
+} from "react-icons/io";
+import Link from "next/link";
 
 const LinkBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); 
-  gap: 10px;
+display: flex;
+justify-content: space-between;
+
   color: white;
   margin-top: var(--spacer-lg);
   margin-bottom: 25px;
 
+  .About{
+    width:40%
+  }
   @media (max-width: 768px) { 
-    grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
+   display:block;
+   .About{
+    width:100%;
+    margin-top:3em
+  }
+  .quickLinks{
+    margin-top:3em
+  }
   }
 }
-`
+`;
 const HeadingTag = styled.h3`
   margin-bottom: 15px;
-`
+`;
+const CopyRight = styled.div`
+  display: flex;
+  color: white;
+  gap: 20px;
+  justify-content: center;
+  margin: 30px 0;
+  flexwrap: wrap;
+
+  p {
+    font-size: 12px;
+  }
+  a {
+    font-size: 12px;
+  }
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+const FooterCopyrightLogo = styled.div`
+  color: white;
+  display: flex;
+  alignitems: center;
+  margin: 30px 0;
+  justify-content: end;
+  @media (max-width: 768px) {
+    margin: 10px 0;
+  }
+`;
 
 const NextLink = ({ children, href }) => {
   return (
     <Link style={{ color: "white", textDecoration: "underline" }} href={href}>
       {children}
     </Link>
-  )
-}
-const LinkElement = styled.div``
+  );
+};
+const LinkElement = styled.div``;
 export default function Footer() {
   return (
     <>
@@ -87,7 +125,10 @@ export default function Footer() {
                 711 84 Ave SW, Calgary, AB <br />
                 Canada
               </p>
-              <div style={{ display: "flex" }} className="social-icons">
+              <div
+                style={{ display: "flex", marginTop: "10px" }}
+                className="social-icons"
+              >
                 {" "}
                 <a
                   target="_blank"
@@ -95,7 +136,6 @@ export default function Footer() {
                 >
                   <Icon
                     color="#973cb7"
-                    ml={"10px"}
                     fontSize={"25px"}
                     as={IoLogoInstagram}
                   />
@@ -194,15 +234,7 @@ export default function Footer() {
                   <NextLink href="/resources/faq">Faq</NextLink>
                 </LinkElement>
                 <LinkElement>
-                  <NextLink href="/contest">Contest</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  <NextLink href="/blog">Blog</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  <NextLink href="/book-now">Contact</NextLink>
+                  <NextLink href="/book-now">Contact & Booking</NextLink>
                 </LinkElement>
               </ul>
             </div>
@@ -230,17 +262,7 @@ export default function Footer() {
               margin: "0 auto",
             }}
           />
-          <div
-            className="copyright"
-            style={{
-              display: "flex",
-              color: "white",
-              gap: "20px",
-              justifyContent: "center",
-              margin: "30px 0",
-              flexWrap: "wrap",
-            }}
-          >
+          <CopyRight className="copyright">
             <p>Copyright© 2023</p>
             <p>Inner Spirit Photography</p>
             <p>All Rights Reserved</p>
@@ -262,7 +284,7 @@ export default function Footer() {
             >
               Privacy Policy
             </a>
-          </div>
+          </CopyRight>
           <hr
             style={{
               backgroundColor: "var(--clr-accent)",
@@ -270,15 +292,7 @@ export default function Footer() {
               margin: "0 auto",
             }}
           />
-          <div
-            style={{
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              margin: "30px 0",
-              justifyContent: "end",
-            }}
-          >
+          <FooterCopyrightLogo>
             <p>Website by:</p>
             <Image
               height={100}
@@ -286,7 +300,7 @@ export default function Footer() {
               alt={"website name"}
               src="/aaron-tonner-web-solutions-logo-white-white.svg"
             />
-          </div>
+          </FooterCopyrightLogo>
         </Container>
       </footer>
       <iframe
@@ -301,5 +315,5 @@ export default function Footer() {
         }}
       ></iframe>
     </>
-  )
+  );
 }

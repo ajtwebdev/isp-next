@@ -1,14 +1,14 @@
-import { getAllPosts, postPathBySlugCategory } from "../../lib/posts"
-import { getPostByCategory } from "../recent-posts"
-import { Container, Section } from "../../components/layoutComponents"
+import { getAllPosts, postPathBySlugCategory } from "../../lib/posts";
+import { getPostByCategory } from "../recent-posts";
+import { Container, Section } from "../../components/layoutComponents";
 
-import styled from "styled-components"
-import Seo from "../../components/seo"
-import LayoutJs from "../../components/layoutJs"
-import Link from "next/link"
+import styled from "styled-components";
+import Seo from "../../components/seo";
+import LayoutJs from "../../components/layoutJs";
+import Link from "next/link";
 
-import HeaderBasic from "../../components/headers/headerBasic"
-import Footer from "../../components/footer"
+import HeaderBasic from "../../components/headers/headerBasic";
+import Footer from "../../components/footer";
 
 const BannerWrapper = styled.div`
   grid-row: 1 / span 2;
@@ -32,7 +32,7 @@ const BannerWrapper = styled.div`
     min-height: 40vh;
     height: 100%;
   }
-`
+`;
 
 const BannerText = styled.div`
   max-width: 140ch;
@@ -41,22 +41,22 @@ const BannerText = styled.div`
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-`
+`;
 
 const Excerpt = styled.div`
   font-size: var(--fs-sm);
-`
+`;
 
 const StyledCard = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 26%;
-`
+`;
 
 const StyledCardContainer = styled.div`
   padding: 10px;
   color: black;
-`
+`;
 
 const CategoryContainer = styled.div`
   h2 {
@@ -64,18 +64,18 @@ const CategoryContainer = styled.div`
     padding: 4px;
     margin-bottom: 14px;
   }
-`
+`;
 
 const CategoryPostContainer = styled.div`
   display: flex;
   gap: 20px;
-`
+`;
 
 const PostContainer = styled(Container)`
   display: flex;
   flex-direction: column;
   gap: 70px;
-`
+`;
 
 const CategoryPage = ({ catgoryPost }) => {
   return (
@@ -100,7 +100,7 @@ const CategoryPage = ({ catgoryPost }) => {
             <CategoryPostContainer>
               {catgoryPost?.posts?.map((post, index) => {
                 const categorySlug =
-                  post?.categories?.length > 0 ? post?.categories[0]?.slug : ""
+                  post?.categories?.length > 0 ? post?.categories[0]?.slug : "";
                 return (
                   <StyledCard key={index}>
                     <Link
@@ -121,7 +121,7 @@ const CategoryPage = ({ catgoryPost }) => {
                       </StyledCardContainer>
                     </Link>
                   </StyledCard>
-                )
+                );
               })}
             </CategoryPostContainer>
           </CategoryContainer>
@@ -130,28 +130,28 @@ const CategoryPage = ({ catgoryPost }) => {
 
       <Footer />
     </div>
-  )
-}
+  );
+};
 
 export async function getStaticProps({ params }) {
   const { posts } = await getAllPosts({
     queryIncludes: "all",
-  })
-  const postsByCategory = getPostByCategory(posts)
+  });
+  const postsByCategory = getPostByCategory(posts);
   const catgoryPost = Object.values(postsByCategory).find(
     (item: any) => item?.categorySlug === params?.category
-  )
+  );
   return {
     props: {
       catgoryPost,
     },
-  }
+  };
 }
 
 export async function getStaticPaths() {
   const { posts } = await getAllPosts({
     queryIncludes: "all",
-  })
+  });
 
   const paths = [].concat(
     ...posts?.map((item: any) =>
@@ -161,12 +161,12 @@ export async function getStaticPaths() {
         },
       }))
     )
-  )
+  );
 
   return {
     paths,
     fallback: false,
-  }
+  };
 }
 
-export default CategoryPage
+export default CategoryPage;

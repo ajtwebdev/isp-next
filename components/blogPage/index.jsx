@@ -1,37 +1,38 @@
-import { useRouter } from "next/router"
-import React, { useEffect } from "react"
-import ErrorPage from "next/error"
-import Head from "next/head"
-import { GetStaticPaths, GetStaticProps } from "next"
-import PostBody from "../post-body"
-import MoreStories from "../more-stories"
-import PostHeader from "../post-header"
-import SectionSeparator from "../section-separator"
-import LayoutJs from "../layoutJs"
-import Tags from "../tags"
-import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api"
-import { CMS_NAME } from "../../lib/constants"
-import { Section, Container, HeroBannerPadding } from "../layoutComponents"
-import { ButtonPrimary, ButtonInline } from "../buttons"
-import styled from "styled-components"
-import Link from "next/link"
-import ServiceForm from "../forms/serviceForm"
-import Image from "next/image"
-import commentBox from "commentbox.io"
+import { useRouter } from "next/router";
+import React, { useEffect } from "react";
+import ErrorPage from "next/error";
+import Head from "next/head";
+import { GetStaticPaths, GetStaticProps } from "next";
+import PostBody from "../post-body";
+import MoreStories from "../more-stories";
+import PostHeader from "../post-header";
+import SectionSeparator from "../section-separator";
+import LayoutJs from "../layoutJs";
+import Tags from "../tags";
+import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
+import { CMS_NAME } from "../../lib/constants";
+import { Section, Container, HeroBannerPadding } from "../layoutComponents";
+import { ButtonPrimary, ButtonInline } from "../buttons";
+import styled from "styled-components";
+import Link from "next/link";
+import ServiceForm from "../forms/serviceForm";
+// import Image from "components/Image";
+import Image from "../Image";
+import commentBox from "commentbox.io";
 
-import Seo from "../seo"
-const BlogArticle = styled.article``
+import Seo from "../seo";
+const BlogArticle = styled.article``;
 
 // Banner
 const BannerGrid = styled.div`
   display: grid;
   grid-template-rows: auto 4em auto;
-`
+`;
 
 const Flex = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 const BannerWrapper = styled.div`
   grid-row: 1 / span 2;
@@ -54,7 +55,7 @@ const BannerWrapper = styled.div`
     min-height: 40vh;
     height: 100%;
   }
-`
+`;
 
 const BannerText = styled.div`
   max-width: 140ch;
@@ -63,7 +64,7 @@ const BannerText = styled.div`
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-`
+`;
 
 const BannerBottomText = styled.div`
   grid-row: 2 / -1;
@@ -74,7 +75,7 @@ const BannerBottomText = styled.div`
   color: var(--txt-light);
   padding: 2em;
   width: 80%;
-`
+`;
 
 // Layout
 const Wrapper = styled.div`
@@ -86,7 +87,7 @@ const Wrapper = styled.div`
     display: flex;
     flex-direction: column-reverse;
   }
-`
+`;
 
 const Aside = styled.div`
   grid-column: 1 / span 1;
@@ -96,7 +97,7 @@ const Aside = styled.div`
       display: none;
     }
   }
-`
+`;
 
 const Navigation = styled.div`
   box-shadow: var(--shadow-light);
@@ -113,32 +114,32 @@ const Navigation = styled.div`
       margin-top: 0.2em;
     }
   }
-`
+`;
 
 const Content = styled.div`
   grid-column: 2 / -1;
   @media screen and (max-width: 48em) {
     grid-row: 1 / span 1;
   }
-`
+`;
 
 const Img = styled.div`
   img {
     width: 100%;
     object-fit: cover;
   }
-`
+`;
 
 const ServiceAreas = styled.div`
   padding: 2em;
   border: 1px solid var(--txt-dark-secondary);
   border-radius: var(--br);
-`
+`;
 
 const StyledLink = styled((props) => <Link {...props} />)`
   text-decoration: none;
   color: var(--clr-accent);
-`
+`;
 
 const BlogWrapper = styled.div`
   max-width: 700px;
@@ -182,7 +183,7 @@ const BlogWrapper = styled.div`
     font-size: 1.2rem;
     margin-bottom: 2em;
   }
-`
+`;
 
 // Layout
 const ContentWrapper = styled.div`
@@ -194,7 +195,7 @@ const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column-reverse;
   }
-`
+`;
 
 const AboutMark = styled.div`
   box-shadow: var(--shadow-light);
@@ -205,19 +206,19 @@ const AboutMark = styled.div`
     height: 300px;
     object-fit: cover;
   }
-`
+`;
 
 export default function PostPage({ post, posts, preview }) {
-  const router = useRouter()
-  const morePosts = posts?.edges
+  const router = useRouter();
+  const morePosts = posts?.edges;
 
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />
+    return <ErrorPage statusCode={404} />;
   }
 
   useEffect(() => {
-    commentBox("5661567546818560-proj")
-  }, [])
+    commentBox("5661567546818560-proj");
+  }, []);
 
   return (
     <LayoutJs>
@@ -299,6 +300,7 @@ export default function PostPage({ post, posts, preview }) {
 
                   <p>{post.date}</p>
                 </header>
+                {console.log(post, "post")}
                 {post.featuredImage ? (
                   // <BannerGrid>
                   //   <BannerWrapper img={post.featuredImage?.node.sourceUrl}>
@@ -314,8 +316,6 @@ export default function PostPage({ post, posts, preview }) {
                   <Image
                     src={post.featuredImage?.node.sourceUrl}
                     alt={post.title}
-                    height={500}
-                    width={600}
                   />
                 ) : null}
                 {!!post.content && (
@@ -339,5 +339,5 @@ export default function PostPage({ post, posts, preview }) {
         </Container>
       </Section> */}
     </LayoutJs>
-  )
+  );
 }
