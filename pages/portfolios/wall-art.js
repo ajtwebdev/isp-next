@@ -33,7 +33,7 @@ export default function WallArt({ allWallArtImages }) {
   return (
     <LayoutJs>
       <Seo
-        title="WallArt | Inner Spirit Photography"
+        title="Wall Art | Inner Spirit Photography"
         description="Here is the full gallery of Inner Spirit Photography!"
       />
       <BannerSecondary

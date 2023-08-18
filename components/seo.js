@@ -1,12 +1,12 @@
 import Head from "next/head";
 
-const DOMAIN = "https://www.shelterinplace3.ca";
+const DOMAIN = "https://www.innerspiritphoto.com";
 const DEFAULT_OG_IMAGE =
-  "https://storage.googleapis.com/brandflow-bucket/personal/blog/portfolio-og.jpg";
+  "https://staging.innerspiritphoto.com/wp-content/uploads/2022/10/X1171D-0007AY.jpg";
 
 export default function Seo({
-  title = "Shelter in Place",
-  description = "This site was created for the glory of god.",
+  title = "Inner Spirit Photography | Calgary Boudoir",
+  description = "Inner Spirit Photography is a Calgary-based boudoir studio with more than 40 years of experience.",
   siteName = "Shelter in Place",
   canonical = DOMAIN,
   ogImage = DEFAULT_OG_IMAGE,

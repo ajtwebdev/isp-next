@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || "https://shelterinplace3.ca",
+  siteUrl: process.env.SITE_URL || "https://innerspiritphoto.com",
   generateRobotsTxt: true, // (optional)
   // ...other options
 };
