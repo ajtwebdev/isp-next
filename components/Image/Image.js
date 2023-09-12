@@ -52,13 +52,15 @@ const Image = ({
           />
         )}
       </figure>
-      <Lightbox
-        index={index}
-        plugins={[Video, Zoom]}
-        open={openLightBox}
-        close={() => setOpenLightbox(false)}
-        slides={slidesImages}
-      />
+      {allImages && (
+        <Lightbox
+          index={index}
+          plugins={[Video, Zoom]}
+          open={openLightBox}
+          close={() => setOpenLightbox(false)}
+          slides={slidesImages}
+        />
+      )}
     </>
   );
 };

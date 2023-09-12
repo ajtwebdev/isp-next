@@ -155,11 +155,16 @@ export default function Blog({ posts, pagination }) {
                     itemType="http://schema.org/Article"
                   >
                     {post.featuredImage ? (
-                      <Image
-                        alt={post.featuredImage.altText || ""}
-                        srcSet={post.featuredImage.srcSet}
-                        src={post.featuredImage.src}
-                      />
+                      <Link
+                        className="spacing accent"
+                        href={postPathBySlugCategory(post.slug, categorySlug)}
+                      >
+                        <Image
+                          alt={post.featuredImage.altText || ""}
+                          srcSet={post.featuredImage.srcSet}
+                          src={post.featuredImage.src}
+                        />
+                      </Link>
                     ) : null}
 
                     <Text>
