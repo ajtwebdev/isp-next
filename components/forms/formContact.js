@@ -42,7 +42,6 @@ export default function FormContact(props) {
   const [properties, setProperties] = useState({
     keep_up_with_us: "",
     Session_wanted_for: "",
-    message: "",
     first_Name: "",
     last_name: "",
   });
@@ -50,6 +49,7 @@ export default function FormContact(props) {
     name: "",
     email: "",
     phone: "",
+    note: "",
     properties: [
       {
         name: "first_name",
@@ -65,10 +65,6 @@ export default function FormContact(props) {
       },
       {
         name: "Session_wanted_for",
-        value: "",
-      },
-      {
-        name: "message",
         value: "",
       },
     ],
@@ -93,10 +89,6 @@ export default function FormContact(props) {
         {
           name: "Session_wanted_for",
           value: properties?.Session_wanted_for,
-        },
-        {
-          name: "message",
-          value: properties?.message,
         },
       ],
     }));
@@ -331,7 +323,7 @@ export default function FormContact(props) {
                 <Label htmlFor="inf_custom_Message">Message *</Label>
                 <TextArea
                   onChange={(e) => {
-                    setProperties({ ...properties, message: e.target.value });
+                    setFormData({ ...formData, note: e.target.value });
                   }}
                   cols={24}
                   id="inf_custom_Message"
