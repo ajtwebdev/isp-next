@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { Section, Container, Flex, FlexMobileOpp } from "../layoutComponents";
@@ -39,6 +39,83 @@ const Socials = styled.div`
 `;
 
 export default function FormContact(props) {
+  const [properties, setProperties] = useState({
+    keep_up_with_us: "",
+    Session_wanted_for: "",
+    first_Name: "",
+    last_name: "",
+  });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    note: "",
+    properties: [
+      {
+        name: "first_name",
+        value: "",
+      },
+      {
+        name: "last_name",
+        value: "",
+      },
+      {
+        name: "keep_up_with_us",
+        value: "",
+      },
+      {
+        name: "Session_wanted_for",
+        value: "",
+      },
+    ],
+  });
+  useEffect(() => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      name: properties?.first_Name + " " + properties.last_name,
+      properties: [
+        {
+          name: "first_name",
+          value: properties?.first_Name,
+        },
+        {
+          name: "last_name",
+          value: properties?.last_name,
+        },
+        {
+          name: "keep_up_with_us",
+          value: properties?.keep_up_with_us,
+        },
+        {
+          name: "Session_wanted_for",
+          value: properties?.Session_wanted_for,
+        },
+      ],
+    }));
+  }, [properties]);
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://markl.sendly.co.uk/api/site/contacts",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer w74fd560ced9a463990c64c52592be364", // Set the content type to JSON
+            // Add any other headers if needed
+          },
+          body: JSON.stringify(formData), // Convert your data to a JSON string
+        }
+      );
+      if (response.status === 200) {
+        console.log("dat saved");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <Section>
       <Container className="spacing">
@@ -53,18 +130,16 @@ export default function FormContact(props) {
           <FormWrapper>
             <form
               acceptCharset="UTF-8"
-              action="https://im322.infusionsoft.com/app/form/process/874dc5be8f3ee257d63dd0f53f29707e"
-              className="infusion-form"
-              id="inf_form_874dc5be8f3ee257d63dd0f53f29707e"
-              method="POST"
+              // action="https://markl.sendly.co.uk/api/site/contacts"
+              // method="POST"
             >
-              <input
-                name="inf_form_xid"
+              {/* <input
+                name="send_form_xid"
                 type="hidden"
                 defaultValue="874dc5be8f3ee257d63dd0f53f29707e"
               />
               <input
-                name="inf_form_name"
+                name="send_form_name"
                 type="hidden"
                 defaultValue="10. Marketing - Free &#a;Consultation Form (471)"
               />
@@ -72,7 +147,7 @@ export default function FormContact(props) {
                 name="infusionsoft_version"
                 type="hidden"
                 defaultValue="1.70.0.503005"
-              />
+              /> */}
               <div>
                 <div>
                   <div className="title">
@@ -94,29 +169,47 @@ export default function FormContact(props) {
                 <div>&nbsp;</div>
               </div>
               <div className="spacing">
-                <div className="infusion-field">
-                  <Label htmlFor="inf_field_FirstName">First Name *</Label>
+                <div className="field">
+                  <Label htmlFor="firstName">First Name *</Label>
                   <Input
-                    id="inf_field_FirstName"
-                    name="inf_field_FirstName"
+                    id="firstName"
+                    name="firstName"
                     placeholder="First Name *"
+                    value={properties.first_Name}
+                    onChange={(e) =>
+                      setProperties({
+                        ...properties,
+                        first_Name: e.target.value,
+                      })
+                    }
                     type="text"
                   />
                 </div>
-                <div className="infusion-field">
-                  <Label htmlFor="inf_field_LastName">Last Name *</Label>
+                <div className="field">
+                  <Label htmlFor="lastname">Last Name *</Label>
                   <Input
-                    id="inf_field_LastName"
-                    name="inf_field_LastName"
+                    id="Lastname"
+                    name="lastname"
+                    value={properties.last_name}
+                    onChange={(e) =>
+                      setProperties({
+                        ...properties,
+                        last_name: e.target.value,
+                      })
+                    }
                     placeholder="Last Name *"
                     type="text"
                   />
                 </div>
                 <div className="infusion-field">
-                  <Label htmlFor="inf_field_Email">Email *</Label>
+                  <Label htmlFor="email">Email *</Label>
                   <Input
-                    id="inf_field_Email"
-                    name="inf_field_Email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     placeholder="Email *"
                     type="text"
                   />
@@ -125,7 +218,11 @@ export default function FormContact(props) {
                   <Label htmlFor="inf_field_Phone1">Phone Number *</Label>
                   <Input
                     id="inf_field_Phone1"
-                    name="inf_field_Phone1"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phone: e.target.value })
+                    }
+                    name="phone"
                     placeholder="Phone Number *"
                     type="text"
                   />
@@ -156,6 +253,15 @@ export default function FormContact(props) {
                         <Input
                           id="inf_option_KeepUpWithUs_701"
                           name="inf_option_KeepUpWithUs"
+                          value={
+                            "Yes, I would love to get updates on contests, phototips, specials, and more."
+                          }
+                          onChange={(e) =>
+                            setProperties({
+                              ...properties,
+                              keep_up_with_us: e.target.value,
+                            })
+                          }
                           type="radio"
                           className="radio"
                           defaultValue={701}
@@ -170,6 +276,13 @@ export default function FormContact(props) {
                         <Input
                           id="inf_option_KeepUpWithUs_703"
                           name="inf_option_KeepUpWithUs"
+                          value={"No, I don't want to get updates"}
+                          onChange={(e) =>
+                            setProperties({
+                              ...properties,
+                              keep_up_with_us: e.target.value,
+                            })
+                          }
                           type="radio"
                           className="radio"
                           defaultValue={703}
@@ -187,8 +300,14 @@ export default function FormContact(props) {
                   <Select
                     id="inf_custom_SessionWantedFor"
                     name="inf_custom_SessionWantedFor"
+                    onChange={(e) => {
+                      setProperties({
+                        ...properties,
+                        Session_wanted_for: e.target.value,
+                      });
+                    }}
                   >
-                    <option value>Please select one</option>
+                    <option value="Please select one">Please select one</option>
                     <option value="Gift">Gift</option>
                     <option value="Adventure">Adventure</option>
                     <option value="Empowerment">Empowerment</option>
@@ -203,6 +322,9 @@ export default function FormContact(props) {
               <div className="infusion-field">
                 <Label htmlFor="inf_custom_Message">Message *</Label>
                 <TextArea
+                  onChange={(e) => {
+                    setFormData({ ...formData, note: e.target.value });
+                  }}
                   cols={24}
                   id="inf_custom_Message"
                   name="inf_custom_Message"
@@ -218,7 +340,8 @@ export default function FormContact(props) {
                 <button
                   className="infusion-recaptcha"
                   id="recaptcha_874dc5be8f3ee257d63dd0f53f29707e"
-                  type="submit"
+                  // type="submit"
+                  onClick={handleFormSubmit}
                 >
                   Submit
                 </button>
