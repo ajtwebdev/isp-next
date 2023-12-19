@@ -234,7 +234,9 @@ export default function Footer() {
                   <NextLink href="/resources/faq">Faq</NextLink>
                 </LinkElement>
                 <LinkElement>
-                  <NextLink href="/book-now">Contact & Booking</NextLink>
+                  <NextLink href="https://markl.sendly.co.uk/contact">
+                    Contact & Booking
+                  </NextLink>
                 </LinkElement>
               </ul>
             </div>

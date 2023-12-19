@@ -373,13 +373,15 @@ export default function HeaderBasic() {
                 </li>
 
                 <li>
-                  <StyledLink href="/book-now">contact</StyledLink>
+                  <StyledLink href="https://markl.sendly.co.uk/contact">
+                    contact
+                  </StyledLink>
                 </li>
                 <NavCtaMobile>
                   <NavPhone href="tel: (403) 252-2662">
                     +1 (403) 252-2662
                   </NavPhone>
-                  <GetQuote href="/book-now">
+                  <GetQuote href="https://markl.sendly.co.uk/contact">
                     <span>book now &#x2192;</span>
                   </GetQuote>
                 </NavCtaMobile>
@@ -387,7 +389,7 @@ export default function HeaderBasic() {
             </Nav>
             <NavCtaDesktop>
               <NavPhone href="tel: (403) 252-2662">+1 (403) 252-2662</NavPhone>
-              <GetQuote href="/book-now">
+              <GetQuote href="https://markl.sendly.co.uk/contact">
                 <span>book now &#x2192;</span>
               </GetQuote>
             </NavCtaDesktop>
