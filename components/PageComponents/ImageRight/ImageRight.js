@@ -49,7 +49,7 @@ export default function ImageRight({
             ) : null}
 
             {/* {link ? <ButtonPrimary href={link}>{button}</ButtonPrimary> : null} */}
-            <ButtonPrimary href="https://contest.sendly.co.uk/application">
+            <ButtonPrimary href="https://markl-1.sendly.co.uk/contest">
               Enter Contest Here
             </ButtonPrimary>
           </Text>
