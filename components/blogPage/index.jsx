@@ -298,7 +298,7 @@ export default function PostPage({ post, posts, preview }) {
                     {post.title}
                   </h1>
 
-                  <p>{post.date}</p>
+                  {/* <p>{post.date}</p> */}
                 </header>
                 {console.log(post, "post")}
                 {post.featuredImage ? (
