@@ -13,7 +13,12 @@ import {
   IoLogoYoutube,
 } from "react-icons/io";
 import Link from "next/link";
-
+import { ReactNode } from "react";
+interface NextLink {
+  children: ReactNode;
+  href: string;
+  target?: string;
+}
 const LinkBox = styled.div`
 display: flex;
 justify-content: space-between;
@@ -69,9 +74,13 @@ const FooterCopyrightLogo = styled.div`
   }
 `;
 
-const NextLink = ({ children, href }) => {
+const NextLink = ({ children, href, target }: NextLink) => {
   return (
-    <Link style={{ color: "white", textDecoration: "underline" }} href={href}>
+    <Link
+      style={{ color: "white", textDecoration: "underline" }}
+      href={href}
+      target={target}
+    >
       {children}
     </Link>
   );
@@ -234,7 +243,10 @@ export default function Footer() {
                   <NextLink href="/resources/faq">Faq</NextLink>
                 </LinkElement>
                 <LinkElement>
-                  <NextLink href="https://markl.sendly.co.uk/contact">
+                  <NextLink
+                    href="https://markl.sendly.co.uk/contact"
+                    target="_blank"
+                  >
                     Contact & Booking
                   </NextLink>
                 </LinkElement>
