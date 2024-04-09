@@ -104,10 +104,7 @@ export default function MainPageTestimonials() {
             <ReviewText className="center spacing accent">
               <h2 className="subhead caps">from baggy sweats to confidence</h2>
               <p className="italics">
-                "It turns out my presented bravado is really inside too, Mark
-                showed me that. I literally went from terrified in baggy sweats
-                to confidence in not much else. Being photographed unnerves me,
-                I don’t even look in mirrors. This experience changed all that."
+                Mark is very gifted at allowing you to feel comfortable in your own skin, by helping you remember the beauty that lies within, which is expressed through the images he captures. For many of us, we do not see what others see in ourselves and through this experience I went from not wanting to look at myself in the mirror to, let’s get these pictures on the wall!
               </p>
               <p className="caps">Kenisha M.</p>
             </ReviewText>
