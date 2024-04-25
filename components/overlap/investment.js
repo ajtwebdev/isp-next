@@ -25,12 +25,13 @@ export default function Investment() {
           <TextBoxRight className="spacing text-right">
             <h3 className="subhead accent caps">session & enlargements:</h3>
             <p>
-              Our Signature Experience 4-hour Session is $495 (includes a $100
-              credit toward image purchase).
+              Our Signature Experience 4-hour Session is $495
             </p>
             <p>
-              Our Connoisseur Experience 2-hour Session is $395 (includes a $100
-              credit toward image purchase).
+              Our Connoisseur Experience 2-hour Session is $395
+            </p>
+            <p>
+              Our  Essence Experience $795- 1 hour session with 3 prints.
             </p>
             <p>
               Image collections, framed prints, bound books and digital images
