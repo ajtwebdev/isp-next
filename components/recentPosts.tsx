@@ -44,19 +44,18 @@ const Excerpt = styled.div`
 `;
 
 const StyledCard = styled.div`
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   width: 26%;
- 
 `;
 
 const StyledCardContainer = styled.div`
   padding: 10px;
-  color:black;
+  color: black;
 `;
 
 const CategoryContainer = styled.div`
-  h2{
+  h2 {
     border-bottom: 1px solid #80808091;
     padding: 4px;
     margin-bottom: 14px;
@@ -65,63 +64,66 @@ const CategoryContainer = styled.div`
 
 const CategoryPostContainer = styled.div`
   display: flex;
-  gap:20px;
+  gap: 20px;
 `;
 
 const PostContainer = styled(Container)`
-  display:flex;
+  display: flex;
   flex-direction: column;
-  gap:70px;
+  gap: 70px;
 `;
 
 export default function Recent({ posts }) {
   return (
-      <Section>
-        <PostContainer>
-          {Object.keys(posts).map((cat_id, index) => {
-            const catgoryPost = posts[cat_id] || {};
-            return (
-              <CategoryContainer key={index}>
-                <h2>{catgoryPost?.categoryName}</h2>
-                <CategoryPostContainer>
-                {catgoryPost?.posts?.slice(0,6)?.map((post, index) => {
+    <Section>
+      <PostContainer>
+        {Object.keys(posts).map((cat_id, index) => {
+          const catgoryPost = posts[cat_id] || {};
+          return (
+            <CategoryContainer key={index}>
+              <h2>{catgoryPost?.categoryName}</h2>
+              <CategoryPostContainer>
+                {catgoryPost?.posts?.slice(0, 6)?.map((post, index) => {
                   const categorySlug =
                     post?.categories?.length > 0
                       ? post?.categories[0]?.slug
                       : "";
                   return (
                     <StyledCard key={index}>
-                    <Link
-                    className="spacing accent"
-                    href={postPathBySlugCategory(
-                      post.slug,
-                      categorySlug
-                    )}
-                  >
-                      <img src={post?.featuredImage?.sourceUrl} alt="Avatar"></img>
-                      <StyledCardContainer>
-                        <h4><b> {post?.title}</b></h4> 
-                        <Excerpt
-                          dangerouslySetInnerHTML={{ __html: post?.excerpt }}
-                        />
-                      </StyledCardContainer>
+                      <Link
+                        className="spacing accent"
+                        href={postPathBySlugCategory(post.slug, categorySlug)}
+                      >
+                        <img
+                          src={post?.featuredImage?.sourceUrl}
+                          alt="Avatar"
+                        ></img>
+                        <StyledCardContainer>
+                          <h4>
+                            <b> {post?.title}</b>
+                          </h4>
+                          <Excerpt
+                            dangerouslySetInnerHTML={{ __html: post?.excerpt }}
+                          />
+                        </StyledCardContainer>
                       </Link>
                     </StyledCard>
-                   
                   );
                 })}
-                </CategoryPostContainer>
-              </CategoryContainer>
-            );
-          })}
-        </PostContainer>
-      </Section>
+              </CategoryPostContainer>
+            </CategoryContainer>
+          );
+        })}
+      </PostContainer>
+    </Section>
   );
 }
 
 const getPostByCategory = (posts) => {
   const postsByCategory = {};
-  posts = posts.sort((a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime());
+  posts = posts.sort(
+    (a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime()
+  );
   // Iterate over the posts array
   for (const post of posts) {
     const categories = post.categories;

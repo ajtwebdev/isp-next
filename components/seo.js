@@ -7,7 +7,7 @@ const DEFAULT_OG_IMAGE =
 export default function Seo({
   title = "Inner Spirit Photography | Calgary Boudoir",
   description = "Inner Spirit Photography is a Calgary-based boudoir studio with more than 40 years of experience.",
-  siteName = "Shelter in Place",
+  siteName = "Inner Spirit Photography",
   canonical = DOMAIN,
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",

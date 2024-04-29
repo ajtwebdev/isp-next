@@ -291,7 +291,7 @@ export default function Footer() {
             </a>
             <a
               target="_blank"
-              href="https://www.innerspiritphoto.com/privacy-policy"
+              href="/privacy-policy"
               style={{
                 color: "white",
               }}
