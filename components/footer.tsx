@@ -282,7 +282,7 @@ export default function Footer() {
             <p>All Rights Reserved</p>
             <a
               target="_blank"
-              href="https://www.innerspiritphoto.com/terms-of-use"
+              href="/terms-of-use"
               style={{
                 color: "white",
               }}
