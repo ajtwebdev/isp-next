@@ -7,7 +7,7 @@ const TermOfUser = () => {
     return (
         <LayoutJs>
             <Seo
-                title="term of user"
+                title="term of use"
                 description="Encouraging, supportive, life-changing. Calgary boudoir photography to build your self-esteem, love yourself more deeply, and see how amazing you truly are!"
             />
             <HeroBannerPadding />
