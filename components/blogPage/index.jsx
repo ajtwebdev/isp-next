@@ -207,6 +207,13 @@ const AboutMark = styled.div`
     object-fit: cover;
   }
 `;
+const TextWrapper = styled.section`
+  figure {
+    @media screen and (max-width: 48em) {
+      margin: 0;
+    }
+  }
+`;
 
 export default function PostPage({ post, posts, preview }) {
   const router = useRouter();
@@ -319,9 +326,9 @@ export default function PostPage({ post, posts, preview }) {
                   />
                 ) : null}
                 {!!post.content && (
-                  <section itemProp="articleBody">
+                  <TextWrapper itemProp="articleBody">
                     <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                  </section>
+                  </TextWrapper>
                 )}
 
                 <hr />
