@@ -8,7 +8,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Seo />
       <GoogleAnalytics gaMeasurementId={"G-P7TRKWJJE7"} trackPageViews />
-      {/* <Component {...pageProps} /> */}
+      <Component {...pageProps} />
     </>
   );
 }
