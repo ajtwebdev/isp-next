@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LayoutJs from "../components/layoutJs";
 import {
   Container,
@@ -8,6 +8,19 @@ import {
 import Seo from "../components/seo";
 
 export default function ThankYouContest() {
+  useEffect(() => {
+      // Check if event has already been fired in this session
+      if (!sessionStorage.getItem("cr_fired")) {
+        if (typeof fbq === "function") {
+          fbq("track", "CompleteRegistration");
+          sessionStorage.setItem("cr_fired", "1");
+          console.log("fbq CompleteRegistration fired");
+        } else {
+          console.warn("fbq not defined — make sure the Facebook Pixel script is loaded");
+        }
+      }
+    }, []); // Empty dependency array → runs once on component mount
+  
   return (
     <LayoutJs>
       <Seo
