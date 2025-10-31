@@ -9,15 +9,20 @@ import Seo from "../components/seo";
 
 export default function ThankYouContest() {
   useEffect(() => {
+    console.log("ThankYouContest component mounted");
       // Check if event has already been fired in this session
       if (!sessionStorage.getItem("cr_fired")) {
-        if (typeof fbq === "function") {
-          fbq("track", "CompleteRegistration");
-          sessionStorage.setItem("cr_fired", "1");
-          console.log("fbq CompleteRegistration fired");
-        } else {
-          console.warn("fbq not defined — make sure the Facebook Pixel script is loaded");
-        }
+        setTimeout(() => {
+          console.log("Waiting 3 seconds before firing fbq event");
+          if (typeof fbq === "function") {
+            fbq("track", "CompleteRegistration");
+            sessionStorage.setItem("cr_fired", "1");
+            console.log("fbq CompleteRegistration fired");
+          } else {
+            console.warn("fbq not defined — make sure the Facebook Pixel script is loaded");
+          }
+        }, 2000); 
+        
       }
     }, []); // Empty dependency array → runs once on component mount
   
