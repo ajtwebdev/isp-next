@@ -12,8 +12,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
 
       <Script
-        id="facebook-pixel"
-        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             !function(f,b,e,v,n,t,s)
