@@ -22,7 +22,7 @@ export default function Document() {
               s.parentNode.insertBefore(t,s)
               }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
               
-              fbq('init', '145078160490439');
+              fbq('init', '329182807442531');
               fbq('track', 'PageView');
             `,
           }}
