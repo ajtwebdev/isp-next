@@ -13,7 +13,7 @@ export default function ThankYouContest() {
       // Check if event has already been fired in this session
       if (!sessionStorage.getItem("cr_fired")) {
         setTimeout(() => {
-          console.log("Waiting 3 seconds before firing fbq event");
+          console.log("Waiting 2 seconds before firing fbq event");
           if (typeof fbq === "function") {
             fbq("track", "CompleteRegistration");
             sessionStorage.setItem("cr_fired", "1");
