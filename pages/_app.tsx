@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Seo />
-      <GoogleAnalytics strategy="beforeInteractive"  gaMeasurementId={"G-P7TRKWJJE7"} trackPageViews />
+      {/* <GoogleAnalytics strategy="beforeInteractive"  gaMeasurementId={"G-P7TRKWJJE7"} trackPageViews /> */}
       <Component {...pageProps} />
 
     </>

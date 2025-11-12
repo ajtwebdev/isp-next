@@ -20,7 +20,7 @@ export default function Document() {
           }}
         />
       
-        <script
+        {/* <script
           dangerouslySetInnerHTML={{
             __html: `
               !function(f,b,e,v,n,t,s)
@@ -41,7 +41,7 @@ export default function Document() {
               fbq('track', 'PageView');
             `,
           }}
-        />
+        /> */}
         
       </Head>
       <body>
