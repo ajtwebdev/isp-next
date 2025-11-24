@@ -277,7 +277,7 @@ export default function Footer() {
             }}
           />
           <CopyRight className="copyright">
-            <p>Copyright© 2024</p>
+            <p>Copyright© 2026</p>
             <p>Inner Spirit Photography</p>
             <p>All Rights Reserved</p>
             <a
