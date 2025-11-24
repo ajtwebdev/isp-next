@@ -569,7 +569,7 @@ export default function Footer() {
           </div>
           <div className={styles.copyright}>
             <ul>
-              <li>Copyright&#169; 2024</li>
+              <li>Copyright&#169; 2026</li>
               <li>Project Landscape Ltd.</li>
               <li>All Rights Reserved</li>
               <li>
