@@ -109,7 +109,9 @@ export default function ContestEntryPage() {
         <Container>
           <Card>
             <h3 className="headline" style={{ textAlign: "center" }}>
-            Contest Form
+            Contest Form<br/>
+            Subscribe to Win!
+            <br/>
             </h3>
 
             <FormWrapper>
