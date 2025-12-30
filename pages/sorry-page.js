@@ -14,21 +14,30 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 700px;
-    margin: 0 auto;
+    max-width: 650px;
     gap: 1.5rem;
+
+     h3{
+  text-align: left;
+}
     `;
 
     const MessageText = styled.p`
     font-size: 1.1rem;
-    line-height: 1.7;
+    text-align: left;
+    margin-left: 0px;
     `;
 
     const ButtonGroup = styled(Flex)`
     gap: 1rem;
     margin-top: 1rem;
+    margin-left: 0px;
     `;
 
+    export const SectionWrapper = styled.section`
+      padding-top: 1.5rem;
+      padding-bottom: 4rem;
+    `;
 
 
     export default function SorryPage() {
@@ -41,7 +50,7 @@
 
         <HeroBannerPadding />
 
-        <Section>
+        <SectionWrapper>
             <Container>
             <ContentWrapper>
                 <h3 className="headline">We’re sorry</h3>
@@ -49,9 +58,7 @@
                 <MessageText>
                 You declined to enter the contest.
                 <br />
-                <br />
                 Your entry needs a subscription to be complete.
-                <br />
                 <br />
                 If you change your mind, you can re-enter by choosing{" "}
                 <strong>Yes</strong>.
@@ -68,7 +75,7 @@
                 </ButtonGroup>
             </ContentWrapper>
             </Container>
-        </Section>
+        </SectionWrapper>
         </LayoutJs>
     );
     }

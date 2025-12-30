@@ -14,21 +14,29 @@ const ContentWrapper = styled(Flex)`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
+  max-width: 650px;
   gap: 1.5rem;
+
+  h3{
+  text-align: left;
+}
 `;
 
 const MessageText = styled.p`
   font-size: 1.1rem;
-  line-height: 1.7;
+  text-align: left;
+  margin-left: 0px;
 `;
 
 const ButtonGroup = styled(Flex)`
   gap: 1rem;
   margin-top: 1rem;
+  margin-left: 0px;
 `;
-
+export const SectionWrapper = styled.section`
+  padding-top: 1.5rem;
+  padding-bottom: 4rem;
+`;
 
 
 export default function CheckMailPage() {
@@ -41,7 +49,7 @@ export default function CheckMailPage() {
 
       <HeroBannerPadding />
 
-      <Section>
+      <SectionWrapper>
         <Container>
           <ContentWrapper>
             <h3 className="headline">Check your email</h3>
@@ -49,12 +57,9 @@ export default function CheckMailPage() {
             <MessageText>
               We’ve just sent you a confirmation email.
               <br />
-              <br />
               To complete your subscription and officially enter the contest, please click the <strong>“Confirm my email”</strong> button inside that message.
               <br />
-              <br />
               If you don’t see the email, please check your spam or junk folder.
-              <br />
               <br />
               Once confirmed, you’re all set!
             </MessageText>
@@ -70,7 +75,7 @@ export default function CheckMailPage() {
             </ButtonGroup>
           </ContentWrapper>
         </Container>
-      </Section>
+      </SectionWrapper>
     </LayoutJs>
   );
 }

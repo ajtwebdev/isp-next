@@ -78,6 +78,13 @@ const CheckboxRow = styled.div`
     margin-top: 0.25rem;
   }
 
+  input[type="checkbox"] {
+    accent-color: #6c0b3a;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+  }
+
   label {
     line-height: 1.5;
   }
