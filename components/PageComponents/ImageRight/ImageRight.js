@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Section, Flex } from "components/layoutComponents";
-import { ButtonPrimary } from "components/buttons";
+import { ButtonPrimary,ButtonSecondary } from "components/buttons";
 import Image from "components/Image";
+import  { useState } from "react";
 
 const Text = styled.div``;
 
@@ -31,6 +32,8 @@ export default function ImageRight({
   button,
   link,
 }) {
+
+
   return (
     <Section>
       <Container>
@@ -49,12 +52,25 @@ export default function ImageRight({
             ) : null}
 
             {/* {link ? <ButtonPrimary href={link}>{button}</ButtonPrimary> : null} */}
-            <ButtonPrimary
+            {/* <ButtonPrimary
               href="https://markl.sendly.co.uk/contest"
               target="_blank"
             >
               Enter Contest Here
-            </ButtonPrimary>
+            </ButtonPrimary> */}
+            <p className="subText">
+  Would you like to subscribe to our newsletter to enter the contest?
+</p>
+
+<div className="buttonGroup" style={{ display:'flex', gap: "1rem" }}>
+  <ButtonPrimary href="/contest-form">
+    Yes, subscribe & enter
+  </ButtonPrimary>
+
+  <ButtonSecondary href="/sorry-page">
+    No, I decline
+  </ButtonSecondary>
+</div>
           </Text>
           <Img>
             <Image
