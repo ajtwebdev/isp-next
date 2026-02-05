@@ -268,3 +268,7 @@ hr {
 .clip-img {
   clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
 }
+
+.injected-html a {
+  display: inline; /* or inline-block if you need sizing */
+}

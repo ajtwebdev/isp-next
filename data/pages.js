@@ -39,6 +39,20 @@ export const PAGE_COMPONENTS_ACF_FIELDS = gql`
             srcSet
           }
         }
+          ... on Page_Pagecomponents_PageComponents_ImageRightContest {
+          __typename
+          body
+          fieldGroupName
+          subheader
+          title
+          button
+          link
+          image {
+            altText
+            sourceUrl(size: MEDIUM_LARGE)
+            srcSet
+          }
+        }
         ... on Page_Pagecomponents_PageComponents_ImageGallery {
           __typename
           body
