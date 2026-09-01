@@ -6,9 +6,21 @@ if (!process.env.WORDPRESS_API_URL) {
 }
 
 /** @type {import('next').NextConfig} */
-module.exports = {
+let withBundleAnalyzer
+try {
+  withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+  })
+} catch (err) {
+  // If the analyzer isn't installed, fall back to identity function so Next doesn't crash.
+  if (err && err.code !== 'MODULE_NOT_FOUND') throw err
+  withBundleAnalyzer = (config) => config
+}
+
+module.exports = withBundleAnalyzer({
   images: {
-    unoptimized: true, // ⭐ IMPORTANT: disables sharp/IPX usage
+    // Enable Next.js Image Optimization (disable only if you have a specific reason)
+    unoptimized: false,
     domains: [
       process.env.WORDPRESS_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
       "0.gravatar.com",
@@ -24,4 +36,5 @@ module.exports = {
       },
     ],
   },
-};
+  swcMinify: true,
+});

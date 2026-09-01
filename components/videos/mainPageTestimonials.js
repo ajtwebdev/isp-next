@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { Container, Section } from "../layoutComponents"
+import LazyVimeo from "./LazyVimeo"
 
 const Wrapper = styled.div`
   display: grid;
@@ -85,22 +86,12 @@ export default function MainPageTestimonials() {
                 that...{" "}
               </h2>
             </Text>
-            <div style={{ padding: "56.25% 0 0 0", position: "relative" }}>
-              <iframe
-                src="https://player.vimeo.com/video/743214435?h=892cd0c99b&badge=0&autopause=0&player_id=0&app_id=58479"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-                title="HD 2 Placeholder"
-              />
-            </div>
+            <LazyVimeo
+              src="https://player.vimeo.com/video/743214435?h=892cd0c99b&badge=0&autopause=0&player_id=0&app_id=58479"
+              title="HD 2 Placeholder"
+              poster="/posters/743214435.jpg"
+              aspectRatio="56.25%"
+            />
             <ReviewText className="center spacing accent">
               <h2 className="subhead caps">from baggy sweats to confidence</h2>
               <p className="italics">
@@ -114,22 +105,12 @@ export default function MainPageTestimonials() {
       <Container>
         <GridAuto>
           <Video2 className="spacing">
-            <div style={{ padding: "100% 0 0 0", position: "relative" }}>
-              <iframe
-                src="https://player.vimeo.com/video/743213750?h=7891e55ab4&badge=0&autopause=0&player_id=0&app_id=58479"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-                title="Testimonial 3 Placeholder"
-              />
-            </div>
+            <LazyVimeo
+              src="https://player.vimeo.com/video/743213750?h=7891e55ab4&badge=0&autopause=0&player_id=0&app_id=58479"
+              title="Testimonial 3 Placeholder"
+              poster="/posters/743213750.jpg"
+              aspectRatio="100%"
+            />
             <ReviewText className="center spacing">
               <h2 className="subhead caps">Nude but Elegant</h2>
               <p className="italics">
@@ -141,22 +122,12 @@ export default function MainPageTestimonials() {
             </ReviewText>
           </Video2>
           <Video2 className="spacing">
-            <div style={{ padding: "100% 0 0 0", position: "relative" }}>
-              <iframe
-                src="https://player.vimeo.com/video/743213628?h=412ec769f5&badge=0&autopause=0&player_id=0&app_id=58479"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-                title="Testimonial 2 Placeholder.mov"
-              />
-            </div>
+            <LazyVimeo
+              src="https://player.vimeo.com/video/743213628?h=412ec769f5&badge=0&autopause=0&player_id=0&app_id=58479"
+              title="Testimonial 2 Placeholder"
+              poster="/posters/743213628.jpg"
+              aspectRatio="100%"
+            />
             <ReviewText className="center spacing">
               <h2 className="subhead caps">The Day was Empowering</h2>
               <p className="italics">
@@ -167,22 +138,12 @@ export default function MainPageTestimonials() {
             </ReviewText>
           </Video2>
           <Video2 className="spacing">
-            <div style={{ padding: "100% 0 0 0", position: "relative" }}>
-              <iframe
-                src="https://player.vimeo.com/video/743214578?h=76cb221d47&badge=0&autopause=0&player_id=0&app_id=58479"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-                title="Testimonial 1 Placeholder"
-              />
-            </div>
+            <LazyVimeo
+              src="https://player.vimeo.com/video/743214578?h=76cb221d47&badge=0&autopause=0&player_id=0&app_id=58479"
+              title="Testimonial 1 Placeholder"
+              poster="/posters/743214578.jpg"
+              aspectRatio="100%"
+            />
             <ReviewText className="center spacing">
               <h2 className="subhead caps">I did this for me</h2>
               <p className="italics">

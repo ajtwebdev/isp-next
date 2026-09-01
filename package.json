@@ -3,6 +3,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
+    "analyze": "ANALYZE=true next build",
+    "fetch-posters": "node scripts/fetch-vimeo-thumbnails.js",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
@@ -46,7 +48,7 @@
     "react-slick": "^0.29.0",
     "rss": "^1.2.2",
     "sass": "^1.62.1",
-    "sharp": "^0.32.1",
+    "sharp": "^0.32.6",
     "slick-carousel": "^1.8.1",
     "style.css": "^1.0.3",
     "styled-components": "^5.3.10",
@@ -55,6 +57,7 @@
     "yet-another-react-lightbox": "^3.12.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.3.4",
     "autoprefixer": "10.4.7",
     "babel-plugin-styled-components": "latest",
     "eslint": "8.39.0",

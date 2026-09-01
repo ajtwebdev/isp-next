@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { AnchorUnderline } from "../buttons"
 import { Container, GridAuto, Section } from "../layoutComponents"
+import LazyVimeo from "./LazyVimeo"
 
 const Wrapper = styled.div`
   display: grid;
@@ -84,22 +85,12 @@ export default function MarkAdvantage() {
                 a safe male photographer.
               </p>
             </Text>
-            <div style={{ padding: "42.6% 0 0 0", position: "relative" }}>
-              <iframe
-                src="https://player.vimeo.com/video/743214161?h=807d640dfd&badge=0&autopause=0&player_id=0&app_id=58479"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-                title="Widescreen 2 Placeholder"
-              />
-            </div>
+            <LazyVimeo
+              src="https://player.vimeo.com/video/743214161?h=807d640dfd&badge=0&autopause=0&player_id=0&app_id=58479"
+              title="Widescreen 2 Placeholder"
+              poster="/posters/743214161.jpg"
+              aspectRatio="42.6%"
+            />
             {/* <center>
               <AnchorUnderline href="">
                 watch the full video &#x2192;

@@ -6,6 +6,11 @@ export default function Document() {
       <Head>
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      {/* Preconnects and font preloads for faster first paint */}
+      <link rel="preconnect" href="https://www.googletagmanager.com" />
+      <link rel="preload" href="/fonts/OPTIMA_B.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      <link rel="preload" href="/fonts/Optima_Italic.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      <link rel="preload" href="/fonts/TrajanPro-Regular.woff" as="font" type="font/woff" crossOrigin="anonymous" />
       <script
           dangerouslySetInnerHTML={{
             __html: `
