@@ -9,6 +9,7 @@ import {
 } from "../buttons";
 import { HeroBannerPadding } from "../layoutComponents";
 import Image from "next/image";
+import LazyVimeo from "../videos/LazyVimeo";
 
 const device = {
   md: "43em",
@@ -118,22 +119,14 @@ export default function HeroBasic() {
       <Container>
         <Flex className="spacing-lg">
           <Video className="spacing-lg">
-            <div style={{ padding: "100% 0 0 0", position: "relative" }}>
-              <iframe
-                src="https://player.vimeo.com/video/743211749?h=a77b06545f&background=1&badge=0&autopause=0&player_id=0&app_id=58479"
-                frameBorder={0}
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowFullScreen
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  width: "100%",
-                  height: "100%",
-                }}
-                title="Home Page Nudes-1080p.mp4"
-              />
-            </div>
+            <LazyVimeo
+              src="https://player.vimeo.com/video/743211749?h=a77b06545f&background=1&badge=0&autopause=0&player_id=0&app_id=58479"
+              title="Home Page Nudes-1080p"
+              poster="/posters/743211749.jpg"
+              aspectRatio="100%"
+              autoLoad={true}
+              priority
+            />
             <p className="italics subhead">
               “When I saw my photos, I broke into tears because I thought, I
               can't believe how beautiful that person is.” - Deanna
