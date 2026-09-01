@@ -19,8 +19,9 @@ try {
 
 module.exports = withBundleAnalyzer({
   images: {
-    // Enable Next.js Image Optimization (disable only if you have a specific reason)
-    unoptimized: false,
+    // Disable Next.js Image Optimization on Netlify (Netlify doesn't support the Next image optimizer by default).
+    // On Netlify builds we set `unoptimized: true` to avoid server-side image /_ipx errors.
+    unoptimized: !!process.env.NETLIFY || false,
     domains: [
       process.env.WORDPRESS_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
       "0.gravatar.com",
