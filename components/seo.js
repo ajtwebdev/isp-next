@@ -63,7 +63,9 @@ export default function Seo({
 
       <link rel="canonical" href={canonical ?? DOMAIN} />
 
-      <link rel="shortcut icon" href="/favicon.ico" />
+      {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
+      <link rel="icon" href="/favicon.ico" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     </Head>
   );
 }
