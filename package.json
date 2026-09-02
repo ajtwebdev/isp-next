@@ -2,7 +2,6 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "prebuild": "cp -R fonts public/fonts || true",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "fetch-posters": "node scripts/fetch-vimeo-thumbnails.js",
