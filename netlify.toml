@@ -1,0 +1,10 @@
+[build]
+  command = "npm run build"
+  publish = ""
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[context.production.environment]
+  # Prevent the fallback unoptimized behavior; plugin enables image optimization.
+  NO_NETLIFY_IMAGE_PLUGIN = "0"
