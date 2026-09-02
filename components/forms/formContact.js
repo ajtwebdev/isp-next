@@ -42,7 +42,8 @@ export default function FormContest(props) {
   const router = useRouter();
   const handleContactForm = () => {
     console.log(window.location, "lcation");
-    window.location.href = "https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E";
+    window.location.href = "/contact";
+    // window.location.href = "https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E";
   };
   return (
     <Section>

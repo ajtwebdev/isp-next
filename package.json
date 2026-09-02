@@ -1,15 +1,15 @@
 {
   "private": true,
   "scripts": {
-  "dev": "next",
-  "prebuild": "cp -R fonts public/fonts || true",
-  "build": "next build",
-  "analyze": "ANALYZE=true next build",
-  "fetch-posters": "node scripts/fetch-vimeo-thumbnails.js",
-  "start": "next start",
-  "lint": "next lint",
-  "postbuild": "next-sitemap"
-},
+    "dev": "next",
+    "prebuild": "cp -R fonts public/fonts || true",
+    "build": "next build",
+    "analyze": "ANALYZE=true next build",
+    "fetch-posters": "node scripts/fetch-vimeo-thumbnails.js",
+    "start": "next start",
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
+  },
   "dependencies": {
     "@apollo/client": "^3.7.14",
     "@chakra-ui/icons": "^2.1.0",
@@ -45,6 +45,7 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",
     "react-is": "^18.2.0",
+    "react-phone-number-input": "^3.4.18",
     "react-slick": "^0.29.0",
     "rss": "^1.2.2",
     "sass": "^1.62.1",
