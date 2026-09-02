@@ -20,7 +20,7 @@ try {
 module.exports = withBundleAnalyzer({
   images: {
     // Enable Next.js Image Optimization (disable only if you have a specific reason)
-    unoptimized: false,
+    unoptimized: !!process.env.NETLIFY,
     domains: [
       process.env.WORDPRESS_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
       "0.gravatar.com",
