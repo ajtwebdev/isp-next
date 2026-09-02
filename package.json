@@ -2,13 +2,13 @@
   "private": true,
   "scripts": {
     "dev": "next",
+    "prebuild": "cp -R fonts public/fonts || true",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "fetch-posters": "node scripts/fetch-vimeo-thumbnails.js",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap",
-    "postinstall": "npm install --platform=linux --arch=x64 sharp"
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@apollo/client": "^3.7.14",
