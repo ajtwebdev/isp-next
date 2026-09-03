@@ -202,7 +202,6 @@ export default function ContactPage() {
           email: formValues.email,
           phone: phone || "",
           message: formValues.message,
-          website: "",
         }),
       });
 
@@ -249,7 +248,7 @@ export default function ContactPage() {
                   </Field>
 
                   <Field>
-                    <Label htmlFor="lastName">Last name *</Label>
+                    <Label htmlFor="lastName">Last name </Label>
                     <Input
                       type="text"
                       id="lastName"
@@ -280,7 +279,7 @@ export default function ContactPage() {
                       <PhoneInput
                         id="phone_input"
                         international
-                        defaultCountry="US"
+                        defaultCountry="CA"
                         value={phone}
                         onChange={setPhone}
                         placeholder="Enter phone number"
@@ -302,19 +301,6 @@ export default function ContactPage() {
                     />
                   </Field>
 
-                  {/* Honeypot — leave completely alone, real users never touch this */}
-                  <HoneypotWrapper aria-hidden="true">
-                    <label htmlFor="website">Leave this field empty</label>
-                    <input
-                      type="text"
-                      id="website"
-                      name="website"
-                      tabIndex={-1}
-                      autoComplete="off"
-                      value={website}
-                      onChange={(e) => setWebsite(e.target.value)}
-                    />
-                  </HoneypotWrapper>
 
                   {formError && <ErrorText>{formError}</ErrorText>}
 
