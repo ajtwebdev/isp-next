@@ -65,16 +65,14 @@ export default async function handler(
     return res.status(405).json({ success: false, message: "Method not allowed" });
   }
 
-  const { firstName, lastName, email, phone, message, website } =
+  const { firstName, lastName, email, phone, message, } =
     (req.body || {}) as ContactFormRequestBody;
 
-  if (!firstName || !lastName || !email || !message) {
+  if (!firstName || !email || !message) {
     return res.status(400).json({ success: false, message: "Missing required fields" });
   }
 
-  if (website) {
-    return res.status(200).json({ success: true, message: "OK" });
-  }
+
 
   if (!process.env.WORDPRESS_GRAPHQL_ENDPOINT) {
     console.error("WORDPRESS_GRAPHQL_ENDPOINT env variable is not set");
