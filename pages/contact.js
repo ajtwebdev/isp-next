@@ -7,6 +7,8 @@ import LayoutJs from "../components/layoutJs";
 import Seo from "../components/seo";
 import { Section, Container } from "../components/layoutComponents";
 import { ButtonPrimary } from "../components/buttons";
+import { FaPhoneAlt, FaCommentDots } from "react-icons/fa";
+import { IoLocationSharp } from "react-icons/io5";
 
 const Card = styled.div`
   background: #ffffff;
@@ -26,6 +28,70 @@ const Heading = styled.h3`
   text-align: center;
   font-size: 1.35rem;
   margin-bottom: 1.25rem;
+`;
+
+const IntroBlock = styled.div`
+  margin: 0 0 1.75rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.1);
+`;
+
+const IntroLead = styled.p`
+  margin: 0 0 0.75rem;
+  color: var(--clr-accent);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  font-weight: var(--fw-button, 700);
+`;
+
+const IntroList = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0 0 0.5rem;
+    color: var(--txt-dark-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+`;
+
+/* Mirrors the Flex row in components/contactInfo/withIcons.js: icon then text,
+   separated by the same 5px gap. Aligned to flex-start rather than center so
+   the icon stays on the first line when the address wraps on narrow screens. */
+const IconRow = styled.div`
+  display: flex;
+  align-items: flex-start;
+
+  & > * + * {
+    margin-left: 5px;
+  }
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 0.35em;
+    font-size: 0.9em;
+  }
+`;
+
+const IntroLink = styled.a`
+  /* globals.scss sets a { display: inline-block }, which breaks these links
+     out of the sentence flow. Keep them inline with the surrounding text. */
+  display: inline;
+  color: var(--clr-accent);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 `;
 
 const FormWrapper = styled.div`
@@ -231,6 +297,45 @@ export default function ContactPage() {
         <Container>
           <Card>
             <Heading className="headline">Contact Us</Heading>
+
+            <IntroBlock>
+              <IntroLead>Can&rsquo;t wait to start the conversation?</IntroLead>
+              <IntroList>
+                <li>
+                  <IconRow>
+                    <FaPhoneAlt className="accent" aria-hidden="true" />
+                    <span>
+                      Call the studio at{" "}
+                      <IntroLink href="tel:+14032522662">
+                        403-252-2662
+                      </IntroLink>
+                      .
+                    </span>
+                  </IconRow>
+                </li>
+                <li>
+                  <IconRow>
+                    <FaCommentDots className="accent" aria-hidden="true" />
+                    <span>
+                      Prefer to text? Message Mark at{" "}
+                      <IntroLink href="tel:+14036057840">
+                        403.605.7840
+                      </IntroLink>
+                      .
+                    </span>
+                  </IconRow>
+                </li>
+                <li>
+                  <IconRow>
+                    <IoLocationSharp className="accent" aria-hidden="true" />
+                    <span>
+                      Our private Calgary studio is located at 711-84 Ave SW.
+                      Sessions are by appointment.
+                    </span>
+                  </IconRow>
+                </li>
+              </IntroList>
+            </IntroBlock>
 
             <FormWrapper>
               <form onSubmit={handleSubmit} noValidate>
