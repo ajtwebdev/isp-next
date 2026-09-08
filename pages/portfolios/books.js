@@ -14,13 +14,22 @@ const Text = styled.div`
   width: 100%;
 `;
 export async function getStaticProps() {
-  const allBooksImages = await getBooksImages();
+  try {
+    const allBooksImages = await getBooksImages();
 
-  return {
-    props: {
-      allBooksImages,
-    },
-  };
+    return {
+      props: {
+        allBooksImages,
+      },
+    };
+  } catch (error) {
+    console.error("[books] Failed to load book images:", error);
+    return {
+      props: {
+        allBooksImages: null,
+      },
+    };
+  }
 }
 export default function Books({ allBooksImages }) {
   const galleryNode =

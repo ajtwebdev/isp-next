@@ -12,9 +12,13 @@ export default function Seo({
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   twitterHandle = "",
+  noindex = false,
+  hideCanonical = false,
 }) {
   const router = useRouter();
   const canonicalUrl = getCanonicalUrl(router.asPath || "/");
+  const isPreview = process.env.VERCEL_ENV === "preview";
+  const robotsContent = isPreview || noindex ? "noindex,follow" : "index,follow";
 
   return (
     <Head>
@@ -27,7 +31,7 @@ export default function Seo({
         property="og:description"
         content={description}
       />
-      <meta key="og_locale" property="og:locale" content="en_IE" />
+      <meta key="og_locale" property="og:locale" content="en_CA" />
       <meta key="og_site_name" property="og:site_name" content={siteName} />
       <meta key="og_url" property="og:url" content={canonicalUrl} />
       <meta
@@ -43,7 +47,7 @@ export default function Seo({
       <meta key="og_image:width" property="og:image:width" content="1200" />
       <meta key="og_image:height" property="og:image:height" content="630" />
 
-      <meta key="robots" name="robots" content="index,follow" />
+      <meta key="robots" name="robots" content={robotsContent} />
 
       <meta
         key="twitter:card"
@@ -63,10 +67,7 @@ export default function Seo({
         content={description}
       />
 
-      <link key="canonical" rel="canonical" href={canonicalUrl} />
-
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      {!hideCanonical && <link key="canonical" rel="canonical" href={canonicalUrl} />}
     </Head>
   );
 }

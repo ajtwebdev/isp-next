@@ -207,7 +207,7 @@ export default function Footer() {
               <HeadingTag>Quick Links</HeadingTag>
               <ul style={{ listStyle: "none", paddingLeft: "0px" }}>
                 <LinkElement>
-                  <NextLink href="/about">Home</NextLink>
+                  <NextLink href="/">Home</NextLink>
                 </LinkElement>
                 <LinkElement>
                   <NextLink href="/about">About</NextLink>
@@ -215,36 +215,17 @@ export default function Footer() {
                 <LinkElement>
                   <NextLink href="/experience">Experience</NextLink>
                 </LinkElement>
-
                 <LinkElement>
-                  {" "}
-                  <NextLink href="/portfolios">Portfolios</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  <NextLink href="/portfolios/gallery">Gallery</NextLink>
+                  <NextLink href="/gallery">Gallery</NextLink>
                 </LinkElement>
                 <LinkElement>
-                  <NextLink href="/portfolios/books">Books</NextLink>
-                </LinkElement>
-                <LinkElement>
-                  <NextLink href="/portfolios/wall-art">Wall art</NextLink>
-                </LinkElement>
-                <LinkElement>
-                  <NextLink href="/portfolios/projects">Projects</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  {" "}
-                  <NextLink href="/resources">Resources</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  <NextLink href="/resources/faq">Faq</NextLink>
+                  <NextLink href="/blog">Blog</NextLink>
                 </LinkElement>
                 <LinkElement>
                   <NextLink
+                    // href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
                     href="/contact"
+                    // target="_blank"
                   >
                     Contact & Booking
                   </NextLink>

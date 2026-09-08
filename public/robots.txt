@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://projectlandscape.ca
+Host: https://innerspiritphoto.com
 
 # Sitemaps
-Sitemap: https://projectlandscape.ca/sitemap.xml
+Sitemap: https://innerspiritphoto.com/sitemap.xml

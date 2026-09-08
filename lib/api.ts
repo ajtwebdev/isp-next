@@ -133,6 +133,8 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
       excerpt
       slug
       date
+      modified
+      databaseId
       featuredImage {
         node {
           sourceUrl
@@ -147,6 +149,8 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         edges {
           node {
             name
+            slug
+            databaseId
           }
         }
       }

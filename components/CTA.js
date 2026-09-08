@@ -48,6 +48,9 @@ const Text = styled.div`
 `;
 
 export default function CTA(props) {
+  const buttonLabel = props.buttonLabel || "yes, i want to take the leap &#x2192;";
+  const buttonHref = props.buttonHref || "/book-now";
+
   return (
     <Wrapper>
       <Section>
@@ -66,8 +69,8 @@ export default function CTA(props) {
                 <h3 className="subhead caps">{props.subhead}</h3>
               </div>
               <p>{props.description}</p>
-              <ButtonPrimary href="/book-now">
-                yes, i want to take the leap &#x2192;
+              <ButtonPrimary href={buttonHref}>
+                {buttonLabel}
               </ButtonPrimary>
             </Text>
           </Flex>

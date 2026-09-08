@@ -14,13 +14,22 @@ const Text = styled.div`
   width: 100%;
 `;
 export async function getStaticProps() {
-  const allProjectsImages = await getProjectImages();
+  try {
+    const allProjectsImages = await getProjectImages();
 
-  return {
-    props: {
-      allProjectsImages,
-    },
-  };
+    return {
+      props: {
+        allProjectsImages,
+      },
+    };
+  } catch (error) {
+    console.error("[projects] Failed to load project images:", error);
+    return {
+      props: {
+        allProjectsImages: null,
+      },
+    };
+  }
 }
 
 export default function Projects({ allProjectsImages }) {

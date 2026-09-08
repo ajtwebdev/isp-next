@@ -3,7 +3,7 @@ import Date from './date'
 import CoverImage from './cover-image'
 import Link from 'next/link'
 
-export default function PostPreview({
+export default function HeroPost({
   title,
   coverImage,
   date,
@@ -12,27 +12,33 @@ export default function PostPreview({
   slug,
 }) {
   return (
-    <div>
-      <div className="mb-5">
+    <section>
+      <div className="mb-8 md:mb-16">
         {coverImage && (
           <CoverImage title={title} coverImage={coverImage} slug={slug} />
         )}
       </div>
-      <h3 className="text-3xl mb-3 leading-snug">
-        <Link
-          href={`/posts/${slug}`}
-          className="hover:underline"
-          dangerouslySetInnerHTML={{ __html: title }}
-        ></Link>
-      </h3>
-      <div className="text-lg mb-4">
-        <Date dateString={date} />
+      <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
+        <div>
+          <h3 className="mb-4 text-4xl lg:text-6xl leading-tight">
+            <Link
+              href={`/blog/${slug}`}
+              className="hover:underline"
+              dangerouslySetInnerHTML={{ __html: title }}
+            ></Link>
+          </h3>
+          <div className="mb-4 md:mb-0 text-lg">
+            <Date dateString={date} />
+          </div>
+        </div>
+        <div>
+          <div
+            className="text-lg leading-relaxed mb-4"
+            dangerouslySetInnerHTML={{ __html: excerpt }}
+          />
+          <Avatar author={author} />
+        </div>
       </div>
-      <div
-        className="text-lg leading-relaxed mb-4"
-        dangerouslySetInnerHTML={{ __html: excerpt }}
-      />
-      <Avatar author={author} />
-    </div>
+    </section>
   )
 }

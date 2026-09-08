@@ -4,7 +4,7 @@ import { Container, Section } from "../components/layoutComponents"
 import Link from "next/link"
 import styled from "styled-components"
 import Seo from "../components/seo"
-import { getAllPosts, postPathBySlugCategory } from "../lib/posts"
+import { getAllPosts } from "../lib/posts"
 import PostList from "../components/recent-posts/components/PostList"
 
 const BannerWrapper = styled.div`
@@ -83,12 +83,21 @@ export const getPostByCategory = (posts) => {
 }
 
 export async function getStaticProps() {
-  const { posts } = await getAllPosts({
-    queryIncludes: "all",
-  })
-  return {
-    props: {
-      posts: getPostByCategory(posts),
-    },
+  try {
+    const { posts } = await getAllPosts({
+      queryIncludes: "all",
+    })
+    return {
+      props: {
+        posts: getPostByCategory(posts),
+      },
+    }
+  } catch (error) {
+    console.error("[recent-posts] Failed to load posts:", error)
+    return {
+      props: {
+        posts: {},
+      },
+    }
   }
 }

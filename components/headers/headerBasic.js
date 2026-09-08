@@ -331,20 +331,6 @@ export default function HeaderBasic() {
                 <li>
                   <StyledLink href="/gallery">Gallery</StyledLink>
                 </li>
-                <Dropdown>
-                  <StyledLink href="/resources">
-                    Resources
-                    <IoMdArrowDropdown size={20} />
-                  </StyledLink>
-                  <ul>
-                    <li>
-                      <StyledLink href="/resources/faq">faq</StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/contest">contest</StyledLink>
-                    </li>
-                  </ul>
-                </Dropdown>
                 <li>
                   <StyledLink href="/blog">blog</StyledLink>
                 </li>
@@ -357,12 +343,13 @@ export default function HeaderBasic() {
                   </StyledLink>
                 </li>
                 <NavCtaMobile>
-                  <NavPhone href="tel: (403) 252-2662">
+                  <NavPhone href="tel:+14032522662">
                     +1 (403) 252-2662
                   </NavPhone>
                   <GetQuote
-                    href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
-                    target="_blank"
+                   href="/contact"
+                    /* href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E" */
+                    /* target="_blank" */
                   >
                     <span>book now &#x2192;</span>
                   </GetQuote>
@@ -370,10 +357,11 @@ export default function HeaderBasic() {
               </NavList>
             </Nav>
             <NavCtaDesktop>
-              <NavPhone href="tel: (403) 252-2662">+1 (403) 252-2662</NavPhone>
+              <NavPhone href="tel:+14032522662">+1 (403) 252-2662</NavPhone>
               <GetQuote
-                href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
-                target="_blank"
+               href="/contact"
+                /* href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
+                target="_blank" */
               >
                 <span>book now &#x2192;</span>
               </GetQuote>

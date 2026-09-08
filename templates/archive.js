@@ -17,7 +17,7 @@ import styles from "styles/templates/Archive.module.scss";
 import styled from "styled-components";
 import Link from "next/link";
 import Seo from "../components/seo";
-import { postPathBySlugCategory, sanitizeExcerpt } from "lib/posts";
+import { postPathBySlug, sanitizeExcerpt } from "lib/posts";
 
 const device = {
   md: "48em",
@@ -170,8 +170,6 @@ export default function TemplateArchive({
             <>
               <ul>
                 {posts.map((post) => {
-                  const categorySlug =
-                    post.categories.length > 0 ? post.categories[0]?.slug : "";
                   return (
                     <Ol key={post.slug}>
                       <Article
@@ -192,10 +190,7 @@ export default function TemplateArchive({
                             <h2 className="subheader upper">
                               <Link
                                 className="spacing accent"
-                                href={postPathBySlugCategory(
-                                  post.slug,
-                                  categorySlug
-                                )}
+                                href={postPathBySlug(post.slug)}
                               >
                                 {post.title}
                               </Link>

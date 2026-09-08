@@ -190,6 +190,16 @@ export const QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE = gql`
             }
           }
           excerpt
+          featuredImage {
+            node {
+              altText
+              caption
+              id
+              sizes
+              sourceUrl
+              srcSet
+            }
+          }
         }
       }
     }

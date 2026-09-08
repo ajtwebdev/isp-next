@@ -5,6 +5,10 @@ if (!process.env.WORDPRESS_API_URL) {
   `);
 }
 
+// Legacy category-prefixed article URLs (/{category}/{slug}) now live at
+// /blog/{slug}. Regenerate with: node scripts/generate-blog-redirects.js
+const blogRedirects = require("./data/blog-redirects.json");
+
 /** @type {import('next').NextConfig} */
 let withBundleAnalyzer
 try {
@@ -54,6 +58,27 @@ module.exports = withBundleAnalyzer({
         destination: '/gallery',
         permanent: true,
       },
+      {
+        source: '/portfolio',
+        destination: '/gallery',
+        permanent: true,
+      },
+      {
+        source: '/portfolio/gallery',
+        destination: '/gallery',
+        permanent: true,
+      },
+      {
+        source: '/portfolios',
+        destination: '/gallery',
+        permanent: true,
+      },
+      {
+        source: '/portfolios/gallery',
+        destination: '/gallery',
+        permanent: true,
+      },
+      ...blogRedirects,
     ];
   },
 });

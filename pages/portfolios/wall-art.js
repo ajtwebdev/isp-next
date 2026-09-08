@@ -17,13 +17,22 @@ const Heading = styled.h2`
   color: var(--clr-dark);
 `;
 export async function getStaticProps() {
-  const allWallArtImages = await getWallArtImages();
+  try {
+    const allWallArtImages = await getWallArtImages();
 
-  return {
-    props: {
-      allWallArtImages,
-    },
-  };
+    return {
+      props: {
+        allWallArtImages,
+      },
+    };
+  } catch (error) {
+    console.error("[wall-art] Failed to load wall art images:", error);
+    return {
+      props: {
+        allWallArtImages: null,
+      },
+    };
+  }
 }
 
 export default function WallArt({ allWallArtImages }) {

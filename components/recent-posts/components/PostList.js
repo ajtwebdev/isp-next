@@ -1,10 +1,11 @@
 import React from "react";
+import Image from "next/image";
 import LayoutJs from "../../layoutJs";
 import { Container, Section } from "../..//layoutComponents";
 import Link from "next/link";
 import styled from "styled-components";
 import Seo from "../../seo";
-import { postPathBySlugCategory } from "../../../lib/posts";
+import { postPathBySlug } from "../../../lib/posts";
 
 const Excerpt = styled.div`
   font-size: var(--fs-sm);
@@ -58,21 +59,24 @@ const PostList = ({ posts }) => {
               <h2>{catgoryPost?.categoryName}</h2>
               <CategoryPostContainer>
               {catgoryPost?.posts?.slice(0,6)?.map((post, index) => {
-                const categorySlug =
-                  post?.categories?.edges?.length > 0
-                    ? post?.categories?.edges[0]?.node?.slug
-                    :  post?.categories[0]?.slug;
-
                 return (
                   <StyledCard key={index}>
                   <Link
                   className="spacing accent"
-                  href={postPathBySlugCategory(
-                    post.slug,
-                    categorySlug
-                  )}
+                  href={postPathBySlug(post.slug)}
                 >
-                    <img src={post?.featuredImage?.sourceUrl || post?.featuredImage?.node?.sourceUrl} alt="Avatar"></img>
+                    {(() => {
+                      const imgSrc = post?.featuredImage?.sourceUrl || post?.featuredImage?.node?.sourceUrl;
+                      return imgSrc ? (
+                        <Image
+                          src={imgSrc}
+                          alt={post?.title || "Avatar"}
+                          width={400}
+                          height={250}
+                          style={{ objectFit: "cover" }}
+                        />
+                      ) : null;
+                    })()}
                     <StyledCardContainer>
                       <h4><b> {post?.title}</b></h4> 
                       <Excerpt

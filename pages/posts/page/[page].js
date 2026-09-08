@@ -26,27 +26,37 @@ export default function Posts({ posts, pagination }) {
 }
 
 export async function getStaticProps({ params = {} } = {}) {
-  const { posts, pagination } = await getPaginatedPosts({
-    currentPage: params?.page,
-    queryIncludes: "archive",
-  });
+  try {
+    const { posts, pagination } = await getPaginatedPosts({
+      currentPage: params?.page,
+      queryIncludes: "archive",
+    });
 
-  if (!pagination.currentPage) {
+    if (!pagination.currentPage) {
+      return {
+        props: {},
+        notFound: true,
+      };
+    }
+
     return {
-      props: {},
-      notFound: true,
+      props: {
+        posts,
+        pagination: {
+          ...pagination,
+          basePath: "/posts",
+        },
+      },
+    };
+  } catch (error) {
+    console.error("[posts/page] Failed to load paginated posts:", error);
+    return {
+      props: {
+        posts: [],
+        pagination: null,
+      },
     };
   }
-
-  return {
-    props: {
-      posts,
-      pagination: {
-        ...pagination,
-        basePath: "/posts",
-      },
-    },
-  };
 }
 
 export async function getStaticPaths() {

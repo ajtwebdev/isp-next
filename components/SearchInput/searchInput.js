@@ -4,7 +4,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import debounce from "lodash/debounce";
 import { getSearchInputData } from "../../lib/api";
 import { Input } from "@chakra-ui/react";
-import { postPathBySlugCategory } from "../../lib/posts";
+import { postPathBySlug } from "../../lib/posts";
 
 export default function SearchBox(props) {
   const [searchField, setSearchField] = useState([]);
@@ -79,11 +79,9 @@ export default function SearchBox(props) {
       >
         {searchField && searchField?.length !== 0
           ? searchField?.map((item, i) => {
-              let categorySlug = item?.categories?.edges[0]?.node?.slug;
-
               return (
                 <Link
-                  href={postPathBySlugCategory(item?.slug, categorySlug)}
+                  href={postPathBySlug(item?.slug)}
                   key={i}
                   style={{ marginTop: "5px", padding: "5px 15px 8px" }}
                 >
