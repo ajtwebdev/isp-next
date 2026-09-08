@@ -17,6 +17,10 @@ export default function Seo({
 }) {
   const router = useRouter();
   const canonicalUrl = getCanonicalUrl(router.asPath || "/");
+  // Dimensions below are only true of the known default image; a per-article
+  // featured image has arbitrary dimensions, so we omit them rather than lie.
+  const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
+  const isDefaultOgImage = resolvedOgImage === DEFAULT_OG_IMAGE;
   const isPreview = process.env.VERCEL_ENV === "preview";
   const robotsContent = isPreview || noindex ? "noindex,follow" : "index,follow";
 
@@ -37,15 +41,19 @@ export default function Seo({
       <meta
         key="og_image"
         property="og:image"
-        content={ogImage ?? DEFAULT_OG_IMAGE}
+        content={resolvedOgImage}
       />
       <meta
         key="og_image:alt"
         property="og:image:alt"
         content={`${title} | ${siteName}`}
       />
-      <meta key="og_image:width" property="og:image:width" content="1200" />
-      <meta key="og_image:height" property="og:image:height" content="630" />
+      {isDefaultOgImage && (
+        <meta key="og_image:width" property="og:image:width" content="1200" />
+      )}
+      {isDefaultOgImage && (
+        <meta key="og_image:height" property="og:image:height" content="630" />
+      )}
 
       <meta key="robots" name="robots" content={robotsContent} />
 
@@ -66,6 +74,7 @@ export default function Seo({
         property="twitter:description"
         content={description}
       />
+      <meta key="twitter:image" name="twitter:image" content={resolvedOgImage} />
 
       {!hideCanonical && <link key="canonical" rel="canonical" href={canonicalUrl} />}
     </Head>

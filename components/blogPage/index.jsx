@@ -7,7 +7,7 @@ import Image from "../Image";
 import commentBox from "commentbox.io";
 
 import Seo from "../seo";
-import { ArticleJsonLd } from "lib/json-ld";
+import { ArticleJsonLd, toPlainText } from "lib/json-ld";
 import ArticleAuthorBio from "../blog/ArticleAuthorBio";
 import RelatedPosts from "../blog/RelatedPosts";
 import CTA from "../CTA";
@@ -95,6 +95,20 @@ const BackToBlogLink = styled(Link)`
   }
 `;
 
+// Search engines truncate descriptions around 155-160 characters; cut on a word
+// boundary so the snippet does not end mid-word.
+const META_DESCRIPTION_MAX = 155;
+
+function truncateForMeta(text) {
+  if (!text) return "";
+  if (text.length <= META_DESCRIPTION_MAX) return text;
+
+  const clipped = text.slice(0, META_DESCRIPTION_MAX);
+  const lastSpace = clipped.lastIndexOf(" ");
+
+  return `${(lastSpace > 0 ? clipped.slice(0, lastSpace) : clipped).replace(/[.,;:\s]+$/, "")}\u2026`;
+}
+
 export default function PostPage({ post, posts = [] }) {
   const router = useRouter();
 
@@ -106,9 +120,19 @@ export default function PostPage({ post, posts = [] }) {
     return <ErrorPage statusCode={404} />;
   }
 
+  // Article-specific meta/OG/Twitter description from the post excerpt. When a
+  // post has no excerpt this stays undefined so <Seo> falls back to the generic
+  // site description rather than emitting an empty tag.
+  const articleDescription = truncateForMeta(toPlainText(post?.excerpt)) || undefined;
+
   return (
     <LayoutJs>
-      <Seo title={post.title} ogType="article" />
+      <Seo
+        title={post.title}
+        description={articleDescription}
+        ogImage={post.featuredImage?.node?.sourceUrl}
+        ogType="article"
+      />
       <ArticleJsonLd post={post} />
       <HeroBannerPadding />
       <Section>

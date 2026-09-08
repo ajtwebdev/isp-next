@@ -51,6 +51,16 @@ export async function getStaticProps({
       const categories = (data.post?.categories?.edges || []).map(
         ({ node }) => node
       );
+      // Dev-only visibility into whether WordPress actually returned a featured
+      // image for this post: it feeds og:image/twitter:image, and a missing one
+      // silently falls back to the generic site image.
+      if (process.env.NODE_ENV === "development") {
+        const featured = data.post?.featuredImage?.node?.sourceUrl;
+        console.log(
+          `[blog] ${slug} — featured image: ${featured || "MISSING (falls back to default OG image)"}`
+        );
+      }
+
       const related = await getRelatedPosts(
         categories,
         data.post?.databaseId,
