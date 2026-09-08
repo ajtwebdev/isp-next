@@ -24,7 +24,7 @@ const Card = styled.div`
   }
 `;
 
-const Heading = styled.h3`
+const Heading = styled.h1`
   text-align: center;
   font-size: 1.35rem;
   margin-bottom: 1.25rem;
@@ -318,7 +318,7 @@ export default function ContactPage() {
                     <FaCommentDots className="accent" aria-hidden="true" />
                     <span>
                       Prefer to text? Message Mark at{" "}
-                      <IntroLink href="tel:+14036057840">
+                      <IntroLink href="sms:+14036057840">
                         403.605.7840
                       </IntroLink>
                       .
