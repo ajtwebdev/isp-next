@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import LayoutJs from "../components/layoutJs";
 import Seo from "../components/seo";
@@ -106,9 +107,9 @@ const PrivacyPolicy = () => {
           email via our{" "}
           <span>
             {" "}
-            <a style={{ display: "table-cell" }} href="/contact-us">
+            <Link style={{ display: "table-cell" }} href="/contact">
               contact page.
-            </a>
+            </Link>
           </span>
         </p>
         <h2 style={{ margin: "10px 0px" }}>Copyright of Images</h2>

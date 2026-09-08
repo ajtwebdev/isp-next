@@ -15,6 +15,9 @@ export default function Alert({ preview }) {
           {preview ? (
             <>
               This is a page preview.{' '}
+              {/* eslint-disable-next-line @next/next/no-html-link-for-pages --
+                  /api/exit-preview is an API route, not a page: it must be a
+                  full navigation so the server can clear the preview cookie. */}
               <a
                 href="/api/exit-preview"
                 className="underline hover:text-cyan duration-200 transition-colors"
