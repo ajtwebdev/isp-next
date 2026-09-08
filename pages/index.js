@@ -66,10 +66,10 @@ export default function Index() {
         to="/experience"
         link="explore the experience &#x2192;"
       />
-      <MarkAdvantage />
+      {/* <MarkAdvantage /> */}
       <MeetMark />
       <FeaturedIn />
-      <Diversity />
+      {/* <Diversity /> */}
       <CTA
         headline="take the leap!"
         subhead="We'll catch you!"

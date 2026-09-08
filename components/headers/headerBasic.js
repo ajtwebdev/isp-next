@@ -328,32 +328,9 @@ export default function HeaderBasic() {
                 <li>
                   <StyledLink href="/experience">experience</StyledLink>
                 </li>
-                <Dropdown>
-                  <StyledLink href="/portfolios">
-                    Portfolios
-                    <IoMdArrowDropdown size={20} />
-                  </StyledLink>
-                  <ul>
-                    <li>
-                      <StyledLink href="/portfolios/gallery">
-                        gallery
-                      </StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/portfolios/books">books</StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/portfolios/wall-art">
-                        wall art
-                      </StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/portfolios/projects">
-                        projects
-                      </StyledLink>
-                    </li>
-                  </ul>
-                </Dropdown>
+                <li>
+                  <StyledLink href="/gallery">Gallery</StyledLink>
+                </li>
                 <Dropdown>
                   <StyledLink href="/resources">
                     Resources
@@ -384,7 +361,8 @@ export default function HeaderBasic() {
                     +1 (403) 252-2662
                   </NavPhone>
                   <GetQuote
-                    href="/contact"
+                    href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
+                    target="_blank"
                   >
                     <span>book now &#x2192;</span>
                   </GetQuote>
@@ -394,7 +372,8 @@ export default function HeaderBasic() {
             <NavCtaDesktop>
               <NavPhone href="tel: (403) 252-2662">+1 (403) 252-2662</NavPhone>
               <GetQuote
-                href="/contact"
+                href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
+                target="_blank"
               >
                 <span>book now &#x2192;</span>
               </GetQuote>

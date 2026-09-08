@@ -1,48 +1,65 @@
-import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-import { Container, GridAuto, Section } from "./layoutComponents";
+import { Container } from "./layoutComponents";
 
 const Wrapper = styled.div`
   background: var(--clr-dark);
   color: var(--txt-light);
+`;
 
-  .gif {
-    height: 110px;
-    object-fit: cover;
+export const Section = styled.section`
+  padding: 1.5em 0;
 
-    @media screen and (max-width: 79em) {
-      max-width: 100px;
-
-      @media screen and (max-width: 22em) {
-        max-width: 100%;
-      }
-    }
+  @media screen and (max-width: 450px) {
+    padding: 1.5em 0;
   }
 `;
 
 const Flex = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1em 1em;
+  gap: 0;
 
-  @media screen and (max-width: 22em) {
+  @media screen and (max-width: 48em) {
     flex-direction: column;
+    gap: 1em;
+    padding: 1.2em 1em;
+  }
+`;
+
+const StatItem = styled.p`
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0 2.5em;
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.25);
   }
 
-  & > * + * {
-    margin-left: 1em;
-
-    @media screen and (max-width: 22em) {
-      margin-left: 0;
-      margin-top: 4px;
+  @media screen and (max-width: 48em) {
+    padding: 0;
+    &:not(:last-child)::after {
+      display: none;
     }
   }
 
-  div {
-    text-align: center;
-    & > * + * {
-      margin-top: 4px;
-    }
+  @media screen and (max-width: 30em) {
+    font-size: 1rem;
   }
 `;
 
@@ -51,48 +68,11 @@ export default function Stats() {
     <Wrapper>
       <Section>
         <Container>
-          <GridAuto>
-            <Flex>
-              <Image
-                className="gif"
-                src="/women-moving-to-boudoir-photographer-in-calgary.gif"
-                alt="number of women photographed for nudes"
-                height={100}
-                width={100}
-              />
-              <div>
-                <p>Photographed</p>
-                <p className="headline">5,127+</p>
-                <p className="teriatary">Women</p>
-              </div>
-            </Flex>
-            <Flex>
-              <Image
-                src="/charity.svg"
-                alt="donations from boudoir studio in Calgary"
-                height={100}
-                width={100}
-              />
-              <div>
-                <p>Donations</p>
-                <p className="headline">$514,210+</p>
-                <p className="teriatary">to Charity</p>
-              </div>
-            </Flex>
-            <Flex>
-              <Image
-                src="/calendar.svg"
-                alt="number of years Calgary boudoir has been in business"
-                height={100}
-                width={100}
-              />
-              <div>
-                <p>in Business</p>
-                <p className="headline">42+</p>
-                <p className="teriatary">Years</p>
-              </div>
-            </Flex>
-          </GridAuto>
+          <Flex>
+            <StatItem>5,300+ Women Photographed</StatItem>
+            <StatItem>Calgary Studio Since 1980</StatItem>
+            <StatItem>$525,000+ Contributed to Charities</StatItem>
+          </Flex>
         </Container>
       </Section>
     </Wrapper>

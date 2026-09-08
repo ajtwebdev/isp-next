@@ -37,4 +37,23 @@ module.exports = withBundleAnalyzer({
     ],
   },
   swcMinify: true,
+  async redirects() {
+    return [
+      {
+        source: '/books',
+        destination: '/gallery',
+        permanent: true,
+      },
+      {
+        source: '/wall-art',
+        destination: '/gallery',
+        permanent: true,
+      },
+      {
+        source: '/projects',
+        destination: '/gallery',
+        permanent: true,
+      },
+    ];
+  },
 });

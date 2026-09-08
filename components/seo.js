@@ -1,6 +1,7 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { getCanonicalUrl } from "../lib/canonical";
 
-const DOMAIN = "https://www.innerspiritphoto.com";
 const DEFAULT_OG_IMAGE =
   "https://staging.innerspiritphoto.com/wp-content/uploads/2022/10/X1171D-0007AY.jpg";
 
@@ -8,15 +9,17 @@ export default function Seo({
   title = "Inner Spirit Photography | Calgary Boudoir",
   description = "Inner Spirit Photography is a Calgary-based boudoir studio with more than 40 years of experience.",
   siteName = "Inner Spirit Photography",
-  canonical = DOMAIN,
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   twitterHandle = "",
 }) {
+  const router = useRouter();
+  const canonicalUrl = getCanonicalUrl(router.asPath || "/");
+
   return (
     <Head>
       <title key="title">{`${title}`}</title>
-      <meta name="description" content={description} />
+      <meta key="description" name="description" content={description} />
       <meta key="og_type" property="og:type" content={ogType} />
       <meta key="og_title" property="og:title" content={title} />
       <meta
@@ -26,8 +29,7 @@ export default function Seo({
       />
       <meta key="og_locale" property="og:locale" content="en_IE" />
       <meta key="og_site_name" property="og:site_name" content={siteName} />
-      <meta key="og_url" property="og:url" content={canonical ?? DOMAIN} />
-      <meta key="og_site_name" property="og:site_name" content={siteName} />
+      <meta key="og_url" property="og:url" content={canonicalUrl} />
       <meta
         key="og_image"
         property="og:image"
@@ -41,7 +43,7 @@ export default function Seo({
       <meta key="og_image:width" property="og:image:width" content="1200" />
       <meta key="og_image:height" property="og:image:height" content="630" />
 
-      <meta name="robots" content="index,follow" />
+      <meta key="robots" name="robots" content="index,follow" />
 
       <meta
         key="twitter:card"
@@ -61,9 +63,8 @@ export default function Seo({
         content={description}
       />
 
-      <link rel="canonical" href={canonical ?? DOMAIN} />
+      <link key="canonical" rel="canonical" href={canonicalUrl} />
 
-      {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     </Head>

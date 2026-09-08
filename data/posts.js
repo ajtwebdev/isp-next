@@ -291,7 +291,6 @@ export const QUERY_POST_SEO_BY_SLUG = gql`
     post(id: $slug, idType: SLUG) {
       id
       seo {
-        canonical
         metaDesc
         metaRobotsNofollow
         metaRobotsNoindex

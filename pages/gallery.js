@@ -1,0 +1,1 @@
+export { default, getStaticProps } from './portfolios/gallery';

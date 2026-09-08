@@ -43,6 +43,10 @@ const BannerText = styled.div`
 export default function RecentPosts({ posts }) {
   return (
     <LayoutJs>
+      <Seo
+        title="Recent Posts | Inner Spirit Photography"
+        description="Recent posts from Inner Spirit Photography."
+      />
       <p>Recent Posts</p>
     </LayoutJs>
   )

@@ -86,12 +86,12 @@ export default function MainPageTestimonials() {
                 that...{" "}
               </h2>
             </Text>
-            <LazyVimeo
+            {/* <LazyVimeo
               src="https://player.vimeo.com/video/743214435?h=892cd0c99b&badge=0&autopause=0&player_id=0&app_id=58479"
               title="HD 2 Placeholder"
               poster="/posters/743214435.jpg"
               aspectRatio="56.25%"
-            />
+            /> */}
             <ReviewText className="center spacing accent">
               <h2 className="subhead caps">from baggy sweats to confidence</h2>
               <p className="italics">

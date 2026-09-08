@@ -192,7 +192,6 @@ export default function Blog({ posts, pagination }) {
           </Ol>
           {pagination && (
             <Pagination
-              addCanonical={false}
               currentPage={pagination?.currentPage}
               pagesCount={pagination?.pagesCount}
               basePath={pagination?.basePath}

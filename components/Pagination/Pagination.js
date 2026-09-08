@@ -15,7 +15,6 @@ const Pagination = ({
   pagesCount,
   currentPage,
   basePath,
-  addCanonical = true,
 }) => {
   const path = `${basePath}/page/`;
 
@@ -53,9 +52,6 @@ const Pagination = ({
   return (
     <>
       <Helmet>
-        {addCanonical && !hasPreviousPage && (
-          <link rel="canonical" href={`${homepage}${basePath}`} />
-        )}
         {hasPreviousPage && (
           <link rel="prev" href={`${homepage}${path}${currentPage - 1}`} />
         )}
