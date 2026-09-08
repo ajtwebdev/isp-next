@@ -230,6 +230,11 @@ export default function Footer() {
                     Contact & Booking
                   </NextLink>
                 </LinkElement>
+                <LinkElement>
+                  <NextLink href="/reflections">
+                    Receive Reflections Journal
+                  </NextLink>
+                </LinkElement>
               </ul>
             </div>
             <div className="About">

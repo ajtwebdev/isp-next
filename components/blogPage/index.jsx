@@ -130,7 +130,6 @@ export default function PostPage({ post, posts = [] }) {
       <Seo
         title={post.title}
         description={articleDescription}
-        ogImage={post.featuredImage?.node?.sourceUrl}
         ogType="article"
       />
       <ArticleJsonLd post={post} />

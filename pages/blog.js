@@ -2,7 +2,7 @@ import BlogList from "components/blog/BlogList";
 import { getPaginatedPosts } from "lib/posts";
 
 export default function Blog(props) {
-  return <BlogList {...props} />;
+  return <BlogList {...props} showReflectionsInvite />;
 }
 
 export async function getStaticProps() {

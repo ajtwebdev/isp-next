@@ -2,6 +2,7 @@ import { getAllPosts, getRelatedPosts } from "../../lib/posts";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
 import { getPostByCategory } from "../recent-posts";
 import BlogList from "../../components/blog/BlogList";
+import { getCategorySeo } from "../../data/category-seo";
 import PostPage from "../../components/blogPage";
 
 /**
@@ -20,14 +21,23 @@ export default function BlogSlugPage(props) {
     return null;
   }
 
+  const { title: categoryTitle, intro: categoryIntro } = getCategorySeo(
+    catgoryPost.categorySlug,
+    catgoryPost.categoryName
+  );
+
   return (
     <BlogList
       posts={catgoryPost.posts}
       pagination={null}
       bannerHeadline={catgoryPost.categoryName}
       activeCategorySlug={catgoryPost.categorySlug}
-      seoTitle={catgoryPost.categoryName}
-      seoDescription={`Browse ${catgoryPost.categoryName} posts on the Inner Spirit Photography blog.`}
+      seoTitle={`${categoryTitle} | Inner Spirit Photography`}
+      seoDescription={
+        categoryIntro ||
+        `Browse ${catgoryPost.categoryName} posts on the Inner Spirit Photography blog.`
+      }
+      intro={categoryIntro}
       gridMode="auto"
     />
   );

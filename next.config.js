@@ -78,6 +78,27 @@ module.exports = withBundleAnalyzer({
         destination: '/gallery',
         permanent: true,
       },
+      // Content/SEO cleanup: 301s added only where a clear, relevant
+      // replacement exists. Verified against the build that every destination
+      // returns 200, so none of these create a redirect chain or loop.
+      {
+        // Internal utility listing superseded by the real blog index.
+        source: "/recent-posts",
+        destination: "/blog",
+        statusCode: 301,
+      },
+      {
+        // Empty WordPress shell (chrome only); the content lives here.
+        source: "/portfolio/projects",
+        destination: "/portfolios/projects",
+        statusCode: 301,
+      },
+      {
+        // Empty WordPress shell (chrome only); the content lives here.
+        source: "/portfolio/wall-art",
+        destination: "/portfolios/wall-art",
+        statusCode: 301,
+      },
       ...blogRedirects,
     ];
   },

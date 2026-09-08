@@ -164,6 +164,32 @@ const Excerpt = styled.div`
   overflow-wrap: anywhere;
 `;
 
+// Short category intro rendered above the post grid on /blog/{category}.
+const CategoryIntro = styled.p`
+  margin: 0 auto 2rem;
+  max-width: 720px;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--txt-dark-secondary, #4b5563);
+`;
+
+// Small, unobtrusive invitation shown only on the main /blog index.
+const ReflectionsInvite = styled.p`
+  margin: 2.5rem auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--txt-dark-secondary, #4b5563);
+
+  a {
+    display: inline;
+    color: var(--clr-accent);
+    text-decoration: underline;
+  }
+`;
+
 export default function BlogList({
   posts,
   pagination,
@@ -172,6 +198,8 @@ export default function BlogList({
   seoTitle = "Inner Spirit Photography Blogs",
   seoDescription = "Welcome to the Inner Spirit Photo blogs!",
   gridMode = "fixed",
+  intro = "",
+  showReflectionsInvite = false,
 }) {
   const categoryLinks = Array.from(
     new Map(
@@ -210,6 +238,8 @@ export default function BlogList({
               ))}
             </CategoryNav>
           )}
+
+          {intro ? <CategoryIntro>{intro}</CategoryIntro> : null}
 
           <PostsGrid $mode={gridMode}>
             {posts.map((post) => {
@@ -262,6 +292,14 @@ export default function BlogList({
               pagesCount={pagination?.pagesCount}
               basePath={pagination?.basePath}
             />
+          )}
+
+          {showReflectionsInvite && (
+            <ReflectionsInvite>
+              Enjoying these stories?{" "}
+              <Link href="/reflections">Receive Reflections Journal</Link> —
+              twice a month, straight from the studio.
+            </ReflectionsInvite>
           )}
         </Container>
       </Section>
