@@ -150,7 +150,10 @@ export default function PostPage({ post, posts = [] }) {
   // and <Seo>'s default OG image.
   const acf = post?.ACF_BlogsPost || {};
   const customTitle = acf.seoMetaTitle?.trim();
-  const customDescription = acf.seoMetaDescription?.trim();
+  // seoMetaDescription is a rich-text field, so WordPress returns it wrapped in
+  // markup ("<p>...</p>\n"). Meta tags need plain text or the tags render as
+  // escaped &lt;p&gt; in the description.
+  const customDescription = toPlainText(acf.seoMetaDescription);
   const customOgImage = acf.socialogImage?.sourceUrl?.trim();
 
   const articleTitle = customTitle || post?.title;
