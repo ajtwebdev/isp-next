@@ -11,8 +11,6 @@ export default function Document() {
       <link rel="preload" href="/fonts/OPTIMA_B.woff" as="font" type="font/woff" crossOrigin="anonymous" />
       <link rel="preload" href="/fonts/Optima_Italic.woff" as="font" type="font/woff" crossOrigin="anonymous" />
       <link rel="preload" href="/fonts/TrajanPro-Regular.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-      {/* GTM script moved to `_app.tsx` and loaded with next/script (afterInteractive) */}
-      
         {/* <script
           dangerouslySetInnerHTML={{
             __html: `

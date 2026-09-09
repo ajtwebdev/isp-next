@@ -198,17 +198,37 @@ export default function BlogList({
   seoTitle = "Inner Spirit Photography Blogs",
   seoDescription = "Welcome to the Inner Spirit Photo blogs!",
   gridMode = "fixed",
+  categories = null,
   intro = "",
   showReflectionsInvite = false,
 }) {
-  const categoryLinks = Array.from(
-    new Map(
-      posts
-        .flatMap((post) => post.categories || [])
-        .filter(Boolean)
-        .map((category) => [category.slug, category])
-    ).values()
-  );
+  // Prefer the full category list from WordPress. Deriving from `posts` only
+  // ever sees the categories present in the current page's slice, so a
+  // category with no post on page 1 disappeared from the nav.
+  const categoryLinks =
+    Array.isArray(categories) && categories.length > 0
+      ? categories
+      : Array.from(
+          new Map(
+            posts
+              .flatMap((post) => post.categories || [])
+              .filter(Boolean)
+              .map((category) => [category.slug, category])
+          ).values()
+        );
+
+  if (process.env.NODE_ENV === "development") {
+    console.log(
+      `[categories] BlogList nav has ${categoryLinks.length} categor${
+        categoryLinks.length === 1 ? "y" : "ies"
+      } (source: ${
+        Array.isArray(categories) && categories.length > 0
+          ? "GraphQL"
+          : `derived from ${posts.length} post(s)`
+      }):`,
+      categoryLinks.map((c) => c.slug).join(", ")
+    );
+  }
 
   return (
     <LayoutJs>

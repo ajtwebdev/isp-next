@@ -343,3 +343,18 @@ export const QUERY_POST_PER_PAGE = gql`
     }
   }
 `;
+export const QUERY_ALL_CATEGORIES = gql`
+  query AllCategories {
+    categories(first: 1000, where: { hideEmpty: true }) {
+      edges {
+        node {
+          databaseId
+          id
+          name
+          slug
+          count
+        }
+      }
+    }
+  }
+`;

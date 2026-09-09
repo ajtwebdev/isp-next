@@ -12,6 +12,7 @@ import ArticleAuthorBio from "../blog/ArticleAuthorBio";
 import RelatedPosts from "../blog/RelatedPosts";
 import CTA from "../CTA";
 import { Section, Container, HeroBannerPadding } from "../layoutComponents";
+import { ButtonPrimary } from "../buttons";
 import LayoutJs from "../layoutJs";
 
 const Content = styled.div`
@@ -78,6 +79,30 @@ const FooterDivider = styled.div`
   margin: 1.5rem 0 2rem;
 `;
 
+// Invitation to the journal, sitting directly under the story it refers to.
+// Deliberately lighter than the full-width <CTA> further down so the article
+// does not end in two competing calls to action.
+const ReflectionsCta = styled.aside`
+  margin: 2rem 0;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  border-radius: 12px;
+  text-align: center;
+
+  h2 {
+    font-size: 1.1rem;
+    margin: 0 0 0.6rem;
+  }
+
+  p {
+    margin: 0 auto 1.5rem;
+    max-width: 34rem;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--txt-dark-secondary, #4b5563);
+  }
+`;
+
 const BackToBlogLink = styled(Link)`
   display: inline-flex;
   align-items: center;
@@ -120,16 +145,29 @@ export default function PostPage({ post, posts = [] }) {
     return <ErrorPage statusCode={404} />;
   }
 
-  // Article-specific meta/OG/Twitter description from the post excerpt. When a
-  // post has no excerpt this stays undefined so <Seo> falls back to the generic
-  // site description rather than emitting an empty tag.
-  const articleDescription = truncateForMeta(toPlainText(post?.excerpt)) || undefined;
+  // SEO values authored in WordPress (ACF group "ACF_BlogsPost") win when set.
+  // Each falls back to what the page did before: the post title, the excerpt,
+  // and <Seo>'s default OG image.
+  const acf = post?.ACF_BlogsPost || {};
+  const customTitle = acf.seoMetaTitle?.trim();
+  const customDescription = acf.seoMetaDescription?.trim();
+  const customOgImage = acf.socialogImage?.sourceUrl?.trim();
+
+  const articleTitle = customTitle || post?.title;
+
+  // undefined (not "") so <Seo> applies its own default rather than emitting
+  // an empty tag.
+  const articleDescription =
+    customDescription || truncateForMeta(toPlainText(post?.excerpt)) || undefined;
+
+  const articleOgImage = customOgImage || undefined;
 
   return (
     <LayoutJs>
       <Seo
-        title={post.title}
+        title={articleTitle}
         description={articleDescription}
+        ogImage={articleOgImage}
         ogType="article"
       />
       <ArticleJsonLd post={post} />
@@ -165,6 +203,18 @@ export default function PostPage({ post, posts = [] }) {
                 <FooterDivider />
 
                 <ArticleAuthorBio />
+
+                <ReflectionsCta aria-label="Receive Reflections Journal">
+                  <h2>Enjoyed this story? Receive Reflections Journal.</h2>
+                  <p>
+                    Twice each month, Mark shares stories, photographs,
+                    insights, and occasional studio news from Inner Spirit
+                    Photography.
+                  </p>
+                  <ButtonPrimary href="/reflections">
+                    Receive Reflections Journal
+                  </ButtonPrimary>
+                </ReflectionsCta>
 
                 <RelatedPosts posts={posts} limit={3} />
 

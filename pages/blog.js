@@ -1,5 +1,6 @@
 import BlogList from "components/blog/BlogList";
 import { getPaginatedPosts } from "lib/posts";
+import { getAllCategories } from "lib/categories";
 
 export default function Blog(props) {
   return <BlogList {...props} showReflectionsInvite />;
@@ -7,14 +8,15 @@ export default function Blog(props) {
 
 export async function getStaticProps() {
   try {
-    const { posts, pagination } = await getPaginatedPosts({
-      currentPage: 1,
-      queryIncludes: "all",
-    });
+    const [{ posts, pagination }, categories] = await Promise.all([
+      getPaginatedPosts({ currentPage: 1, queryIncludes: "all" }),
+      getAllCategories(),
+    ]);
 
     return {
       props: {
         posts: Array.isArray(posts) ? posts : [],
+        categories,
         pagination: {
           ...pagination,
           basePath: "/blog",

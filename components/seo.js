@@ -17,6 +17,11 @@ export default function Seo({
 }) {
   const router = useRouter();
   const canonicalUrl = getCanonicalUrl(router.asPath || "/");
+  // 1200x630 is only true of DEFAULT_OG_IMAGE. A per-post image supplied from
+  // WordPress has arbitrary dimensions, so we omit the tags rather than
+  // declare wrong ones.
+  const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
+  const isDefaultOgImage = resolvedOgImage === DEFAULT_OG_IMAGE;
   const isPreview = process.env.VERCEL_ENV === "preview";
   const robotsContent = isPreview || noindex ? "noindex,follow" : "index,follow";
 
@@ -37,15 +42,19 @@ export default function Seo({
       <meta
         key="og_image"
         property="og:image"
-        content={ogImage ?? DEFAULT_OG_IMAGE}
+        content={resolvedOgImage}
       />
       <meta
         key="og_image:alt"
         property="og:image:alt"
         content={`${title} | ${siteName}`}
       />
-      <meta key="og_image:width" property="og:image:width" content="1200" />
-      <meta key="og_image:height" property="og:image:height" content="630" />
+      {isDefaultOgImage && (
+        <meta key="og_image:width" property="og:image:width" content="1200" />
+      )}
+      {isDefaultOgImage && (
+        <meta key="og_image:height" property="og:image:height" content="630" />
+      )}
 
       <meta key="robots" name="robots" content={robotsContent} />
 

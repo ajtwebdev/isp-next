@@ -1,54 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import LayoutJs from "../components/layoutJs";
 import Seo from "../components/seo";
-import { Section, Container } from "../components/layoutComponents";
-import { ButtonPrimary } from "../components/buttons";
+import {
+  Container,
+  HeroBannerPadding,
+  Section,
+} from "../components/layoutComponents";
 
-/**
- * CyberImpact subscription settings.
- *
- * The account id is shared with the contest form (pages/contest-form.js).
- *
- * TODO(client): CI_GROUP_ID currently reuses the CONTEST list id ("9") because
- * the Reflections Journal list id has not been supplied yet. Subscribers will
- * land on the wrong list until this is replaced.
- */
-// TEMP: CyberImpact submission disabled until list ID confirmed.
-// Flip this single flag back to `true` to restore the real POST to CyberImpact.
-// Nothing else needs to change: the form action, the hidden ci_* inputs and
-// CI_GROUP_ID below are all left intact and are used as soon as this is true.
-const CYBERIMPACT_SUBMISSION_ENABLED = false;
-
-const CI_ACCOUNT_ID = "d5d6a294-fdde-4c20-3de4-87103dafd0d8";
-const CI_GROUP_ID = "9";
-const SITE_ORIGIN = "https://innerspiritphoto.com";
-
-const Card = styled.div`
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 2rem 1.75rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-  max-width: 640px;
-  margin: 30px auto;
+// The page sits directly on the section background rather than inside a raised
+// card: the CyberImpact form already renders its own panel, and nesting one
+// card inside another read as heavy.
+const Wrapper = styled.div`
+  max-width: 46rem;
+  margin: 0 auto;
 `;
 
 const Heading = styled.h1`
   text-align: center;
-  font-size: 1.35rem;
-  margin-bottom: 1.25rem;
+  margin: 0 0 0.5rem;
+`;
+
+const Standfirst = styled.p`
+  text-align: center;
+  max-width: 34rem;
+  margin: 0 auto 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--clr-accent);
+  font-weight: var(--fw-button, 700);
 `;
 
 const Body = styled.div`
-  margin: 0 0 1.75rem;
+  /* One short paragraph now, so it is centred to balance the heading above. */
+  max-width: 34rem;
+  margin: 0 auto;
+  text-align: center;
 
   p {
-    margin: 0 0 1rem;
-    font-size: 1rem;
-    line-height: 1.7;
+    margin: 0 0 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
   }
 
   p:last-child {
@@ -56,52 +50,78 @@ const Body = styled.div`
   }
 `;
 
-const FormWrapper = styled.div`
-  border-top: 1px solid rgba(17, 17, 17, 0.1);
-  padding-top: 1.5rem;
-`;
-
-const Fieldset = styled.fieldset`
-  border: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 1rem;
-`;
-
-const Field = styled.div`
+const FormPanel = styled.div`
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(17, 17, 17, 0.12);
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-const Label = styled.label`
-  font-weight: 600;
-  font-size: 0.85rem;
-  margin-bottom: 0.3rem;
-  color: #374151;
-`;
+// The iframe is given the full column width so it no longer floats in a
+// narrow strip. Its internal layout is CyberImpact's and is not styled here.
+// The frame and the overlay share these dimensions so the spinner sits exactly
+// where the form was, with no layout shift when it appears.
+const FrameWrap = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 33rem;
+  height: 323px;
 
-const Input = styled.input`
-  padding: 0.55rem 0.7rem;
-  border: 1px solid #d1d5db;
-  border-radius: 8px;
-  font-size: 0.9rem;
-
-  &:focus {
-    outline: none;
-    border-color: var(--clr-accent);
+  @media screen and (max-width: 34em) {
+    height: 400px;
+    max-width: 21rem;
   }
 `;
 
-const SubmitButton = styled(ButtonPrimary)`
-  justify-self: start;
-  cursor: pointer;
+const spin = keyframes`
+  to { transform: rotate(360deg); }
 `;
 
-// Unsubscribe notice and privacy link sit BELOW the form, not above it.
+const Overlay = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  background: #ffffff;
+  text-align: center;
+`;
+
+const Spinner = styled.div`
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 3px solid rgba(17, 17, 17, 0.12);
+  border-top-color: var(--clr-accent);
+  border-radius: 50%;
+  animation: ${spin} 0.8s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 2.4s;
+  }
+`;
+
+const OverlayText = styled.p`
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--txt-dark-secondary, #4b5563);
+`;
+
+const FormFrame = styled.iframe`
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+
+`;
+
 const FinePrint = styled.p`
-  margin: 1.25rem 0 0;
-  font-size: 0.82rem;
+  margin: 1.5rem 0 0;
+  text-align: center;
+  font-size: 0.85rem;
   line-height: 1.6;
   color: var(--txt-dark-secondary, #4b5563);
 
@@ -112,66 +132,48 @@ const FinePrint = styled.p`
   }
 `;
 
-const Confirmation = styled.div`
-  background: rgba(17, 17, 17, 0.04);
-  border-left: 3px solid var(--clr-accent);
-  border-radius: 8px;
-  padding: 1.1rem 1.25rem;
-  margin: 0 0 1.75rem;
-
-  h2 {
-    font-size: 1.05rem;
-    margin: 0 0 0.5rem;
-  }
-
-  p {
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-  }
-`;
-
 export default function ReflectionsPage() {
-  const router = useRouter();
-  const [confirmed, setConfirmed] = useState(false);
+  // CyberImpact redirects *inside* the signup iframe after a successful
+  // submission. The framed confirmation page signals us here so the visitor
+  // lands on the real full-page confirmation instead of a clipped copy of the
+  // site nested in a 400px frame.
+  // CyberImpact runs a bot check between submit and its redirect. We cannot
+  // read inside a cross-origin frame, but its `load` event still fires on every
+  // navigation, so the second load onward means the visitor has submitted.
+  const [isWorking, setIsWorking] = useState(false);
+  const loadCountRef = useRef(0);
+  const revealTimerRef = useRef(null);
 
-  // CyberImpact posts natively and redirects back here via ci_sent_url, so the
-  // success state arrives as a query param rather than an in-page callback.
-  useEffect(() => {
-    if (!router.isReady) return;
-    if (router.query.subscribed !== "1") return;
+  const handleFrameLoad = () => {
+    loadCountRef.current += 1;
 
-    setConfirmed(true);
+    // First load is the form itself.
+    if (loadCountRef.current < 2) return;
 
-    // GA4 signup-completion event via the GTM dataLayer. Guarded so a missing
-    // container (see note in _document.tsx) can never break the page.
-    if (typeof window !== "undefined") {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: "signup-completion",
-        signup_method: "cyberimpact",
-        signup_list: "reflections-journal",
-      });
-    }
-  }, [router.isReady, router.query.subscribed]);
+    setIsWorking(true);
 
-  const handleSubmit = (event) => {
-    // When enabled, let the browser perform its normal POST to CyberImpact.
-    if (CYBERIMPACT_SUBMISSION_ENABLED) return;
-
-    event.preventDefault();
-
-    const formData = new FormData(event.currentTarget);
-
-    console.log("[reflections] TEMP: CyberImpact submission disabled — no data sent.", {
-      firstName: formData.get("ci_firstname"),
-      email: formData.get("ci_email"),
-    });
-
-    // Route through the same ?subscribed=1 state the real CyberImpact redirect
-    // uses, so the confirmation message and GA4 event behave identically.
-    router.push("/reflections?subscribed=1", undefined, { shallow: true });
+    // Safety valve: if CyberImpact ever asks the visitor to complete a
+    // challenge, they must be able to see and click it. Reveal the frame again
+    // if we have not been redirected shortly after submitting.
+    clearTimeout(revealTimerRef.current);
+    revealTimerRef.current = setTimeout(() => setIsWorking(false), 6000);
   };
+
+  useEffect(() => () => clearTimeout(revealTimerRef.current), []);
+
+  useEffect(() => {
+    function handleMessage(event) {
+      if (event?.data?.type !== "isp:reflections-subscribed") return;
+
+      // Nothing from the message is used: we always navigate to our own
+      // confirmation route on the current origin, so a spoofed message can
+      // only ever send the visitor to this same page.
+      window.location.replace("/reflections/thank-you");
+    }
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <LayoutJs>
@@ -180,104 +182,52 @@ export default function ReflectionsPage() {
         description="Twice each month, Mark Laurie shares a short story or personal insight from the studio: confidence, creativity, beauty, transformation and life behind the camera."
       />
 
+      <HeroBannerPadding />
       <Section>
         <Container>
-          <Card>
+          <Wrapper>
             <Heading className="headline">Receive Reflections Journal</Heading>
 
-            {confirmed && (
-              <Confirmation role="status" aria-live="polite">
-                <h2>Thank you — one last step</h2>
-                <p>
-                  Please check your inbox and confirm your email address to
-                  finish subscribing to Reflections Journal.
-                </p>
-              </Confirmation>
-            )}
+            <Standfirst>
+              Enjoyed this story? Receive Reflections Journal.
+            </Standfirst>
 
             <Body>
               <p>
-                Reflections Journal has become something close to my personal
-                written journal a place where I pause over a photograph, a
-                conversation or a moment from the studio and explore why it
-                stayed with me.
-              </p>
-              <p>
-                Twice each month, I share one of those entries: short stories
-                and personal insights about confidence, creativity, beauty,
-                transformation and life behind the camera.
-              </p>
-              <p>
-                From time to time, you may also receive special offers, contest
-                news and notices of upcoming Inner Spirit events or creative
-                experiences.
-              </p>
-              <p>
-                If this sounds like something you would enjoy, I would be
-                delighted to have you join me.
+                Twice each month, Mark shares stories, photographs, insights,
+                and occasional studio news from Inner Spirit Photography.
               </p>
             </Body>
 
-            <FormWrapper>
-              <form
-                action="https://app.cyberimpact.com/optin"
-                method="post"
-                acceptCharset="utf-8"
-                onSubmit={handleSubmit}
-              >
-                <Fieldset>
-                  <Field>
-                    <Label htmlFor="ci_firstname">First name *</Label>
-                    <Input
-                      type="text"
-                      id="ci_firstname"
-                      name="ci_firstname"
-                      autoComplete="given-name"
-                      required
-                    />
-                  </Field>
+            <FormPanel>
+              <FrameWrap>
+                <FormFrame
+                  src="https://app.cyberimpact.com/clients/60137/subscribe-forms/CF3FC3B8-63CA-458E-84B5-D9AD14F7BC99"
+                  width="500"
+                  height="323"
+                  frameBorder="0"
+                  marginHeight="0"
+                  marginWidth="0"
+                  scrolling="auto"
+                  title="Reflections Journal subscription form"
+                  onLoad={handleFrameLoad}
+                />
 
-                  <Field>
-                    <Label htmlFor="ci_email">Email *</Label>
-                    <Input
-                      type="email"
-                      id="ci_email"
-                      name="ci_email"
-                      autoComplete="email"
-                      required
-                    />
-                  </Field>
+                {isWorking && (
+                  <Overlay role="status" aria-live="polite">
+                    <Spinner aria-hidden="true" />
+                    <OverlayText>Finishing your subscription&hellip;</OverlayText>
+                  </Overlay>
+                )}
+              </FrameWrap>
 
-                  <input type="hidden" name="ci_groups" value={CI_GROUP_ID} />
-                  <input
-                    type="hidden"
-                    name="ci_account"
-                    value={CI_ACCOUNT_ID}
-                  />
-                  <input type="hidden" name="ci_language" value="en_ca" />
-                  <input
-                    type="hidden"
-                    name="ci_sent_url"
-                    value={`${SITE_ORIGIN}/reflections?subscribed=1`}
-                  />
-                  <input
-                    type="hidden"
-                    name="ci_confirm_url"
-                    value={`${SITE_ORIGIN}/reflections?subscribed=1`}
-                  />
-
-                  <SubmitButton as="button" type="submit">
-                    Subscribe
-                  </SubmitButton>
-                </Fieldset>
-              </form>
 
               <FinePrint>
                 You may unsubscribe at any time. Read our{" "}
                 <Link href="/privacy-policy">privacy policy</Link>.
               </FinePrint>
-            </FormWrapper>
-          </Card>
+            </FormPanel>
+          </Wrapper>
         </Container>
       </Section>
     </LayoutJs>

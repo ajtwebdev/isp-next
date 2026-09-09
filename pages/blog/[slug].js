@@ -1,4 +1,5 @@
 import { getAllPosts, getRelatedPosts } from "../../lib/posts";
+import { getAllCategories } from "../../lib/categories";
 import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
 import { getPostByCategory } from "../recent-posts";
 import BlogList from "../../components/blog/BlogList";
@@ -11,7 +12,7 @@ import PostPage from "../../components/blogPage";
  * (/blog/confidence). Posts take precedence over categories.
  */
 export default function BlogSlugPage(props) {
-  const { post, catgoryPost } = props;
+  const { post, catgoryPost, categories } = props;
 
   if (post) {
     return <PostPage {...props} />;
@@ -37,6 +38,7 @@ export default function BlogSlugPage(props) {
         categoryIntro ||
         `Browse ${catgoryPost.categoryName} posts on the Inner Spirit Photography blog.`
       }
+      categories={categories}
       intro={categoryIntro}
       gridMode="auto"
     />
@@ -89,9 +91,10 @@ export async function getStaticProps({
     }
 
     // Otherwise fall back to a category archive.
-    const { posts } = await getAllPosts({
-      queryIncludes: "all",
-    });
+    const [{ posts }, categories] = await Promise.all([
+      getAllPosts({ queryIncludes: "all" }),
+      getAllCategories(),
+    ]);
     const postsByCategory = getPostByCategory(posts);
     const catgoryPost = Object.values(postsByCategory).find(
       (item) => item?.categorySlug === slug
@@ -107,6 +110,7 @@ export async function getStaticProps({
     return {
       props: {
         catgoryPost,
+        categories,
       },
     };
   } catch (error) {
@@ -133,6 +137,14 @@ export async function getStaticPaths() {
         item?.categories?.map((category) => category?.slug)
       ) || [])
     );
+
+    if (process.env.NODE_ENV === "development") {
+      const uniqueCategories = [...new Set(categoryPaths.filter(Boolean))];
+      console.log(
+        `[categories] ${uniqueCategories.length} category archive route(s) from GraphQL:`,
+        uniqueCategories.join(", ")
+      );
+    }
 
     // Posts are added first so a slug shared with a category resolves as a post,
     // matching the precedence in getStaticProps.

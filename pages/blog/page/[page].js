@@ -1,17 +1,20 @@
 import BlogList from "components/blog/BlogList";
 import { getAllPosts, getPagesCount, getPaginatedPosts } from "lib/posts";
+import { getAllCategories } from "lib/categories";
 
-export default function BlogPage({ posts, pagination }) {
-  return <BlogList posts={posts} pagination={pagination} />;
+export default function BlogPage({ posts, pagination, categories }) {
+  return (
+    <BlogList posts={posts} pagination={pagination} categories={categories} />
+  );
 }
 
 export async function getStaticProps({ params = {} } = {}) {
   try {
     const page = Number(params?.page || 1);
-    const { posts, pagination } = await getPaginatedPosts({
-      currentPage: page,
-      queryIncludes: "all",
-    });
+    const [{ posts, pagination }, categories] = await Promise.all([
+      getPaginatedPosts({ currentPage: page, queryIncludes: "all" }),
+      getAllCategories(),
+    ]);
 
     if (!pagination?.currentPage) {
       return {
@@ -23,6 +26,7 @@ export async function getStaticProps({ params = {} } = {}) {
     return {
       props: {
         posts: Array.isArray(posts) ? posts : [],
+        categories,
         pagination: {
           ...pagination,
           basePath: "/blog",

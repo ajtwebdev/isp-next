@@ -20,6 +20,7 @@ const NOINDEX_PATHS = [
   "/sorry-page",
   "/thank-you",
   "/thank-you-contest",
+  "/reflections/thank-you",
 ];
 
 // Test, utility and superseded pages that must not appear in the sitemap.
