@@ -63,14 +63,22 @@ const FormPanel = styled.div`
 // narrow strip. Its internal layout is CyberImpact's and is not styled here.
 // The frame and the overlay share these dimensions so the spinner sits exactly
 // where the form was, with no layout shift when it appears.
+/**
+ * The frame is sized for the signup form. After submitting, CyberImpact swaps
+ * in a bot check that is taller than the form, which produced a scrollbar
+ * *inside* the iframe - the frustration the client reported. We cannot size a
+ * cross-origin iframe to its content, so the frame grows on the post-submit
+ * load instead ($verifying), giving the check room to render in full.
+ */
 const FrameWrap = styled.div`
   position: relative;
   width: 100%;
   max-width: 33rem;
-  height: 323px;
+  height: ${({ $verifying }) => ($verifying ? "640px" : "323px")};
+  transition: height 0.25s ease;
 
   @media screen and (max-width: 34em) {
-    height: 400px;
+    height: ${({ $verifying }) => ($verifying ? "680px" : "400px")};
     max-width: 21rem;
   }
 `;
@@ -141,6 +149,10 @@ export default function ReflectionsPage() {
   // read inside a cross-origin frame, but its `load` event still fires on every
   // navigation, so the second load onward means the visitor has submitted.
   const [isWorking, setIsWorking] = useState(false);
+  // Stays true once the visitor has submitted. The overlay auto-hides after a
+  // few seconds so an interactive check stays usable, but the frame must keep
+  // its extra height for as long as that check is on screen.
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const loadCountRef = useRef(0);
   const revealTimerRef = useRef(null);
 
@@ -151,6 +163,7 @@ export default function ReflectionsPage() {
     if (loadCountRef.current < 2) return;
 
     setIsWorking(true);
+    setHasSubmitted(true);
 
     // Safety valve: if CyberImpact ever asks the visitor to complete a
     // challenge, they must be able to see and click it. Reveal the frame again
@@ -200,7 +213,7 @@ export default function ReflectionsPage() {
             </Body>
 
             <FormPanel>
-              <FrameWrap>
+              <FrameWrap $verifying={hasSubmitted}>
                 <FormFrame
                   src="https://app.cyberimpact.com/clients/60137/subscribe-forms/CF3FC3B8-63CA-458E-84B5-D9AD14F7BC99"
                   width="500"
