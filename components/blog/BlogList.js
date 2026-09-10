@@ -8,53 +8,14 @@ import { postPathBySlug, sanitizeExcerpt } from "lib/posts";
 import Seo from "../seo";
 import Pagination from "components/Pagination";
 import BlogBanner from "../banners/blogBanner";
+import BlogNav from "./BlogNav";
 
 const device = {
   md: "48em",
   lg: "64em",
 };
 
-const CategoryNav = styled.nav`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin: 0 0 2rem;
-  padding: 0;
-`;
 
-const CategoryLink = styled((props) => <Link {...props} />)`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  padding: 0.55rem 1rem;
-  border: 1px solid rgba(17, 17, 17, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.7);
-  color: var(--clr-accent);
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
-  font-weight: var(--fw-button);
-  transition: all 0.2s ease;
-
-  ${(props) =>
-    props.$active
-      ? `
-        background: var(--clr-accent);
-        color: var(--txt-light);
-        border-color: var(--clr-accent);
-      `
-      : ""}
-
-  &:hover,
-  &:focus {
-    background: var(--clr-accent);
-    color: var(--txt-light);
-    border-color: var(--clr-accent);
-  }
-`;
 
 const PostsGrid = styled.div`
   display: grid;
@@ -199,6 +160,7 @@ export default function BlogList({
   seoDescription = "Welcome to the Inner Spirit Photo blogs!",
   gridMode = "fixed",
   categories = null,
+  activeTopicSlug = null,
   intro = "",
   showReflectionsInvite = false,
 }) {
@@ -242,22 +204,11 @@ export default function BlogList({
       />
       <Section>
         <Container>
-          {categoryLinks.length > 0 && (
-            <CategoryNav aria-label="Blog categories">
-              <CategoryLink href="/blog" $active={!activeCategorySlug}>
-                All
-              </CategoryLink>
-              {categoryLinks.map((category) => (
-                <CategoryLink
-                  key={category.slug}
-                  href={`/blog/${category.slug}`}
-                  $active={activeCategorySlug === category.slug}
-                >
-                  {category.name}
-                </CategoryLink>
-              ))}
-            </CategoryNav>
-          )}
+          <BlogNav
+            categories={categoryLinks}
+            activeCategorySlug={activeCategorySlug}
+            activeTopicSlug={activeTopicSlug}
+          />
 
           {intro ? <CategoryIntro>{intro}</CategoryIntro> : null}
 

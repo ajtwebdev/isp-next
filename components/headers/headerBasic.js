@@ -332,6 +332,27 @@ export default function HeaderBasic() {
                   <StyledLink href="/gallery">Gallery</StyledLink>
                 </li>
                 <li>
+                  <StyledLink href="/faq">faq</StyledLink>
+                </li>
+                {/* Resources dropdown kept for reference. FAQ is now a
+                    top-level nav item above; restore this block to bring back
+                    the Resources parent link and the contest item.
+                <Dropdown>
+                  <StyledLink href="/resources">
+                    Resources
+                    <IoMdArrowDropdown size={20} />
+                  </StyledLink>
+                  <ul>
+                    <li>
+                      <StyledLink href="/resources/faq">faq</StyledLink>
+                    </li>
+                    <li>
+                      <StyledLink href="/contest">contest</StyledLink>
+                    </li>
+                  </ul>
+                </Dropdown>
+                */}
+                <li>
                   <StyledLink href="/blog">blog</StyledLink>
                 </li>
 

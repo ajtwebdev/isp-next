@@ -113,12 +113,15 @@ export default function BlogBanner(props) {
               <hr />
               <h1 className="headline">{props.headline}</h1>
             </div>
-            <p>Welcome to the Inner Spirit Photography blog!</p>
+            <p>
+              {props.description ||
+                "Welcome to the Inner Spirit Photography blog!"}
+            </p>
             <Actions>
-              <ButtonPrimary className="btn-light" href="/book-now">
+              <ButtonPrimary className="btn-light" href="/contact">
                 contact us &#x2192;
               </ButtonPrimary>
-              <ButtonPrimary className="btn-accent" href="/book-now">
+              <ButtonPrimary className="btn-accent" href="/contact">
                 contact us &#x2192;
               </ButtonPrimary>
             </Actions>

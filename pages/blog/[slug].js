@@ -73,6 +73,8 @@ export async function getStaticProps({
         );
       }
 
+      const navCategories = await getAllCategories();
+
       const related = await getRelatedPosts(
         categories,
         data.post?.databaseId,
@@ -83,6 +85,7 @@ export async function getStaticProps({
         props: {
           preview,
           post: data.post,
+          categories: navCategories,
           // RelatedPosts consumes mapPostData's flat shape directly, which is
           // exactly what getRelatedPosts already returns.
           posts: Array.isArray(related?.posts) ? related.posts : [],

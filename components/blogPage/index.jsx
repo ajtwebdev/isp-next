@@ -10,6 +10,7 @@ import Seo from "../seo";
 import { ArticleJsonLd, toPlainText } from "lib/json-ld";
 import ArticleAuthorBio from "../blog/ArticleAuthorBio";
 import RelatedPosts from "../blog/RelatedPosts";
+import BlogNav from "../blog/BlogNav";
 import CTA from "../CTA";
 import { Section, Container, HeroBannerPadding } from "../layoutComponents";
 import { ButtonPrimary } from "../buttons";
@@ -17,6 +18,15 @@ import LayoutJs from "../layoutJs";
 
 const Content = styled.div`
   width: 100%;
+`;
+
+// Aligns the nav with the article column below it rather than the full
+// container width, which left the two starting at different left edges.
+const NavWrapper = styled.div`
+  max-width: 880px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const BlogWrapper = styled.div`
@@ -79,28 +89,85 @@ const FooterDivider = styled.div`
   margin: 1.5rem 0 2rem;
 `;
 
-// Invitation to the journal, sitting directly under the story it refers to.
-// Deliberately lighter than the full-width <CTA> further down so the article
-// does not end in two competing calls to action.
-const ReflectionsCta = styled.aside`
-  margin: 2rem 0;
-  padding: 1.75rem 1.5rem;
-  border: 1px solid rgba(17, 17, 17, 0.14);
-  border-radius: 12px;
-  text-align: center;
+// Topics (WordPress tags) for this article. Same pill treatment as the blog
+// nav and /blog/topics so the three read as one system.
+const TopicList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0;
+`;
 
+const TopicLabel = styled.span`
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--txt-dark-secondary, #4b5563);
+  margin-right: 0.25rem;
+`;
+
+const TopicLink = styled(Link)`
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--clr-dark);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: var(--txt-light);
+  }
+`;
+
+// Thin invitation to the journal. Deliberately a rule-bounded row rather than
+// a bordered card: the article already sits inside one, and a second box read
+// as a card inside a card. Uses the same hairline as FooterDivider.
+const ReflectionsCta = styled.aside`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  padding: 0.9rem 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.18);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.18);
+
+  /* Stack only when the row genuinely cannot fit, keeping mobile height low. */
+  @media screen and (max-width: 34em) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+`;
+
+const ReflectionsCopy = styled.div`
   h2 {
-    font-size: 1.1rem;
-    margin: 0 0 0.6rem;
+    margin: 0 0 0.15rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
   p {
-    margin: 0 auto 1.5rem;
-    max-width: 34rem;
-    font-size: 0.95rem;
-    line-height: 1.7;
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
     color: var(--txt-dark-secondary, #4b5563);
   }
+`;
+
+// Slightly tighter than the page's default button so the row stays thin.
+const ReflectionsButton = styled(ButtonPrimary)`
+  flex-shrink: 0;
+  padding: 0.7em 1.1em;
+  white-space: nowrap;
 `;
 
 const BackToBlogLink = styled(Link)`
@@ -134,7 +201,7 @@ function truncateForMeta(text) {
   return `${(lastSpace > 0 ? clipped.slice(0, lastSpace) : clipped).replace(/[.,;:\s]+$/, "")}\u2026`;
 }
 
-export default function PostPage({ post, posts = [] }) {
+export default function PostPage({ post, posts = [], categories = [] }) {
   const router = useRouter();
 
   useEffect(() => {
@@ -165,6 +232,11 @@ export default function PostPage({ post, posts = [] }) {
 
   const articleOgImage = customOgImage || undefined;
 
+  // WordPress tags, surfaced as "Topics".
+  const topics = (post?.tags?.edges || [])
+    .map(({ node }) => node)
+    .filter((tag) => tag?.slug);
+
   return (
     <LayoutJs>
       <Seo
@@ -177,6 +249,13 @@ export default function PostPage({ post, posts = [] }) {
       <HeroBannerPadding />
       <Section>
         <Container>
+          <NavWrapper>
+            <BlogNav
+              categories={categories}
+              activeCategorySlug={post?.categories?.edges?.[0]?.node?.slug}
+            />
+          </NavWrapper>
+
           <Content>
             <BlogWrapper
               className="blog-post"
@@ -205,19 +284,31 @@ export default function PostPage({ post, posts = [] }) {
               <EndOfArticle>
                 <FooterDivider />
 
-                <ArticleAuthorBio />
+                {topics.length > 0 && (
+                  <TopicList aria-label="Topics">
+                    <TopicLabel>Topics</TopicLabel>
+                    {topics.map((tag) => (
+                      <TopicLink
+                        key={tag.slug}
+                        href={`/blog/topics/${tag.slug}`}
+                      >
+                        {tag.name}
+                      </TopicLink>
+                    ))}
+                  </TopicList>
+                )}
 
-                <ReflectionsCta aria-label="Receive Reflections Journal">
-                  <h2>Enjoyed this story? Receive Reflections Journal.</h2>
-                  <p>
-                    Twice each month, Mark shares stories, photographs,
-                    insights, and occasional studio news from Inner Spirit
-                    Photography.
-                  </p>
-                  <ButtonPrimary href="/reflections">
-                    Receive Reflections Journal
-                  </ButtonPrimary>
+                <ReflectionsCta aria-label="Reflections Journal">
+                  <ReflectionsCopy>
+                    <h2>Reflections Journal</h2>
+                    <p>A little inspiration, delivered to your inbox.</p>
+                  </ReflectionsCopy>
+                  <ReflectionsButton href="/reflections">
+                    Join the journal
+                  </ReflectionsButton>
                 </ReflectionsCta>
+
+                <ArticleAuthorBio />
 
                 <RelatedPosts posts={posts} limit={3} />
 

@@ -147,7 +147,7 @@ export default function HeroBasic() {
               <ButtonOutlineLight href="/experience">
                 explore the experience &#x2192;
               </ButtonOutlineLight>
-              <ButtonPrimary href="/book-now">
+              <ButtonPrimary href="/contact">
                 book planning session now &#x2192;
               </ButtonPrimary>
             </ActionsDesktop>

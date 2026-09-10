@@ -43,7 +43,7 @@ export default function CTAsecondary() {
               A boudoir photography session can empower you to start feeling
               better in your own skin!{" "}
             </p>
-            <ButtonPrimary href="/book-now">
+            <ButtonPrimary href="/contact">
               book planning session now &#x2192;
             </ButtonPrimary>
           </Text>

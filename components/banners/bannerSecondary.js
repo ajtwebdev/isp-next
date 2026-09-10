@@ -111,10 +111,10 @@ export default function BannerSecondary(props) {
           </div>
 
           <Actions>
-            <ButtonPrimary className="btn-light" href="/book-now">
+            <ButtonPrimary className="btn-light" href="/contact">
               book planning session now &#x2192;
             </ButtonPrimary>
-            <ButtonPrimary className="btn-accent" href="/book-now">
+            <ButtonPrimary className="btn-accent" href="/contact">
               book planning session now &#x2192;
             </ButtonPrimary>
           </Actions>

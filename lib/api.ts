@@ -169,6 +169,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         edges {
           node {
             name
+            slug
           }
         }
       }

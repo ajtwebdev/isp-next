@@ -78,6 +78,13 @@ module.exports = withBundleAnalyzer({
         destination: '/gallery',
         permanent: true,
       },
+      {
+        // FAQ is a top-level nav item now, so it lives at /faq rather than
+        // under the Resources section. /resources itself is still live.
+        source: "/resources/faq",
+        destination: "/faq",
+        statusCode: 301,
+      },
       // Content/SEO cleanup: 301s added only where a clear, relevant
       // replacement exists. Verified against the build that every destination
       // returns 200, so none of these create a redirect chain or loop.
