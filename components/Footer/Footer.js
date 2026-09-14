@@ -84,7 +84,7 @@ export default function Footer() {
                     src="/visa.png"
                     alt="calgary landscaping payment type"
                     width={100}
-                    height={100}
+                    height={19}
                   />
                 </div>
                 <div className="spacing">
@@ -189,7 +189,7 @@ export default function Footer() {
                     >
                       <Image
                         width={100}
-                        height={100}
+                        height={175}
                         src="/socials/houzz.svg"
                         alt="calgary landscaping company"
                       />
@@ -528,7 +528,7 @@ export default function Footer() {
                     src="/aaron-tonner-web-solutions-logo-white-white.svg"
                     alt="aaron tonner web solutions logo"
                     width={100}
-                    height={100}
+                    height={19}
                   />
                 </a>
               </div>

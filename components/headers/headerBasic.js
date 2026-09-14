@@ -309,7 +309,7 @@ export default function HeaderBasic() {
                   data-active={scrolled}
                   src="/inner-spirit-logo-text-white.svg"
                   alt="inner spirit photography logo"
-                  height={100}
+                  height={40}
                   width={250}
                 />
               </Link>

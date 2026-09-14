@@ -5,6 +5,7 @@ import PhoneInput from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import LayoutJs from "../components/layoutJs";
 import Seo from "../components/seo";
+import { STUDIO_ADDRESS, STUDIO_MAP_URL } from "../lib/studio";
 import { Section, Container } from "../components/layoutComponents";
 import { ButtonPrimary } from "../components/buttons";
 import { FaPhoneAlt, FaCommentDots } from "react-icons/fa";
@@ -329,8 +330,15 @@ export default function ContactPage() {
                   <IconRow>
                     <IoLocationSharp className="accent" aria-hidden="true" />
                     <span>
-                      Our private Calgary studio is located at 711-84 Ave SW.
-                      Sessions are by appointment.
+                      Our private Calgary studio is located at{" "}
+                      <IntroLink
+                        href={STUDIO_MAP_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {STUDIO_ADDRESS}
+                      </IntroLink>
+                      . Sessions are by appointment.
                     </span>
                   </IconRow>
                 </li>

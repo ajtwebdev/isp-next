@@ -43,7 +43,7 @@ export default function Why() {
             src="/why-we-do-nude-photography.jpg"
             alt="why we do boudoir, nudes, & beauty"
             width={920}
-            height={100}
+            height={613}
           />
           <TextBoxRight className="spacing text-right">
             <p>
@@ -74,7 +74,7 @@ export default function Why() {
           src="/doing-something-bold.jpg"
           alt="do something bold with photography"
           width={1500}
-          height={100}
+          height={890}
         />
         <Container className="text-bottom">
           <TextBox>
@@ -110,7 +110,7 @@ export default function Why() {
             src="/something-like-nude.jpg"
             alt="why we do boudoir, nudes, & beauty"
             width={750}
-            height={100}
+            height={500}
           />
         </WrapperTextLeft>
       </Container>

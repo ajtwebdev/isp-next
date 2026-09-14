@@ -13,6 +13,8 @@ import {
   IoLogoYoutube,
 } from "react-icons/io";
 import Link from "next/link";
+
+import { STUDIO_ADDRESS, STUDIO_MAP_URL } from "../lib/studio";
 import { ReactNode } from "react";
 interface NextLink {
   children: ReactNode;
@@ -96,7 +98,7 @@ export default function Footer() {
         <div className="footer-logo">
           <Image
             width={200}
-            height={100}
+            height={112}
             src="/logo-white.svg"
             alt="footer logo"
             style={{ margin: "0 auto", padding: "15px 0px" }}
@@ -131,8 +133,14 @@ export default function Footer() {
               </p>
 
               <p style={{ marginTop: "20px" }}>
-                711 84 Ave SW, Calgary, AB <br />
-                Canada
+                <a
+                  href={STUDIO_MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "inline", color: "inherit" }}
+                >
+                  {STUDIO_ADDRESS}
+                </a>
               </p>
               <div
                 style={{ display: "flex", marginTop: "10px" }}
@@ -294,7 +302,7 @@ export default function Footer() {
           <FooterCopyrightLogo>
             <p>Website by:</p>
             <Image
-              height={100}
+              height={28}
               width={150}
               alt={"website name"}
               src="/aaron-tonner-web-solutions-logo-white-white.svg"
@@ -302,17 +310,6 @@ export default function Footer() {
           </FooterCopyrightLogo>
         </Container>
       </footer>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2512.0791090232547!2d-114.08319942383308!3d50.97772834925977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5371711767f98659%3A0xbbb2559053a55ca5!2sInner%20Spirit%20Photography!5e0!3m2!1sen!2sin!4v1691152752711!5m2!1sen!2sin"
-        width="600"
-        height="450"
-        allowFullScreen
-        allow="autoplay; fullscreen; picture-in-picture"
-        style={{
-          width: "100%",
-          height: "400px",
-        }}
-      ></iframe>
     </>
   );
 }

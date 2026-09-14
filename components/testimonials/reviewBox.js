@@ -40,7 +40,7 @@ export default function ReviewBox(props) {
         <Image
           src="/frill.jpg"
           alt="review of boudoir studio in Calgary"
-          height={100}
+          height={7}
           width={100}
         />
         <FlexStars>

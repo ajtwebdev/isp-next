@@ -106,7 +106,7 @@ export default function BannerBooking(props) {
       <Container className="container">
         <Image
           className="stretch clip-img "
-          height={100}
+          height={634}
           width={580}
           src={props.img}
           alt={props.alt}

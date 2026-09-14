@@ -89,7 +89,7 @@ export default function MeetMark2() {
           <MarkImg>
             <Image
               className="stretch"
-              height={100}
+              height={625}
               width={500}
               src="/mark-nude-boudoir-photographer-calgary.gif"
               alt="nude and boudoir photographer in calgary, AB"
@@ -105,7 +105,7 @@ export default function MeetMark2() {
             <div>
               <Image
                 className="stretch"
-                height={100}
+                height={625}
                 width={500}
                 src="/mark-nude-boudoir-photographer-calgary.gif"
                 alt="nude and boudoir photographer in calgary, AB"

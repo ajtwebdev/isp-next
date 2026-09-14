@@ -35,7 +35,7 @@ export default function FeaturedIn() {
         <GridAuto>
           <a href="https://www.citytv.com/" target="_blank">
             <Image
-              height={100}
+              height={38}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-citytv.jpg"
@@ -44,7 +44,7 @@ export default function FeaturedIn() {
           </a>
           <a href="https://www.cbc.ca/" target="_blank">
             <Image
-              height={100}
+              height={51}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-cbc.jpg"
@@ -53,7 +53,7 @@ export default function FeaturedIn() {
           </a>
           <a href="https://calgarysun.com/" target="_blank">
             <Image
-              height={100}
+              height={101}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-calgary-sun.jpg"
@@ -62,35 +62,35 @@ export default function FeaturedIn() {
           </a>
           <a href="https://www.ctvnews.ca/live" target="_blank">
             <Image
-              height={100}
+              height={58}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-ctv-live.jpg"
               alt="calgary boudoir photographer featured in ctv live"
             />
           </a>
-          <a href="" target="_blank">
+          {/* <a href="" target="_blank">
             <Image
-              height={100}
+              height={73}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-best-of-best.jpg"
               alt="calgary boudoir photographer featured in best of the best"
             />
-          </a>
-          <a href="https://www.thebestcalgary.com/" target="_blank">
+          </a> */}
+          {/* <a href="https://www.thebestcalgary.com/" target="_blank">
             <Image
-              height={100}
+              height={70}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-best-in-calgary.jpg"
               alt="calgary boudoir photographer featured in best in calgary"
             />
-          </a>
+          </a> */}
 
           <a href="https://www.divorcemag.com/region/AB" target="_blank">
             <Image
-              height={100}
+              height={41}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-divorce-magazine.jpg"
@@ -99,16 +99,16 @@ export default function FeaturedIn() {
           </a>
           <a href="https://weddingbells.ca/" target="_blank">
             <Image
-              height={100}
+              height={26}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-wedding-bells.jpg"
               alt="calgary boudoir photographer featured in wedding bells"
             />
           </a>
-          <a href="" target="_blank">
+          {/* <a href="" target="_blank">
             <Image
-              height={100}
+              height={139}
               width={100}
               style={ImageStyleEpcot}
               src="/featured-in/calgary-boudoir-photographer-featured-epcot-center.jpg"
@@ -117,7 +117,7 @@ export default function FeaturedIn() {
           </a>
           <a href="https://www.nationalgeographic.com/" target="_blank">
             <Image
-              height={100}
+              height={31}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-nat-geo.jpg"
@@ -126,7 +126,7 @@ export default function FeaturedIn() {
           </a>
           <a href="" target="_blank">
             <Image
-              height={100}
+              height={33}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-gallerie.jpg"
@@ -135,7 +135,7 @@ export default function FeaturedIn() {
           </a>
           <a href="https://www.ppoc.ca/" target="_blank">
             <Image
-              height={100}
+              height={25}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-professional-photographer.jpg"
@@ -147,15 +147,16 @@ export default function FeaturedIn() {
             target="_blank"
           >
             <Image
-              height={100}
+              height={19}
               width={100}
               style={ImageStyle}
               src="/featured-in/calgary-boudoir-photographer-featured-image-maker.jpg"
               alt="calgary boudoir photographer featured in image maker"
             />
-          </a>
+          </a> */}
         </GridAuto>
       </Container>
     </Section>
   );
 }
+

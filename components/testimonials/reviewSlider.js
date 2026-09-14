@@ -73,7 +73,7 @@ const ReviewBox = (props) => {
           <Image
             src="/frill.jpg"
             alt="review of boudoir studio in Calgary"
-            height={100}
+            height={22}
             width={300}
           />
         </center>
@@ -112,7 +112,7 @@ export default function ReviewSlider() {
           <Slider className="slider" {...settings}>
             <ItemGrid>
               <Image
-                height={100}
+                height={1333}
                 width={2000}
                 className="slider-img"
                 src="/calgary-boudoir-joy-review.jpg"
@@ -125,7 +125,7 @@ export default function ReviewSlider() {
             </ItemGrid>
             <ItemGrid>
               <Image
-                height={100}
+                height={1333}
                 width={2000}
                 className="slider-img"
                 src="/calgary-boudoir-kb-review.jpg"
@@ -139,7 +139,7 @@ export default function ReviewSlider() {
             </ItemGrid>
             <ItemGrid>
               <Image
-                height={100}
+                height={1250}
                 width={2000}
                 className="slider-img"
                 src="/calgary-boudoir-photography-robin.jpg"

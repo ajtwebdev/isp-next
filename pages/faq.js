@@ -1,4 +1,5 @@
 import React from "react";
+import { SITE_ORIGIN } from "../lib/canonical";
 import LayoutJs from "../components/layoutJs";
 import Banner from "../components/banners/bannerPrimary";
 import FullFaq from "../components/faqs/fullFaq";
@@ -13,6 +14,7 @@ export default function Faq() {
       <Seo
         title="FAQ | Inner Spirit Photography"
         description="Get answers to your questions about boudoir and nude photography!"
+        ogImage={`${SITE_ORIGIN}/banners/faq-banner-new.jpg`}
       />
       <BannerFaq
         img="/banners/faq-banner-new.jpg"

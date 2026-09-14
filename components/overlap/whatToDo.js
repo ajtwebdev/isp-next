@@ -49,7 +49,7 @@ export default function WhatToDo() {
               src="/bound-boudoir-photography-book-in-calgary-2.jpg"
               alt="bound book of boudoir photography session"
               width={600}
-              height={100}
+              height={600}
             />
             <TextBox>
               <p>
@@ -66,7 +66,7 @@ export default function WhatToDo() {
               src="/boudoir-wall-art-in-calgary-3.jpg"
               alt="wall art of boudoir photography session"
               width={600}
-              height={100}
+              height={600}
             />
             <TextBox>
               <p>

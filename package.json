@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
-    "prebuild": "cp -R fonts public/fonts || true",
+    "prebuild": "mkdir -p public/fonts && cp -R fonts/. public/fonts/ || true",
     "build": "next build",
     "analyze": "ANALYZE=true next build",
     "fetch-posters": "node scripts/fetch-vimeo-thumbnails.js",
@@ -39,7 +39,6 @@
     "react": "^18.2.0",
     "react-accessible-accordion": "^5.0.0",
     "react-bootstrap": "^2.7.4",
-    "react-compare-image": "^3.4.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",

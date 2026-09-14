@@ -66,7 +66,7 @@ const ReviewBox = (props) => {
           <Image
             src="/frill.jpg"
             alt="review of boudoir studio in Calgary"
-            height={100}
+            height={22}
             width={300}
           />
         </center>

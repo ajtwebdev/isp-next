@@ -1,4 +1,5 @@
 import React from "react";
+import { SITE_ORIGIN } from "../../lib/canonical";
 import BannerSecondary from "../../components/banners/bannerSecondary";
 import LayoutJs from "../../components/layoutJs";
 import Seo from "../../components/seo";
@@ -40,7 +41,8 @@ export default function Projects({ allProjectsImages }) {
     <LayoutJs>
       <Seo
         title="Projects | Inner Spirit Photography"
-        description="Here is the full gallery of Inner Spirit Photography!"
+        description="Creative photography projects from Inner Spirit Photography, a Calgary boudoir and nude portrait studio established in 1980."
+        ogImage={`${SITE_ORIGIN}/banners/projects-banner.jpg`}
       />
       <BannerSecondary
         img="/banners/projects-banner.jpg"

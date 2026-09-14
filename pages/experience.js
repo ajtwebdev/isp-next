@@ -1,4 +1,5 @@
 import React from "react";
+import { SITE_ORIGIN } from "../lib/canonical";
 import LayoutJs from "../components/layoutJs";
 import BannerExperience from "../components/banners/bannerExperience";
 import Stats from "../components/stats";
@@ -19,6 +20,7 @@ export default function Experience() {
       <Seo
         title="Your Experience of a Lifetime | Inner Spirit Photography"
         description="An Inner Spirit photography session is the experience of a lifetime! Choose from dozens of creative sets to create your unique photography session."
+        ogImage={`${SITE_ORIGIN}/banners/experience-banner.jpg`}
       />
       <BannerExperience
         img="/banners/experience-banner.jpg"

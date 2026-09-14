@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { STUDIO_ADDRESS } from "../lib/studio";
 import React from "react";
 import LayoutJs from "../components/layoutJs";
 import Seo from "../components/seo";
@@ -8,8 +9,8 @@ const PrivacyPolicy = () => {
   return (
     <LayoutJs>
       <Seo
-        title="Privay Policy"
-        description="Encouraging, supportive, life-changing. Calgary boudoir photography to build your self-esteem, love yourself more deeply, and see how amazing you truly are!"
+        title="Privacy Policy | Inner Spirit Photography"
+        description="How Inner Spirit Photography collects, uses and protects your personal information, and how to contact the Calgary studio about your data."
       />
       <HeroBannerPadding />
       <Container>
@@ -144,9 +145,7 @@ const PrivacyPolicy = () => {
         <p>mail us at:</p>
         <addresss>
           Inner Spirit Photography
-          <br /> 711-84 Ave. SW
-          <br /> Calgary, Alberta,
-          <br /> Canada, T2V 0V8
+          <br /> {STUDIO_ADDRESS}
         </addresss>
       </Container>
     </LayoutJs>

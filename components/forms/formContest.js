@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { Section, Container, Flex, FlexMobileOpp } from "../layoutComponents";
 import { Label, Input, TextArea, Submit, Select } from "./formItems";
 import Map from "../map";
+import { STUDIO_ADDRESS, STUDIO_MAP_URL } from "../../lib/studio";
 import { AnchorInline, AnchorUnderline } from "../buttons";
 import Image from "next/image";
 
@@ -363,8 +364,8 @@ export default function FormContact(props) {
             </div>
             <div>
               <h3 className="caps subhead accent">our location:</h3>
-              <AnchorUnderline href="https://www.google.com/maps/place/Inner+Spirit+Photography/@50.977725,-114.0806245,15z/data=!4m2!3m1!1s0x0:0xbbb2559053a55ca5?sa=X&ved=2ahUKEwiG9tu9j975AhXlATQIHfAzDv8Q_BJ6BAhAEB8">
-                711 84 Ave SW Calgary, AB, Canada T2V 0V8
+              <AnchorUnderline href={STUDIO_MAP_URL}>
+                {STUDIO_ADDRESS}
               </AnchorUnderline>
             </div>
             <div>

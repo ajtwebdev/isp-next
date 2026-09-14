@@ -23,7 +23,7 @@ export default function Diversity() {
       <Container>
         <Flex>
           <Image
-            height={100}
+            height={214}
             width={600}
             style={{objectFit:'cover'}}
             src="/diversity-for-boudoir-photography-calgary.jpg"

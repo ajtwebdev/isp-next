@@ -114,6 +114,7 @@ export const ButtonOutlineLight = styled((props) => <Link {...props} />)`
   border-radius: 4px;
   border: 1px solid var(--clr-light);
   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px 0;
+  width: 70% !important;
 
   // this is for when an icon is used inside too
   div {
