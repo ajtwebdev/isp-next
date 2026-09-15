@@ -20,7 +20,12 @@
      so it resolves almost immediately. Under `optional` a cold load kept the
      sans-serif fallback for the whole page view. */
   font-display: swap;
-  src: url("/fonts/TrajanPro-Regular.woff") format("woff");
+  /* WOFF2 first: 55.9 KB against 134.7 KB for the same 504 glyphs. Every
+     browser that supports WOFF2 takes it; the WOFF1 file stays as the
+     fallback for anything older, which reads the second src only when the
+     first format is unsupported - it is never a second download. */
+  src: url("/fonts/TrajanPro-Regular.woff2") format("woff2"),
+    url("/fonts/TrajanPro-Regular.woff") format("woff");
 }
 
 @font-face {

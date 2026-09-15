@@ -1,0 +1,29 @@
+# Cache headers for static assets.
+#
+# Netlify's default for this site is `public,max-age=0,must-revalidate` on
+# everything, including content-hashed bundles under /_next/static. Those
+# filenames change whenever their contents change, so revalidating them on
+# every visit is a wasted round trip per asset for returning visitors.
+#
+# HTML is deliberately left alone: it must keep max-age=0 so a new deploy is
+# picked up immediately.
+
+[[headers]]
+  # Content-hashed build output - the filename is the cache key.
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Next.js image optimizer output. Keyed by source URL + width + quality, so
+  # it changes when the source image is replaced.
+  for = "/_next/image*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Font files are not hashed, so they are cacheable but not immutable: a
+  # year of freshness with revalidation once stale.
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"

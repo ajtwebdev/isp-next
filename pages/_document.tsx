@@ -63,7 +63,7 @@ export default class MyDocument extends Document {
           Trajan Pro Regular (--ff-trajan, all headings and banner text) and
           Optima (--ff-optima-r, body copy). Optima_Italic and OPTIMA_B were
           previously preloaded but their families are barely referenced. */}
-      <link rel="preload" href="/fonts/TrajanPro-Regular.woff" as="font" type="font/woff" crossOrigin="anonymous" />
+      <link rel="preload" href="/fonts/TrajanPro-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       <link rel="preload" href="/fonts/OPTIMA.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         {/* <script
           dangerouslySetInnerHTML={{
