@@ -16,7 +16,10 @@
   font-family: "Trajan Pro Regular";
   font-style: normal;
   font-weight: normal;
-  font-display: optional;
+  /* swap, not optional: this is the brand headline face and it is preloaded,
+     so it resolves almost immediately. Under `optional` a cold load kept the
+     sans-serif fallback for the whole page view. */
+  font-display: swap;
   src: url("/fonts/TrajanPro-Regular.woff") format("woff");
 }
 

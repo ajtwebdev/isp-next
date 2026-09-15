@@ -115,6 +115,7 @@ export default function ReviewSlider() {
                 height={1333}
                 width={2000}
                 className="slider-img"
+                sizes="(max-width: 95rem) 85vw, 1520px"
                 src="/calgary-boudoir-joy-review.jpg"
                 alt="calgary boudoir photography google review"
               />
@@ -128,6 +129,7 @@ export default function ReviewSlider() {
                 height={1333}
                 width={2000}
                 className="slider-img"
+                sizes="(max-width: 95rem) 85vw, 1520px"
                 src="/calgary-boudoir-kb-review.jpg"
                 alt="calgary boudoir photography google review"
               />

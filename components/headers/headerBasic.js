@@ -311,6 +311,7 @@ export default function HeaderBasic() {
                   alt="inner spirit photography logo"
                   height={40}
                   width={250}
+                  priority
                 />
               </Link>
             </LogoContainer>

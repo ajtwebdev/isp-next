@@ -4,10 +4,8 @@ import {
   ButtonPrimary,
   ButtonLight,
   ButtonSecondaryDark,
-  ButtonOutlineLight,
 } from "../buttons";
 import { HeroBannerPadding } from "../layoutComponents";
-import Image from "next/image";
 
 const device = {
   md: "43em",
@@ -16,7 +14,15 @@ const device = {
 const HeroWrapper = styled.div`
   background: var(--clr-dark);
   color: var(--txt-light);
-  padding-bottom: 4em;
+
+  /* Below 75em the headline stacks beneath the image instead of overlaying
+     it, so it would sit on this black ground - burgundy on black is 1.74:1.
+     The stacked area goes light, keeping burgundy type at ~10:1 as it is on
+     the photograph above. */
+  @media screen and (max-width: 75em) {
+    background: var(--clr-light-secondary);
+  }
+  padding-bottom: 2em;
   border-bottom: 8px solid var(--clr-light);
 
   // @media screen and (max-width: 32em) {
@@ -29,25 +35,30 @@ const HeroWrapper = styled.div`
 `;
 
 const Text = styled.div`
-  background: var(--clr-accent);
-  padding: 2em 1.75em;
-  border-radius: 4px;
+  /* No panel: the type sits directly on the photograph. Burgundy measures
+     8.74:1 against the pale bedding on the right of the hero image (white
+     would be 1.38:1), so it stays well clear of the 4.5:1 requirement. */
+  color: var(--clr-accent);
   width: min(38rem, 42vw);
+  /* Headline, CTA and logo share one centred axis - previously the headline
+     was left-aligned while the CTA and logo centred themselves, which read as
+     misaligned. */
+  text-align: center;
 
   @media screen and (max-width: 62em) {
     width: min(30rem, 52vw);
-    padding: 1.5em 1.25em;
   }
 
+  /* Stacked below the image, the type sits on the page background instead. */
   @media screen and (max-width: 75em) {
     width: 100%;
-    border-radius: 0;
-    padding: 1.75em 1.25em;
+    padding: 1.5em 1.25em 2em;
   }
 
   h1 {
     display: flex;
     flex-direction: column;
+    align-items: center;
     line-height: 1.1;
     font-family: var(--ff-trajan);
 
@@ -146,7 +157,6 @@ const ActionsDesktop = styled.div`
   text-align: center;
 
   & > * {
-    width: 100%;
     text-align: center;
     white-space: nowrap;
   }
@@ -155,16 +165,56 @@ const ActionsDesktop = styled.div`
     margin-top: var(--spacer);
   }
 `;
+
 /**
- * ButtonPrimary fills with var(--clr-accent) and borders with the same colour.
- * The hero headline panel is also var(--clr-accent), so on this panel the
- * button's fill and border both disappeared into the background. Giving it the
- * same light border as the outline button beside it restores a visible edge
- * without touching ButtonPrimary elsewhere on the site.
+ * Single hero CTA, outlined in the brand burgundy to match the mockup.
  */
-const HeroPrimaryButton = styled(ButtonPrimary)`
-  border: 1px solid var(--clr-light);
-  width: 70% !important;
+const HeroCta = styled(ButtonPrimary)`
+  background: transparent;
+  color: var(--clr-accent);
+  border: 1px solid var(--clr-accent);
+  letter-spacing: 0.12em;
+
+  /* ButtonPrimary asks for --ff-alfa ("Alfa Slab One"), which has no
+     @font-face anywhere, so it was silently falling back to Times at weight
+     400 and reading thin. Trajan is actually loaded and matches the logo. */
+  font-family: var(--ff-trajan);
+  font-weight: var(--fw-900);
+
+  /* Roughly half the text column rather than spanning it. */
+  width: 45%;
+  min-width: 190px;
+  margin: 0 auto;
+
+  &:hover,
+  &:focus {
+    background: var(--clr-accent);
+    color: var(--txt-light);
+    border-color: var(--clr-accent);
+  }
+`;
+
+/**
+ * Burgundy wordmark.
+ *
+ * There is no burgundy logo file in the repo - logo-white.svg is the only full
+ * lockup and it is a white raster inside an SVG, so `fill` cannot recolour it
+ * (and logo.svg is a leftover from another business entirely). Masking paints
+ * the brand colour through the logo's alpha channel, giving the exact value
+ * with no new asset and no filter approximation.
+ */
+const BrandMark = styled.span`
+  display: block;
+  width: 180px;
+  height: 100px;
+  background-color: var(--clr-accent);
+  -webkit-mask: url("/logo-white.svg") center / contain no-repeat;
+  mask: url("/logo-white.svg") center / contain no-repeat;
+
+  @media screen and (max-width: 48em) {
+    width: 150px;
+    height: 84px;
+  }
 `;
 
 const Logo = styled.div`
@@ -201,7 +251,7 @@ export default function HeroBasic() {
           <Text className="spacing-md">
             <h1 className="">
               <span className="span-1">the best Creative</span>{" "}
-              <span className="span-2">nude & boudoir</span>{" "}
+              <span className="span-2">boudoir</span>{" "}
               <span className="span-3">
                 photography in Calgary <br /> for those seeking adventure
               </span>
@@ -209,23 +259,12 @@ export default function HeroBasic() {
             </h1>
 
             <ActionsDesktop>
-              <ButtonOutlineLight href="/experience">
-                explore the experience &#x2192;
-              </ButtonOutlineLight>
-              <HeroPrimaryButton href="/contact">
-                book planning session now &#x2192;
-              </HeroPrimaryButton>
+              <HeroCta href="/contact">Lets talk</HeroCta>
             </ActionsDesktop>
             <Logo>
-              {/* ~55% smaller than the previous 400px. White lettering is kept
-                  because this sits on the burgundy panel (var(--clr-accent)),
-                  not on the photograph: white gives 12:1 contrast there, while
-                  black would be 1.75:1 and burgundy invisible. */}
-              <Image
-                src="/logo-white.svg"
-                alt="nude & boudoir photography in calgary"
-                width={180}
-                height={100}
+              <BrandMark
+                role="img"
+                aria-label="Inner Spirit Photography"
               />
             </Logo>
           </Text>
