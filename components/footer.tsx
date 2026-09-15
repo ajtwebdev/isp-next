@@ -60,6 +60,16 @@ const CopyRight = styled.div`
   }
   a {
     font-size: 12px;
+    /* 12px text gives a touch target well under the 24px minimum. Padding
+       raises the hit area without changing type size or alignment. */
+    /* block, not inline-block: the mobile branch below switches this
+       container to display:block, where inline-block would pull the two legal
+       links onto one line ("Terms of usePrivacy Policy"). On desktop the
+       container is flex, which blockifies its items anyway, so this is inert
+       there and the row is unchanged. */
+    display: block;
+    padding: 4px 0;
+    min-height: 24px;
   }
   @media (max-width: 768px) {
     display: block;
@@ -87,7 +97,10 @@ const NextLink = ({ children, href, target }: NextLink) => {
     </Link>
   );
 };
-const LinkElement = styled.div``;
+/* Renders inside the Quick Links <ul>, so it must be an <li>: a <ul> may only
+   directly contain <li>, <script> or <template>. It carries no styles and the
+   list has list-style:none, so this is not a visual change. */
+const LinkElement = styled.li``;
 export default function Footer() {
   return (
     <>
@@ -150,6 +163,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.instagram.com/boudoirphotographycalgary/"
+                  aria-label="Inner Spirit Photography on Instagram"
                 >
                   <Icon
                     color="#973cb7"
@@ -160,6 +174,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.facebook.com/innerspiritphoto"
+                  aria-label="Inner Spirit Photography on Facebook"
                 >
                   <Icon
                     color="#1877f2"
@@ -171,6 +186,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.linkedin.com/in/marklauriephotographer/"
+                  aria-label="Mark Laurie on LinkedIn"
                 >
                   <Icon
                     color="#2a7bb6"
@@ -179,7 +195,11 @@ export default function Footer() {
                     as={IoLogoLinkedin}
                   />
                 </a>
-                <a target="_blank" href="https://twitter.com/marklaurie">
+                <a
+                  target="_blank"
+                  href="https://twitter.com/marklaurie"
+                  aria-label="Mark Laurie on Twitter"
+                >
                   <Icon
                     color="#39a2f4"
                     ml={"10px"}
@@ -190,6 +210,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.pinterest.ca/innerspiritphot/_saved/"
+                  aria-label="Inner Spirit Photography on Pinterest"
                 >
                   <Icon
                     color="red"
@@ -201,6 +222,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.youtube.com/c/InnerSpiritPhotographyCalgary/videos"
+                  aria-label="Inner Spirit Photography on YouTube"
                 >
                   <Icon
                     color="#ed3833"
