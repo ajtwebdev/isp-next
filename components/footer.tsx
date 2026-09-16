@@ -49,8 +49,14 @@ const CopyRight = styled.div`
   color: white;
   gap: 20px;
   justify-content: center;
+  /* The legal links carry 4px of vertical padding to meet the 24px touch
+     target. Under the default "stretch" every child became the same height,
+     but that padding still pushed the link text 4px below the paragraphs
+     beside it. Aligning on the baseline lines the text up regardless of each
+     child's own padding, so the touch target survives. */
+  align-items: baseline;
   margin: 30px 0;
-  flexwrap: wrap;
+  flex-wrap: wrap;
 
   p {
     font-size: 12px;
