@@ -58,8 +58,10 @@ export default function CTA(props) {
           <Flex>
             <Image
               className="stretch cta-image"
-              fill={true}
-              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius:'5px', border:'1px solid white' }}
+              width={662}
+              height={880}
+              sizes="(max-width: 57em) 100vw, 50vw"
+              style={{ width: "100%", height: "auto", objectFit: "cover", borderRadius:'5px', border:'1px solid white' }}
               src="/book-your-calgary-boudoir-session.jpg"
               alt="calgary boudoir session"
             />

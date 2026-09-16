@@ -5,24 +5,28 @@ import LazyVimeo from "./LazyVimeo"
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: 4em auto 20em;
-
-  @media screen and (max-width: 25em) {
-    grid-template-rows: 4em auto 25em;
-  }
+  grid-template-rows: 4em auto auto;
 `
 
 const Bg = styled.div`
-  grid-row: 1 / span 2;
+  grid-row: 1 / 3;
   grid-column: 1 / -1;
   z-index: 1;
   background: var(--clr-accent);
 `
 
-const Video = styled.div`
-  grid-row: 2 / -1;
+const Head = styled.div`
+  grid-row: 2;
   grid-column: 1 / -1;
   z-index: 2;
+  padding-bottom: 1.75em;
+`
+
+const Video = styled.div`
+  grid-row: 3;
+  grid-column: 1 / -1;
+  z-index: 2;
+  padding-top: 2em;
   // iframe {
   //   height: 550px;
   //   width: 100%;
@@ -77,8 +81,8 @@ export default function MainPageTestimonials() {
           <div></div>
           <div></div>
         </Bg>
-        <Video>
-          <Container className="spacing">
+        <Head>
+          <Container>
             <Text className="center">
               <h3 className="subhead upper">what can you expect?</h3>{" "}
               <h2 className="headline">
@@ -86,6 +90,10 @@ export default function MainPageTestimonials() {
                 that...{" "}
               </h2>
             </Text>
+          </Container>
+        </Head>
+        <Video>
+          <Container className="spacing">
             {/* <LazyVimeo
               src="https://player.vimeo.com/video/743214435?h=892cd0c99b&badge=0&autopause=0&player_id=0&app_id=58479"
               title="HD 2 Placeholder"

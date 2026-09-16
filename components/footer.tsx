@@ -5,12 +5,9 @@ import { Container } from "./layoutComponents";
 import { Icon } from "@chakra-ui/react";
 import { PhoneIcon, AtSignIcon, TimeIcon } from "@chakra-ui/icons";
 import {
-  IoLogoPinterest,
   IoLogoInstagram,
-  IoLogoTwitter,
   IoLogoFacebook,
   IoLogoLinkedin,
-  IoLogoYoutube,
 } from "react-icons/io";
 import Link from "next/link";
 
@@ -60,13 +57,6 @@ const CopyRight = styled.div`
   }
   a {
     font-size: 12px;
-    /* 12px text gives a touch target well under the 24px minimum. Padding
-       raises the hit area without changing type size or alignment. */
-    /* block, not inline-block: the mobile branch below switches this
-       container to display:block, where inline-block would pull the two legal
-       links onto one line ("Terms of usePrivacy Policy"). On desktop the
-       container is flex, which blockifies its items anyway, so this is inert
-       there and the row is unchanged. */
     display: block;
     padding: 4px 0;
     min-height: 24px;
@@ -97,9 +87,19 @@ const NextLink = ({ children, href, target }: NextLink) => {
     </Link>
   );
 };
-/* Renders inside the Quick Links <ul>, so it must be an <li>: a <ul> may only
-   directly contain <li>, <script> or <template>. It carries no styles and the
-   list has list-style:none, so this is not a visual change. */
+
+const ContactLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  min-height: 24px;
+
+  :hover,
+  :focus {
+    text-decoration: underline;
+  }
+`;
+
 const LinkElement = styled.li``;
 export default function Footer() {
   return (
@@ -130,11 +130,15 @@ export default function Footer() {
               <HeadingTag>Contact Us</HeadingTag>
               <p>
                 <PhoneIcon mr={"10px"} />
-                +1 (403) 252-2662
+                <ContactLink href="tel:+14032522662">
+                  +1 (403) 252-2662
+                </ContactLink>
               </p>
               <p>
                 <AtSignIcon mr={"10px"} />
-                info@innerspiritphoto.com
+                <ContactLink href="mailto:info@innerspiritphoto.com">
+                  info@innerspiritphoto.com
+                </ContactLink>
               </p>
               <p>
                 <TimeIcon mr={"10px"} mt={"10px"} />
@@ -195,42 +199,6 @@ export default function Footer() {
                     as={IoLogoLinkedin}
                   />
                 </a>
-                <a
-                  target="_blank"
-                  href="https://twitter.com/marklaurie"
-                  aria-label="Mark Laurie on Twitter"
-                >
-                  <Icon
-                    color="#39a2f4"
-                    ml={"10px"}
-                    fontSize={"25px"}
-                    as={IoLogoTwitter}
-                  />
-                </a>
-                <a
-                  target="_blank"
-                  href="https://www.pinterest.ca/innerspiritphot/_saved/"
-                  aria-label="Inner Spirit Photography on Pinterest"
-                >
-                  <Icon
-                    color="red"
-                    ml={"10px"}
-                    fontSize={"25px"}
-                    as={IoLogoPinterest}
-                  />
-                </a>
-                <a
-                  target="_blank"
-                  href="https://www.youtube.com/c/InnerSpiritPhotographyCalgary/videos"
-                  aria-label="Inner Spirit Photography on YouTube"
-                >
-                  <Icon
-                    color="#ed3833"
-                    ml={"10px"}
-                    fontSize={"25px"}
-                    as={IoLogoYoutube}
-                  />
-                </a>
               </div>
             </div>
             <div className="quickLinks">
@@ -274,7 +242,7 @@ export default function Footer() {
                 photographer for Inner Spirit Photography. Internationally
                 renowned, his clients fly in from all over the world or fly Mark
                 out. He has done portraits in 16 countries plus every province
-                in Canada **** Inner Spirit creates a transformational
+                in Canada Inner Spirit creates a transformational
                 experience with imagery that has been described as life
                 changing. Timeless images that portray the soul, desires and
                 personality of his clients. We create an enviroment that is so

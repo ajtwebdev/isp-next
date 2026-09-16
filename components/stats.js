@@ -2,17 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "./layoutComponents";
 
-/**
- * Stats banner.
- *
- * Was a full-bleed pure-black bar (139px desktop / 221px mobile) with heavy
- * 500-weight white caps. It now uses the brand burgundy already used by the
- * header/nav, splits each stat into a Trajan numeral and a muted label, and
- * runs roughly half the height.
- */
+
 const Wrapper = styled.div`
-  /* Brand burgundy, matching the header/nav, with a subtle lift so the bar
-     reads as a band rather than a flat block. */
+
   background: linear-gradient(
     180deg,
     var(--clr-accent) 0%,
@@ -36,14 +28,9 @@ const StatGrid = styled.div`
   padding: 0.15em 0;
 
   @media screen and (max-width: 48em) {
-    /* Two columns instead of one tall stack; the third centres beneath. */
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 0.55em;
-    padding: 0.1em 0;
-
-    & > :last-child {
-      grid-column: 1 / -1;
-    }
+    grid-template-columns: 1fr;
+    row-gap: 0.7em;
+    padding: 0.35em 0;
   }
 `;
 
@@ -53,7 +40,6 @@ const StatItem = styled.p`
   padding: 0 1.5em;
   text-align: center;
 
-  /* Hairline dividers rather than borders or heavy rules. */
   &:not(:last-child)::after {
     content: "";
     position: absolute;
@@ -68,10 +54,13 @@ const StatItem = styled.p`
   @media screen and (max-width: 48em) {
     padding: 0 0.75em;
 
-    /* Only the divider between the two top cells remains. */
-    &:nth-child(2)::after,
-    &:last-child::after {
+    &::after {
       display: none;
+    }
+
+    &:not(:last-child) {
+      padding-bottom: 0.7em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     }
   }
 `;
@@ -87,28 +76,27 @@ const Value = styled.span`
 
   @media screen and (max-width: 48em) {
     font-size: clamp(1.2rem, 5vw, 1.45rem);
+    white-space: nowrap;
   }
 `;
 
 const Label = styled.span`
   display: block;
-  margin-top: 0.22em;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  /* Muted rather than stark white, so the numeral leads. */
-  color: rgba(255, 255, 255, 0.72);
+  margin-top: 0.28em;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.85);
 
   @media screen and (max-width: 48em) {
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
+    font-size: 1rem; /* 16px */
+    letter-spacing: 0.04em;
   }
 `;
 
 const STATS = [
   { value: "5,300+", label: "Women Photographed" },
-  { value: "Since 1980", label: "Calgary Studio" },
+  { value: "Founded 1980", label: "Calgary Studio" },
   { value: "$525,000+", label: "Contributed to Charities" },
 ];
 
