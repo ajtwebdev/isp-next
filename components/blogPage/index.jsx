@@ -1,158 +1,41 @@
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import ErrorPage from "next/error";
-import Head from "next/head";
-import { GetStaticPaths, GetStaticProps } from "next";
-import PostBody from "../post-body";
-import MoreStories from "../more-stories";
-import PostHeader from "../post-header";
-import SectionSeparator from "../section-separator";
-import LayoutJs from "../layoutJs";
-import Tags from "../tags";
-import { getAllPostsWithSlug, getPostAndMorePosts } from "../../lib/api";
-import { CMS_NAME } from "../../lib/constants";
-import { Section, Container, HeroBannerPadding } from "../layoutComponents";
-import { ButtonPrimary, ButtonInline } from "../buttons";
-import styled from "styled-components";
 import Link from "next/link";
-import ServiceForm from "../forms/serviceForm";
-// import Image from "components/Image";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import ErrorPage from "next/error";
+import styled from "styled-components";
 import Image from "../Image";
 import commentBox from "commentbox.io";
 
 import Seo from "../seo";
-const BlogArticle = styled.article``;
-
-// Banner
-const BannerGrid = styled.div`
-  display: grid;
-  grid-template-rows: auto 4em auto;
-`;
-
-const Flex = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const BannerWrapper = styled.div`
-  grid-row: 1 / span 2;
-  grid-column: 1 / -1;
-  z-index: 1;
-  background: ${(props) => `url(${props.img})`}, rgba(0, 0, 0, 0.5);
-  background-blend-mode: overlay;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding: 4em 0;
-
-  display: grid;
-  place-items: center;
-
-  min-height: 80vh;
-  height: 100%;
-
-  @media screen and (max-width: 26em) {
-    min-height: 40vh;
-    height: 100%;
-  }
-`;
-
-const BannerText = styled.div`
-  max-width: 140ch;
-  width: 100%;
-  color: var(--txt-light);
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-`;
-
-const BannerBottomText = styled.div`
-  grid-row: 2 / -1;
-  grid-column: 1 / -1;
-  z-index: 2;
-
-  background: var(--clr-dark);
-  color: var(--txt-light);
-  padding: 2em;
-  width: 80%;
-`;
-
-// Layout
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr;
-  grid-gap: 4em;
-
-  @media screen and (max-width: 48em) {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-`;
-
-const Aside = styled.div`
-  grid-column: 1 / span 1;
-
-  .service-form {
-    @media screen and (max-width: 48em) {
-      display: none;
-    }
-  }
-`;
-
-const Navigation = styled.div`
-  box-shadow: var(--shadow-light);
-  border-radius: var(--br);
-  padding: 2em;
-
-  ul {
-    list-style-type: none;
-    margin: var(--spacer) 0 0 0;
-    padding: 0;
-    text-transform: capitalize;
-
-    & > * + * {
-      margin-top: 0.2em;
-    }
-  }
-`;
+import { ArticleJsonLd, toPlainText } from "lib/json-ld";
+import ArticleAuthorBio from "../blog/ArticleAuthorBio";
+import RelatedPosts from "../blog/RelatedPosts";
+import BlogNav from "../blog/BlogNav";
+import CTA from "../CTA";
+import { Section, Container, HeroBannerPadding } from "../layoutComponents";
+import { ButtonPrimary } from "../buttons";
+import LayoutJs from "../layoutJs";
 
 const Content = styled.div`
-  grid-column: 2 / -1;
-  @media screen and (max-width: 48em) {
-    grid-row: 1 / span 1;
-  }
+  width: 100%;
 `;
 
-const Img = styled.div`
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
-`;
-
-const ServiceAreas = styled.div`
-  padding: 2em;
-  border: 1px solid var(--txt-dark-secondary);
-  border-radius: var(--br);
-`;
-
-const StyledLink = styled((props) => <Link {...props} />)`
-  text-decoration: none;
-  color: var(--clr-accent);
+// Aligns the nav with the article column below it rather than the full
+// container width, which left the two starting at different left edges.
+const NavWrapper = styled.div`
+  max-width: 880px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const BlogWrapper = styled.div`
-  max-width: 700px;
+  max-width: 880px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 
   div {
-    figure {
-      // margin-block-start: 0;
-      // margin-block-end: 0;
-      // margin-inline-start: 0;
-      // margin-inline-end: 0;
-    }
     img {
       width: 100%;
       margin: 0;
@@ -179,34 +62,13 @@ const BlogWrapper = styled.div`
   h6 {
     margin-top: 2em;
   }
+
   p {
     font-size: 1.2rem;
     margin-bottom: 2em;
   }
 `;
 
-// Layout
-const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 1fr;
-  grid-gap: 4em;
-
-  @media screen and (max-width: 48em) {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-`;
-
-const AboutMark = styled.div`
-  box-shadow: var(--shadow-light);
-  border-radius: var(--br);
-  padding: 2em;
-
-  img {
-    height: 300px;
-    object-fit: cover;
-  }
-`;
 const TextWrapper = styled.section`
   figure {
     @media screen and (max-width: 48em) {
@@ -215,136 +77,258 @@ const TextWrapper = styled.section`
   }
 `;
 
-export default function PostPage({ post, posts, preview }) {
-  const router = useRouter();
-  const morePosts = posts?.edges;
+const EndOfArticle = styled.div`
+  margin-top: 1.5rem;
+  padding-top: 0;
+`;
 
-  if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
+const FooterDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  background: rgba(17, 17, 17, 0.18);
+  margin: 1.5rem 0 2rem;
+`;
+
+// Topics (WordPress tags) for this article. Same pill treatment as the blog
+// nav and /blog/topics so the three read as one system.
+const TopicList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0;
+`;
+
+const TopicLabel = styled.span`
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--txt-dark-secondary, #4b5563);
+  margin-right: 0.25rem;
+`;
+
+const TopicLink = styled(Link)`
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--clr-dark);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: var(--clr-accent);
+    border-color: var(--clr-accent);
+    color: var(--txt-light);
   }
+`;
+
+// Thin invitation to the journal. Deliberately a rule-bounded row rather than
+// a bordered card: the article already sits inside one, and a second box read
+// as a card inside a card. Uses the same hairline as FooterDivider.
+const ReflectionsCta = styled.aside`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  padding: 0.9rem 0;
+  border-top: 1px solid rgba(17, 17, 17, 0.18);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.18);
+
+  /* Stack only when the row genuinely cannot fit, keeping mobile height low. */
+  @media screen and (max-width: 34em) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+`;
+
+const ReflectionsCopy = styled.div`
+  h2 {
+    margin: 0 0 0.15rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--txt-dark-secondary, #4b5563);
+  }
+`;
+
+// Slightly tighter than the page's default button so the row stays thin.
+const ReflectionsButton = styled(ButtonPrimary)`
+  flex-shrink: 0;
+  padding: 0.7em 1.1em;
+  white-space: nowrap;
+`;
+
+const BackToBlogLink = styled(Link)`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 2rem;
+  color: var(--clr-dark);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-size: 0.8rem;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+// Search engines truncate descriptions around 155-160 characters; cut on a word
+// boundary so the snippet does not end mid-word.
+const META_DESCRIPTION_MAX = 155;
+
+function truncateForMeta(text) {
+  if (!text) return "";
+  if (text.length <= META_DESCRIPTION_MAX) return text;
+
+  const clipped = text.slice(0, META_DESCRIPTION_MAX);
+  const lastSpace = clipped.lastIndexOf(" ");
+
+  return `${(lastSpace > 0 ? clipped.slice(0, lastSpace) : clipped).replace(/[.,;:\s]+$/, "")}\u2026`;
+}
+
+export default function PostPage({ post, posts = [], categories = [] }) {
+  const router = useRouter();
 
   useEffect(() => {
     commentBox("5661567546818560-proj");
   }, []);
 
+  if (!router.isFallback && !post?.slug) {
+    return <ErrorPage statusCode={404} />;
+  }
+
+  // SEO values authored in WordPress (ACF group "ACF_BlogsPost") win when set.
+  // Each falls back to what the page did before: the post title, the excerpt,
+  // and <Seo>'s default OG image.
+  const acf = post?.ACF_BlogsPost || {};
+  const customTitle = acf.seoMetaTitle?.trim();
+  // seoMetaDescription is a rich-text field, so WordPress returns it wrapped in
+  // markup ("<p>...</p>\n"). Meta tags need plain text or the tags render as
+  // escaped &lt;p&gt; in the description.
+  const customDescription = toPlainText(acf.seoMetaDescription);
+  const customOgImage = acf.socialogImage?.sourceUrl?.trim();
+
+  const articleTitle = customTitle || post?.title;
+
+  // undefined (not "") so <Seo> applies its own default rather than emitting
+  // an empty tag.
+  const articleDescription =
+    customDescription || truncateForMeta(toPlainText(post?.excerpt)) || undefined;
+
+  const articleOgImage = customOgImage || undefined;
+
+  // WordPress tags, surfaced as "Topics".
+  const topics = (post?.tags?.edges || [])
+    .map(({ node }) => node)
+    .filter((tag) => tag?.slug);
+
   return (
     <LayoutJs>
-      <Seo title={post.title} />
+      <Seo
+        title={articleTitle}
+        description={articleDescription}
+        ogImage={articleOgImage}
+        ogType="article"
+      />
+      <ArticleJsonLd post={post} />
       <HeroBannerPadding />
       <Section>
         <Container>
-          <ContentWrapper>
-            <Aside className="spacing">
-              <AboutMark className="spacing">
-                <h3 className="caps accent title bold">about mark</h3>
-                <img
-                  src="/mark-nude-boudoir-photographer-calgary.gif"
-                  alt="mark laurie"
-                />
-                <p>
-                  {" "}
-                  Mark offered the first nude & boudoir photography studio in
-                  Calgary and remains the best. His imaginative portraits expand
-                  beyond the typical “lingerie and satin sheets” boudoir. Mark’s
-                  creatively passionate presentation of women has earned him the
-                  honour of being the most awarded photographer in his niche in
-                  Canada. Possibly North America.
-                </p>
-              </AboutMark>
-              <Navigation className="spacing">
-                <h3 className="caps accent title bold">
-                  Inner <br /> Spirit
-                </h3>
-                <div>
-                  <ul>
-                    <li>
-                      <ButtonInline href="/">Home</ButtonInline> <hr />
-                    </li>
-                    <li>
-                      <ButtonInline href="/about">about us</ButtonInline> <hr />
-                    </li>
-                    <li>
-                      <ButtonInline href="/experience">experience</ButtonInline>{" "}
-                      <hr />
-                    </li>
-                    <li>
-                      <ButtonInline href="/portfolios">portfolios</ButtonInline>{" "}
-                      <hr />
-                    </li>
-                    <li>
-                      <ButtonInline href="/resources/faq">faq</ButtonInline>{" "}
-                      <hr />
-                    </li>
-                    <li>
-                      <ButtonInline href="/blog">blog</ButtonInline> <hr />
-                    </li>
-                    <li>
-                      <ButtonInline href="/book-now">
-                        book a session
-                      </ButtonInline>
-                    </li>
-                  </ul>
-                </div>
-              </Navigation>
-              <div className="service-form">
-                <ServiceForm />
-              </div>
-            </Aside>
-            <Content>
-              <BlogWrapper
-                className="blog-post"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h1
-                    className="headline
-                "
-                    itemProp="headline"
-                  >
-                    {post.title}
-                  </h1>
+          <NavWrapper>
+            <BlogNav
+              categories={categories}
+              activeCategorySlug={post?.categories?.edges?.[0]?.node?.slug}
+            />
+          </NavWrapper>
 
-                  {/* <p>{post.date}</p> */}
-                </header>
-                {console.log(post, "post")}
-                {post.featuredImage ? (
-                  // <BannerGrid>
-                  //   <BannerWrapper img={post.featuredImage?.node.sourceUrl}>
-                  //     <Container className="spacing">
-                  //       <BannerText className="spacing">
-                  //         <div className="">
-                  //           <h1 className="title">{post.title}</h1>
-                  //         </div>
-                  //       </BannerText>
-                  //     </Container>
-                  //   </BannerWrapper>
-                  // </BannerGrid>
-                  <Image
-                    src={post.featuredImage?.node.sourceUrl}
-                    alt={post.title}
-                  />
-                ) : null}
-                {!!post.content && (
-                  <TextWrapper itemProp="articleBody">
-                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
-                  </TextWrapper>
+          <Content>
+            <BlogWrapper
+              className="blog-post"
+              itemScope
+              itemType="http://schema.org/Article"
+            >
+              <header>
+                <h1 className="headline" itemProp="headline">
+                  {post.title}
+                </h1>
+              </header>
+
+              {post.featuredImage ? (
+                <Image
+                  src={post.featuredImage?.node.sourceUrl}
+                  alt={post.title}
+                />
+              ) : null}
+
+              {!!post.content && (
+                <TextWrapper itemProp="articleBody">
+                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                </TextWrapper>
+              )}
+
+              <EndOfArticle>
+                <FooterDivider />
+
+                {topics.length > 0 && (
+                  <TopicList aria-label="Topics">
+                    <TopicLabel>Topics</TopicLabel>
+                    {topics.map((tag) => (
+                      <TopicLink
+                        key={tag.slug}
+                        href={`/blog/topics/${tag.slug}`}
+                      >
+                        {tag.name}
+                      </TopicLink>
+                    ))}
+                  </TopicList>
                 )}
 
-                <hr />
-              </BlogWrapper>
-            </Content>
-          </ContentWrapper>
+                <ReflectionsCta aria-label="Reflections Journal">
+                  <ReflectionsCopy>
+                    <h2>Reflections Journal</h2>
+                    <p>A little inspiration, delivered to your inbox.</p>
+                  </ReflectionsCopy>
+                  <ReflectionsButton href="/reflections">
+                    Join the journal
+                  </ReflectionsButton>
+                </ReflectionsCta>
+
+                <ArticleAuthorBio />
+
+                <RelatedPosts posts={posts} limit={3} />
+
+                <BackToBlogLink href="/blog">
+                  <span aria-hidden="true">←</span>
+                  <span>Back to Blog</span>
+                </BackToBlogLink>
+
+                <CTA
+                  headline="Plan Your Session"
+                  subhead="Your story deserves a beautiful frame"
+                  description="Create a boudoir experience that feels confident, safe, and unforgettable."
+                  buttonLabel="Plan Your Session"
+                  buttonHref="/contact"
+                />
+              </EndOfArticle>
+            </BlogWrapper>
+          </Content>
         </Container>
       </Section>
-
-      {/* <Section>
-        <Container className="spacing">
-          <BlogWrapper>
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
-          </BlogWrapper>
-        </Container>
-      </Section> */}
     </LayoutJs>
   );
 }

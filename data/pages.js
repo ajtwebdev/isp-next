@@ -216,7 +216,6 @@ export const QUERY_PAGE_SEO_BY_URI = gql`
     page(id: $uri, idType: URI) {
       id
       seo {
-        canonical
         metaDesc
         metaRobotsNofollow
         metaRobotsNoindex

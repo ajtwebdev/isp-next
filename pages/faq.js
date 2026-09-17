@@ -1,11 +1,12 @@
 import React from "react";
-import LayoutJs from "../../components/layoutJs";
-import Banner from "../../components/banners/bannerPrimary";
-import FullFaq from "../../components/faqs/fullFaq";
-import FullImageTestimonial from "../../components/testimonials/fullImageTestimonial";
-import CTA from "../../components/CTA";
-import BannerFaq from "../../components/banners/bannerFaq";
-import Seo from "../../components/seo";
+import { SITE_ORIGIN } from "../lib/canonical";
+import LayoutJs from "../components/layoutJs";
+import Banner from "../components/banners/bannerPrimary";
+import FullFaq from "../components/faqs/fullFaq";
+import FullImageTestimonial from "../components/testimonials/fullImageTestimonial";
+import CTA from "../components/CTA";
+import BannerFaq from "../components/banners/bannerFaq";
+import Seo from "../components/seo";
 
 export default function Faq() {
   return (
@@ -13,15 +14,14 @@ export default function Faq() {
       <Seo
         title="FAQ | Inner Spirit Photography"
         description="Get answers to your questions about boudoir and nude photography!"
+        ogImage={`${SITE_ORIGIN}/banners/faq-banner-new.jpg`}
       />
       <BannerFaq
         img="/banners/faq-banner-new.jpg"
-        to1="/resources"
-        link1="Resources"
-        to2="/resources/faq"
+        to1="/"
+        link1="Home"
+        to2="/faq"
         link2="FAQ"
-        link3="FAQ"
-        to3="/resources/faq"
         headline="frequently asked questions"
         description="If you are new to nude, boudoir, & beauty photography, we understand you might have some questions. We are confident that we have answers to all your questions on this page. Should you have additional questions, please feel free to contact us."
       />

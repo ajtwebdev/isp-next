@@ -1,5 +1,7 @@
 import Image from 'next/image'
 
+const AVATAR_SIZE = 48
+
 export default function Avatar({ author }) {
   const isAuthorHaveFullName = author?.node?.firstName && author?.node?.lastName
   const name = isAuthorHaveFullName
@@ -7,16 +9,27 @@ export default function Avatar({ author }) {
     : author.node.name || null
 
   return (
-    <div className="flex items-center">
-      <div className="w-12 h-12 relative mr-4">
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          position: 'relative',
+          flexShrink: 0,
+          width: AVATAR_SIZE,
+          height: AVATAR_SIZE,
+          marginRight: '1rem',
+          borderRadius: '50%',
+          overflow: 'hidden',
+        }}
+      >
         <Image
           src={author.node.avatar.url}
-          layout="fill"
-          className="rounded-full"
+          width={AVATAR_SIZE}
+          height={AVATAR_SIZE}
           alt={name}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         />
       </div>
-      <div className="text-xl font-bold">{name}</div>
+      <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>{name}</div>
     </div>
   )
 }

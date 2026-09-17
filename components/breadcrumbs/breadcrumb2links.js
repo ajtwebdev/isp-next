@@ -26,7 +26,7 @@ const BreadcrumbLink = styled(props => <Link {...props} />)`
 export default function Breadcrumb2Links(props) {
   return (
     <div>
-      <BreadcrumbLink href={props.to1}>{props.link1}</BreadcrumbLink>>
+      <BreadcrumbLink href={props.to1}>{props.link1}</BreadcrumbLink>&gt;
       <BreadcrumbLink href={props.to2}>{props.link2}</BreadcrumbLink>
     </div>
   )

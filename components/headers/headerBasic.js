@@ -309,8 +309,9 @@ export default function HeaderBasic() {
                   data-active={scrolled}
                   src="/inner-spirit-logo-text-white.svg"
                   alt="inner spirit photography logo"
-                  height={100}
+                  height={40}
                   width={250}
+                  priority
                 />
               </Link>
             </LogoContainer>
@@ -328,32 +329,15 @@ export default function HeaderBasic() {
                 <li>
                   <StyledLink href="/experience">experience</StyledLink>
                 </li>
-                <Dropdown>
-                  <StyledLink href="/portfolios">
-                    Portfolios
-                    <IoMdArrowDropdown size={20} />
-                  </StyledLink>
-                  <ul>
-                    <li>
-                      <StyledLink href="/portfolios/gallery">
-                        gallery
-                      </StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/portfolios/books">books</StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/portfolios/wall-art">
-                        wall art
-                      </StyledLink>
-                    </li>
-                    <li>
-                      <StyledLink href="/portfolios/projects">
-                        projects
-                      </StyledLink>
-                    </li>
-                  </ul>
-                </Dropdown>
+                <li>
+                  <StyledLink href="/gallery">Gallery</StyledLink>
+                </li>
+                <li>
+                  <StyledLink href="/faq">faq</StyledLink>
+                </li>
+                {/* Resources dropdown kept for reference. FAQ is now a
+                    top-level nav item above; restore this block to bring back
+                    the Resources parent link and the contest item.
                 <Dropdown>
                   <StyledLink href="/resources">
                     Resources
@@ -368,6 +352,7 @@ export default function HeaderBasic() {
                     </li>
                   </ul>
                 </Dropdown>
+                */}
                 <li>
                   <StyledLink href="/blog">blog</StyledLink>
                 </li>
@@ -380,11 +365,13 @@ export default function HeaderBasic() {
                   </StyledLink>
                 </li>
                 <NavCtaMobile>
-                  <NavPhone href="tel: (403) 252-2662">
+                  <NavPhone href="tel:+14032522662">
                     +1 (403) 252-2662
                   </NavPhone>
                   <GetQuote
-                    href="/contact"
+                   href="/contact"
+                    /* href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E" */
+                    /* target="_blank" */
                   >
                     <span>book now &#x2192;</span>
                   </GetQuote>
@@ -392,9 +379,11 @@ export default function HeaderBasic() {
               </NavList>
             </Nav>
             <NavCtaDesktop>
-              <NavPhone href="tel: (403) 252-2662">+1 (403) 252-2662</NavPhone>
+              <NavPhone href="tel:+14032522662">+1 (403) 252-2662</NavPhone>
               <GetQuote
-                href="/contact"
+               href="/contact"
+                /* href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
+                target="_blank" */
               >
                 <span>book now &#x2192;</span>
               </GetQuote>

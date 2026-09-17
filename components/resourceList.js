@@ -45,7 +45,7 @@ export default function ResourceList() {
         <div className="spacing">
           <Article href="/contest">
             <Image
-              height={100}
+              height={451}
               width={1200}
               className="img"
               src="/resources/contest-img.jpg"
@@ -67,7 +67,7 @@ export default function ResourceList() {
           </Article>
           <Article>
             <Image
-              height={100}
+              height={658}
               width={580}
               src="/resources/revelations.png"
               alt="calgary boudoir books portfolio"
@@ -92,7 +92,7 @@ export default function ResourceList() {
           </Article>
           <Article href="/portfolios/books">
             <Image
-              height={100}
+              height={1200}
               width={1200}
               className="img"
               src="/resources/podcast-img.jpg"
@@ -117,7 +117,7 @@ export default function ResourceList() {
           </Article>
           {/* <Article href="/portfolios/books">
             <Image
-            height={100}
+            height={67}
             width={100}
               className="img"
               src="/resources/newsletter.jpg"
@@ -138,7 +138,7 @@ export default function ResourceList() {
           </Article> */}
           <Article href="/portfolios/books">
             <Image
-              height={100}
+              height={649}
               width={1200}
               className="img"
               src="/resources/fb-group.jpg"
@@ -163,7 +163,7 @@ export default function ResourceList() {
           </Article>
           {/* <Article href="/portfolios/books">
             <Image
-            height={100}
+            height={129}
             width={100}
               className="img"
               src="/resources/prep-guide.jpg"

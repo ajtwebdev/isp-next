@@ -17,7 +17,7 @@
 
   --fw-button: 400;
 
-  --fs-1: 2rem;
+  --fs-1: 1.5rem;
   --fs-2: 1.375rem;
   --fs-3: 1.125rem;
   --fs-b: 1rem;
@@ -56,9 +56,9 @@
 
 @media (min-width: 45em) {
   :root {
-    --fs-1: 2.75rem;
+    --fs-1: 2rem;
     --fs-2: 1.375rem;
-    --fs-3: 1.5rem;
+    --fs-3: 1.375rem;
     --fs-b: 1.125rem;
     --fs-sm: 0.875rem;
   }

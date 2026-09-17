@@ -7,8 +7,8 @@ const TermOfUser = () => {
     return (
         <LayoutJs>
             <Seo
-                title="term of use"
-                description="Encouraging, supportive, life-changing. Calgary boudoir photography to build your self-esteem, love yourself more deeply, and see how amazing you truly are!"
+                title="Terms of Use | Inner Spirit Photography"
+                description="The terms governing your use of the Inner Spirit Photography website, including copyright of images, acceptable use and limitation of liability."
             />
             <HeroBannerPadding />
             <Container>

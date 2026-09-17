@@ -111,7 +111,7 @@ export default function MeetMark() {
           <div>
             <Image
               className="stretch"
-              height={100}
+              height={125}
               width={100}
               layout="responsive"
               style={{ maxWidth: '100%', height: 'auto', borderRadius: '5px' }}
@@ -129,7 +129,7 @@ export default function MeetMark() {
             <div>
               <Image
                 className="stretch"
-                height={100}
+                height={500}
                 width={400}
                 style={{ width: '100%', height: 'auto', borderRadius: '5px' }}
                 src="/mark-nude-boudoir-photographer-calgary.gif"

@@ -1,4 +1,5 @@
 import React from "react";
+import { SITE_ORIGIN } from "../lib/canonical";
 import LayoutJs from "../components/layoutJs";
 import BannerExperience from "../components/banners/bannerExperience";
 import Stats from "../components/stats";
@@ -19,6 +20,7 @@ export default function Experience() {
       <Seo
         title="Your Experience of a Lifetime | Inner Spirit Photography"
         description="An Inner Spirit photography session is the experience of a lifetime! Choose from dozens of creative sets to create your unique photography session."
+        ogImage={`${SITE_ORIGIN}/banners/experience-banner.jpg`}
       />
       <BannerExperience
         img="/banners/experience-banner.jpg"
@@ -35,7 +37,7 @@ export default function Experience() {
         alt="review of calgary boudoir photographer"
         review="Mark really captures the essence of you that you just never see. We females are so critical of our bodies and critical of ourselves that when you see the photos he takes, you're thinking, ‘oh my God, that’s me?"
         name="kerry p."
-        to="/book-now"
+        to="/contact"
         link="book planning session &#x2192;"
       />
       <HowItWorks />
@@ -48,7 +50,7 @@ export default function Experience() {
         alt="review of calgary boudoir photographer"
         review="For me, the experience was about being bold and being true to myself and knowing that I can accomplish anything. I can be who I want to be, without hesitation."
         name="renilda f."
-        to="/book-now"
+        to="/contact"
         link="book planning session &#x2192;"
       />
       <ReassuranceVideoTestimonial />
@@ -57,7 +59,7 @@ export default function Experience() {
         alt="review of calgary boudoir photographer"
         review="Mark sees your unspoken boundaries, and I think through respecting those boundaries, he creates the safety needed to help people heal."
         name="deanna b."
-        to="/book-now"
+        to="/contact"
         link="book planning session &#x2192;"
       />
       <CTA

@@ -50,6 +50,7 @@ export default function ImageGallery({ totalGalleryImages }) {
             {totalGalleryImages?.map((image, index) => {
               return (
                 <Image
+                  key={index}
                   alt={"galleryImage"}
                   src={image.sourceUrl}
                   width={600}

@@ -133,6 +133,19 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
       excerpt
       slug
       date
+      modified
+      databaseId
+      ACF_BlogsPost {
+        seoMetaTitle
+        seoMetaDescription
+        socialogImage {
+          altText
+          # sourceUrl is the image file. Note MediaItem.uri is the attachment
+          # *page* path (/client-stories/../attachment/..), not the image, so it
+          # cannot be used for og:image.
+          sourceUrl
+        }
+      }
       featuredImage {
         node {
           sourceUrl
@@ -147,6 +160,8 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         edges {
           node {
             name
+            slug
+            databaseId
           }
         }
       }
@@ -154,6 +169,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
         edges {
           node {
             name
+            slug
           }
         }
       }

@@ -27,7 +27,6 @@ export default function Footer() {
                   src="/project-landscape-logo-light.svg"
                   alt="project landscape logo - calgary landscape company"
                 />
-                <Map />
               </div>
               <div className={styles.divider} />
             </div>
@@ -85,7 +84,7 @@ export default function Footer() {
                     src="/visa.png"
                     alt="calgary landscaping payment type"
                     width={100}
-                    height={100}
+                    height={19}
                   />
                 </div>
                 <div className="spacing">
@@ -190,7 +189,7 @@ export default function Footer() {
                     >
                       <Image
                         width={100}
-                        height={100}
+                        height={175}
                         src="/socials/houzz.svg"
                         alt="calgary landscaping company"
                       />
@@ -479,88 +478,23 @@ export default function Footer() {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      className={styles.styledLink}
-                      href="/customer-resource-center"
-                    >
-                      customer resource center
+                    <Link className={styles.styledLink} href="/experience">
+                      experience
                     </Link>
                   </li>
                   <li>
-                    <Link className={styles.styledLink} href="/our-process">
-                      our process
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={styles.styledLink} href="/careers">
-                      careers
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={styles.styledLink}
-                      href="/residential-services"
-                    >
-                      residential services
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={styles.styledLink}
-                      href="/commercial-services"
-                    >
-                      commercial services
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={styles.styledLink} href="/faq">
-                      FAQ
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={styles.styledLink}
-                      href="/areas-we-service"
-                    >
-                      service areas
+                    <Link className={styles.styledLink} href="/gallery">
+                      gallery
                     </Link>
                   </li>
                   <li>
                     <Link className={styles.styledLink} href="/blog">
-                      blogs
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={styles.styledLink} href="/testimonials">
-                      testimonials
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={styles.styledLink} href="/packages">
-                      packages
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      className={styles.styledLink}
-                      href="/strategic-partners"
-                    >
-                      strategic partners
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={styles.styledLink} href="/portfolio">
-                      portfolio
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={styles.styledLink} href="/financing">
-                      financing
+                      blog
                     </Link>
                   </li>
                   <li>
                     <Link className={styles.styledLink} href="/contact">
-                      get a quote
+                      contact
                     </Link>
                   </li>
                 </ul>
@@ -594,7 +528,7 @@ export default function Footer() {
                     src="/aaron-tonner-web-solutions-logo-white-white.svg"
                     alt="aaron tonner web solutions logo"
                     width={100}
-                    height={100}
+                    height={19}
                   />
                 </a>
               </div>

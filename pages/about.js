@@ -1,4 +1,5 @@
 import React from "react";
+import { SITE_ORIGIN } from "../lib/canonical";
 import CTA from "../components/CTA";
 import Awards from "../components/awards";
 import Banner from "../components/banners/bannerPrimary";
@@ -17,6 +18,7 @@ export default function About() {
       <Seo
         title="About Inner Spirit Photography"
         description="Inner Spirit Photography is a boudoir photography studio founded over 40 years ago by Canada’s most awarded portrait photographer, Mark Laurie."
+        ogImage={`${SITE_ORIGIN}/banners/about-banner.jpg`}
       />
       <Banner
         img="/banners/about-banner.jpg"

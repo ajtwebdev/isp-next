@@ -1,6 +1,7 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { getCanonicalUrl } from "../lib/canonical";
 
-const DOMAIN = "https://www.innerspiritphoto.com";
 const DEFAULT_OG_IMAGE =
   "https://staging.innerspiritphoto.com/wp-content/uploads/2022/10/X1171D-0007AY.jpg";
 
@@ -8,15 +9,26 @@ export default function Seo({
   title = "Inner Spirit Photography | Calgary Boudoir",
   description = "Inner Spirit Photography is a Calgary-based boudoir studio with more than 40 years of experience.",
   siteName = "Inner Spirit Photography",
-  canonical = DOMAIN,
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   twitterHandle = "",
+  noindex = false,
+  hideCanonical = false,
 }) {
+  const router = useRouter();
+  const canonicalUrl = getCanonicalUrl(router.asPath || "/");
+  // 1200x630 is only true of DEFAULT_OG_IMAGE. A per-post image supplied from
+  // WordPress has arbitrary dimensions, so we omit the tags rather than
+  // declare wrong ones.
+  const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
+  const isDefaultOgImage = resolvedOgImage === DEFAULT_OG_IMAGE;
+  const isPreview = process.env.VERCEL_ENV === "preview";
+  const robotsContent = isPreview || noindex ? "noindex,follow" : "index,follow";
+
   return (
     <Head>
       <title key="title">{`${title}`}</title>
-      <meta name="description" content={description} />
+      <meta key="description" name="description" content={description} />
       <meta key="og_type" property="og:type" content={ogType} />
       <meta key="og_title" property="og:title" content={title} />
       <meta
@@ -24,24 +36,27 @@ export default function Seo({
         property="og:description"
         content={description}
       />
-      <meta key="og_locale" property="og:locale" content="en_IE" />
+      <meta key="og_locale" property="og:locale" content="en_CA" />
       <meta key="og_site_name" property="og:site_name" content={siteName} />
-      <meta key="og_url" property="og:url" content={canonical ?? DOMAIN} />
-      <meta key="og_site_name" property="og:site_name" content={siteName} />
+      <meta key="og_url" property="og:url" content={canonicalUrl} />
       <meta
         key="og_image"
         property="og:image"
-        content={ogImage ?? DEFAULT_OG_IMAGE}
+        content={resolvedOgImage}
       />
       <meta
         key="og_image:alt"
         property="og:image:alt"
         content={`${title} | ${siteName}`}
       />
-      <meta key="og_image:width" property="og:image:width" content="1200" />
-      <meta key="og_image:height" property="og:image:height" content="630" />
+      {isDefaultOgImage && (
+        <meta key="og_image:width" property="og:image:width" content="1200" />
+      )}
+      {isDefaultOgImage && (
+        <meta key="og_image:height" property="og:image:height" content="630" />
+      )}
 
-      <meta name="robots" content="index,follow" />
+      <meta key="robots" name="robots" content={robotsContent} />
 
       <meta
         key="twitter:card"
@@ -61,11 +76,7 @@ export default function Seo({
         content={description}
       />
 
-      <link rel="canonical" href={canonical ?? DOMAIN} />
-
-      {/* <link rel="shortcut icon" href="/favicon.ico" /> */}
-      <link rel="icon" href="/favicon.ico" />
-      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+      {!hideCanonical && <link key="canonical" rel="canonical" href={canonicalUrl} />}
     </Head>
   );
 }

@@ -38,7 +38,7 @@ export default function Awards() {
         <GridAuto>
           <a href="https://www.ppoc.ca/" target="_blank">
             <Image
-              height={100}
+              height={89}
               width={100}
               style={ImageStylePpoc}
               src="/awards/awarded-photographer-ppoc.jpg"
@@ -47,7 +47,7 @@ export default function Awards() {
           </a>
           <a href="https://www.ppa.com/" target="_blank">
             <Image
-              height={100}
+              height={37}
               width={100}
               style={ImageStyle}
               src="/awards/awarded-photographer-ppoa.jpg"
@@ -56,7 +56,7 @@ export default function Awards() {
           </a>
           <a href="https://swpp.co.uk/" target="_blank">
             <Image
-              height={100}
+              height={37}
               width={100}
               style={ImageStyle}
               src="/awards/awarded-photographer-swpp.jpg"
@@ -65,7 +65,7 @@ export default function Awards() {
           </a>
           <a href="https://www.worldphotographiccup.org/" target="_blank">
             <Image
-              height={100}
+              height={32}
               width={100}
               style={ImageStyle}
               src="/awards/awarded-photographer-wpc.jpg"

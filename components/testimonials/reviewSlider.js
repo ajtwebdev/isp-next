@@ -9,6 +9,12 @@ import { AnchorUnderline } from "../buttons";
 import { FaStar } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+const Frill = styled(Image)`
+
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const Wrapper = styled.div`
   .slick-prev:before,
   .slick-next:before {
@@ -26,6 +32,15 @@ const ItemGrid = styled.div`
     grid-row: 1 / span 2;
     grid-column: 1 / -1;
     z-index: 1;
+
+    display: block;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--br);
+    }
   }
 `;
 
@@ -69,14 +84,12 @@ const ReviewBox = (props) => {
   return (
     <ReviewWrapper className="spacing">
       <div>
-        <center>
-          <Image
-            src="/frill.jpg"
-            alt="review of boudoir studio in Calgary"
-            height={100}
-            width={300}
-          />
-        </center>
+        <Frill
+          src="/frill.jpg"
+          alt="review of boudoir studio in Calgary"
+          height={22}
+          width={300}
+        />
         <FlexStars>
           <FaStar />
           <FaStar />
@@ -111,26 +124,47 @@ export default function ReviewSlider() {
         <Wrapper>
           <Slider className="slider" {...settings}>
             <ItemGrid>
-              <Image
-                height={100}
-                width={2000}
-                className="slider-img"
-                src="/calgary-boudoir-joy-review.jpg"
-                alt="calgary boudoir photography google review"
-              />
+              <picture className="slider-img">
+               
+                <source
+                  media="(max-width: 43em)"
+                  srcSet="/calgary-boudoir-joy-review-mobile.webp"
+                  width="900"
+                  height="600"
+                />
+                <source srcSet="/calgary-boudoir-joy-review.webp" width="1600" height="1066" />
+                <img
+                  src="/calgary-boudoir-joy-review.webp"
+                  width="1600"
+                  height="1066"
+                  loading="lazy"
+                  decoding="async"
+                  alt="calgary boudoir photography google review"
+                />
+              </picture>
               <ReviewBox
                 review="At first I resisted, saying it was extravagant and unnecessary, but the more I talked to Mark and saw his work I realized it was a fantastic opportunity. We shot a mix of boudoir, sexy and sporty poses and once I saw the completed album,  my confidence soared! I was a huge fan from that point on. Do this now for yourself or a loved one. You will never stop enjoying the results!"
                 name="Joy B."
               />
             </ItemGrid>
             <ItemGrid>
-              <Image
-                height={100}
-                width={2000}
-                className="slider-img"
-                src="/calgary-boudoir-kb-review.jpg"
-                alt="calgary boudoir photography google review"
-              />
+              <picture className="slider-img">
+                <source
+                  media="(max-width: 43em)"
+                  srcSet="/calgary-boudoir-kb-review-mobile.webp"
+                  width="900"
+                  height="600"
+                />
+                <source srcSet="/calgary-boudoir-kb-review.webp" width="1600" height="1066" />
+                <img
+                  src="/calgary-boudoir-kb-review.webp"
+                  width="1600"
+                  height="1066"
+                  loading="lazy"
+                  decoding="async"
+                  alt="calgary boudoir photography google review"
+                />
+              </picture>
               <ReviewBox
                 className="review-box"
                 review="I love the unexpected creativity of Mark's studio. I arrive and I get to be myself. I just finished my 6th session, it was as different and inspiring as the rest. Each one is a new adventure. No other studio touches what Mark does, he is on a whole different level. Mark gives you the confidence to be beautiful and he will find that beauty in every shot. You will never be disappointed in his professionalism, creativity and the beauty of you"
@@ -138,13 +172,24 @@ export default function ReviewSlider() {
               />
             </ItemGrid>
             <ItemGrid>
-              <Image
-                height={100}
-                width={2000}
-                className="slider-img"
-                src="/calgary-boudoir-photography-robin.jpg"
-                alt="calgary boudoir photography google review"
-              />
+              <picture className="slider-img">
+
+                <source
+                  media="(max-width: 43em)"
+                  srcSet="/calgary-boudoir-photography-robin-mobile.webp"
+                  width="900"
+                  height="563"
+                />
+                <source srcSet="/calgary-boudoir-photography-robin.webp" width="1600" height="1000" />
+                <img
+                  src="/calgary-boudoir-photography-robin.webp"
+                  width="1600"
+                  height="1000"
+                  loading="lazy"
+                  decoding="async"
+                  alt="calgary boudoir photography google review"
+                />
+              </picture>
               <ReviewBox
                 className="review-box"
                 review="Mark was instrumental in changing the view my wife had of herself after three kids.  His thoughtful input, witty charm and great photography skills made for a memorable makeover session.  She has gone from hiding behind baggy sweats to wearing the clothes of a confident and sexy woman!"

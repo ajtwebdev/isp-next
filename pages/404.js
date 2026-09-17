@@ -9,7 +9,7 @@ import Seo from "../components/seo";
 export default function Custom404() {
   return (
     <LayoutJs>
-      <Seo title="404: Not Found | ISP" />
+      <Seo title="404: Not Found | ISP" noindex={true} hideCanonical={true} />
       <HeroBannerPadding />
       <Section>
         <Container>

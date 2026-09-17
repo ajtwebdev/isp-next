@@ -18,6 +18,16 @@ export const POST_FIELDS = gql`
     isSticky
     postId
     slug
+    tags {
+      edges {
+        node {
+          databaseId
+          id
+          name
+          slug
+        }
+      }
+    }
     title
   }
 `;
@@ -190,6 +200,16 @@ export const QUERY_POSTS_BY_CATEGORY_ID_ARCHIVE = gql`
             }
           }
           excerpt
+          featuredImage {
+            node {
+              altText
+              caption
+              id
+              sizes
+              sourceUrl
+              srcSet
+            }
+          }
         }
       }
     }
@@ -291,7 +311,6 @@ export const QUERY_POST_SEO_BY_SLUG = gql`
     post(id: $slug, idType: SLUG) {
       id
       seo {
-        canonical
         metaDesc
         metaRobotsNofollow
         metaRobotsNoindex
@@ -331,6 +350,37 @@ export const QUERY_POST_PER_PAGE = gql`
   query PostPerPage {
     allSettings {
       readingSettingsPostsPerPage
+    }
+  }
+`;
+export const QUERY_ALL_CATEGORIES = gql`
+  query AllCategories {
+    categories(first: 1000, where: { hideEmpty: true }) {
+      edges {
+        node {
+          databaseId
+          id
+          name
+          slug
+          count
+        }
+      }
+    }
+  }
+`;
+
+export const QUERY_ALL_TAGS = gql`
+  query AllTags {
+    tags(first: 1000, where: { hideEmpty: true }) {
+      edges {
+        node {
+          databaseId
+          id
+          name
+          slug
+          count
+        }
+      }
     }
   }
 `;

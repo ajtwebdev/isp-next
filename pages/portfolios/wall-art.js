@@ -1,4 +1,5 @@
 import React from "react";
+import { SITE_ORIGIN } from "../../lib/canonical";
 import BannerSecondary from "../../components/banners/bannerSecondary";
 import LayoutJs from "../../components/layoutJs";
 import Seo from "../../components/seo";
@@ -17,13 +18,22 @@ const Heading = styled.h2`
   color: var(--clr-dark);
 `;
 export async function getStaticProps() {
-  const allWallArtImages = await getWallArtImages();
+  try {
+    const allWallArtImages = await getWallArtImages();
 
-  return {
-    props: {
-      allWallArtImages,
-    },
-  };
+    return {
+      props: {
+        allWallArtImages,
+      },
+    };
+  } catch (error) {
+    console.error("[wall-art] Failed to load wall art images:", error);
+    return {
+      props: {
+        allWallArtImages: null,
+      },
+    };
+  }
 }
 
 export default function WallArt({ allWallArtImages }) {
@@ -34,7 +44,8 @@ export default function WallArt({ allWallArtImages }) {
     <LayoutJs>
       <Seo
         title="Wall Art | Inner Spirit Photography"
-        description="Here is the full gallery of Inner Spirit Photography!"
+        description="Fine art wall prints from Inner Spirit Photography, a Calgary boudoir and nude portrait studio established in 1980."
+        ogImage={`${SITE_ORIGIN}/banners/wall-art-banner.jpg`}
       />
       <BannerSecondary
         img="/banners/wall-art-banner.jpg"

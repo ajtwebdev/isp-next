@@ -5,14 +5,13 @@ import { Container } from "./layoutComponents";
 import { Icon } from "@chakra-ui/react";
 import { PhoneIcon, AtSignIcon, TimeIcon } from "@chakra-ui/icons";
 import {
-  IoLogoPinterest,
   IoLogoInstagram,
-  IoLogoTwitter,
   IoLogoFacebook,
   IoLogoLinkedin,
-  IoLogoYoutube,
 } from "react-icons/io";
 import Link from "next/link";
+
+import { STUDIO_ADDRESS, STUDIO_MAP_URL } from "../lib/studio";
 import { ReactNode } from "react";
 interface NextLink {
   children: ReactNode;
@@ -50,14 +49,23 @@ const CopyRight = styled.div`
   color: white;
   gap: 20px;
   justify-content: center;
+  /* The legal links carry 4px of vertical padding to meet the 24px touch
+     target. Under the default "stretch" every child became the same height,
+     but that padding still pushed the link text 4px below the paragraphs
+     beside it. Aligning on the baseline lines the text up regardless of each
+     child's own padding, so the touch target survives. */
+  align-items: baseline;
   margin: 30px 0;
-  flexwrap: wrap;
+  flex-wrap: wrap;
 
   p {
     font-size: 12px;
   }
   a {
     font-size: 12px;
+    display: block;
+    padding: 4px 0;
+    min-height: 24px;
   }
   @media (max-width: 768px) {
     display: block;
@@ -85,7 +93,20 @@ const NextLink = ({ children, href, target }: NextLink) => {
     </Link>
   );
 };
-const LinkElement = styled.div``;
+
+const ContactLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  display: inline-block;
+  min-height: 24px;
+
+  :hover,
+  :focus {
+    text-decoration: underline;
+  }
+`;
+
+const LinkElement = styled.li``;
 export default function Footer() {
   return (
     <>
@@ -96,7 +117,7 @@ export default function Footer() {
         <div className="footer-logo">
           <Image
             width={200}
-            height={100}
+            height={112}
             src="/logo-white.svg"
             alt="footer logo"
             style={{ margin: "0 auto", padding: "15px 0px" }}
@@ -115,11 +136,15 @@ export default function Footer() {
               <HeadingTag>Contact Us</HeadingTag>
               <p>
                 <PhoneIcon mr={"10px"} />
-                +1 (403) 252-2662
+                <ContactLink href="tel:+14032522662">
+                  +1 (403) 252-2662
+                </ContactLink>
               </p>
               <p>
                 <AtSignIcon mr={"10px"} />
-                info@innerspiritphoto.com
+                <ContactLink href="mailto:info@innerspiritphoto.com">
+                  info@innerspiritphoto.com
+                </ContactLink>
               </p>
               <p>
                 <TimeIcon mr={"10px"} mt={"10px"} />
@@ -131,8 +156,14 @@ export default function Footer() {
               </p>
 
               <p style={{ marginTop: "20px" }}>
-                711 84 Ave SW, Calgary, AB <br />
-                Canada
+                <a
+                  href={STUDIO_MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "inline", color: "inherit" }}
+                >
+                  {STUDIO_ADDRESS}
+                </a>
               </p>
               <div
                 style={{ display: "flex", marginTop: "10px" }}
@@ -142,6 +173,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.instagram.com/boudoirphotographycalgary/"
+                  aria-label="Inner Spirit Photography on Instagram"
                 >
                   <Icon
                     color="#973cb7"
@@ -152,6 +184,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.facebook.com/innerspiritphoto"
+                  aria-label="Inner Spirit Photography on Facebook"
                 >
                   <Icon
                     color="#1877f2"
@@ -163,6 +196,7 @@ export default function Footer() {
                 <a
                   target="_blank"
                   href="https://www.linkedin.com/in/marklauriephotographer/"
+                  aria-label="Mark Laurie on LinkedIn"
                 >
                   <Icon
                     color="#2a7bb6"
@@ -171,43 +205,13 @@ export default function Footer() {
                     as={IoLogoLinkedin}
                   />
                 </a>
-                <a target="_blank" href="https://twitter.com/marklaurie">
-                  <Icon
-                    color="#39a2f4"
-                    ml={"10px"}
-                    fontSize={"25px"}
-                    as={IoLogoTwitter}
-                  />
-                </a>
-                <a
-                  target="_blank"
-                  href="https://www.pinterest.ca/innerspiritphot/_saved/"
-                >
-                  <Icon
-                    color="red"
-                    ml={"10px"}
-                    fontSize={"25px"}
-                    as={IoLogoPinterest}
-                  />
-                </a>
-                <a
-                  target="_blank"
-                  href="https://www.youtube.com/c/InnerSpiritPhotographyCalgary/videos"
-                >
-                  <Icon
-                    color="#ed3833"
-                    ml={"10px"}
-                    fontSize={"25px"}
-                    as={IoLogoYoutube}
-                  />
-                </a>
               </div>
             </div>
             <div className="quickLinks">
               <HeadingTag>Quick Links</HeadingTag>
               <ul style={{ listStyle: "none", paddingLeft: "0px" }}>
                 <LinkElement>
-                  <NextLink href="/about">Home</NextLink>
+                  <NextLink href="/">Home</NextLink>
                 </LinkElement>
                 <LinkElement>
                   <NextLink href="/about">About</NextLink>
@@ -215,38 +219,24 @@ export default function Footer() {
                 <LinkElement>
                   <NextLink href="/experience">Experience</NextLink>
                 </LinkElement>
-
                 <LinkElement>
-                  {" "}
-                  <NextLink href="/portfolios">Portfolios</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  <NextLink href="/portfolios/gallery">Gallery</NextLink>
+                  <NextLink href="/gallery">Gallery</NextLink>
                 </LinkElement>
                 <LinkElement>
-                  <NextLink href="/portfolios/books">Books</NextLink>
-                </LinkElement>
-                <LinkElement>
-                  <NextLink href="/portfolios/wall-art">Wall art</NextLink>
-                </LinkElement>
-                <LinkElement>
-                  <NextLink href="/portfolios/projects">Projects</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  {" "}
-                  <NextLink href="/resources">Resources</NextLink>
-                </LinkElement>
-
-                <LinkElement>
-                  <NextLink href="/resources/faq">Faq</NextLink>
+                  <NextLink href="/blog">Blog</NextLink>
                 </LinkElement>
                 <LinkElement>
                   <NextLink
+                    // href="https://app.cyberimpact.com/clients/60137/subscribe-forms/85E2BDA2-3940-4988-AB06-552E4EC6D22E"
                     href="/contact"
+                    // target="_blank"
                   >
                     Contact & Booking
+                  </NextLink>
+                </LinkElement>
+                <LinkElement>
+                  <NextLink href="/reflections">
+                    Receive Reflections Journal
                   </NextLink>
                 </LinkElement>
               </ul>
@@ -258,7 +248,7 @@ export default function Footer() {
                 photographer for Inner Spirit Photography. Internationally
                 renowned, his clients fly in from all over the world or fly Mark
                 out. He has done portraits in 16 countries plus every province
-                in Canada **** Inner Spirit creates a transformational
+                in Canada Inner Spirit creates a transformational
                 experience with imagery that has been described as life
                 changing. Timeless images that portray the soul, desires and
                 personality of his clients. We create an enviroment that is so
@@ -308,7 +298,7 @@ export default function Footer() {
           <FooterCopyrightLogo>
             <p>Website by:</p>
             <Image
-              height={100}
+              height={28}
               width={150}
               alt={"website name"}
               src="/aaron-tonner-web-solutions-logo-white-white.svg"
@@ -316,17 +306,6 @@ export default function Footer() {
           </FooterCopyrightLogo>
         </Container>
       </footer>
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2512.0791090232547!2d-114.08319942383308!3d50.97772834925977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5371711767f98659%3A0xbbb2559053a55ca5!2sInner%20Spirit%20Photography!5e0!3m2!1sen!2sin!4v1691152752711!5m2!1sen!2sin"
-        width="600"
-        height="450"
-        allowFullScreen
-        allow="autoplay; fullscreen; picture-in-picture"
-        style={{
-          width: "100%",
-          height: "400px",
-        }}
-      ></iframe>
     </>
   );
 }

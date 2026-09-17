@@ -3,7 +3,8 @@ import { ButtonPrimary } from "../components/buttons";
 import CTA from "../components/CTA";
 import Diversity from "../components/diversity";
 import FeaturedIn from "../components/featuredIn";
-import HeroBasic from "../components/heros/hero";
+import HeroBasic from "../components/Heros/hero";
+import HeroQuote from "../components/heroQuote";
 import LayoutJs from "../components/layoutJs";
 import { Container, Flex, Section } from "../components/layoutComponents";
 import MeetMark from "../components/meetMark";
@@ -24,6 +25,7 @@ export default function Index() {
         description="Encouraging, supportive, life-changing. Calgary boudoir photography to build your self-esteem, love yourself more deeply, and see how amazing you truly are!"
       />
       <HeroBasic />
+      <HeroQuote />
       <Stats />
       <HomeMain />
       <ReviewSlider />
@@ -66,10 +68,10 @@ export default function Index() {
         to="/experience"
         link="explore the experience &#x2192;"
       />
-      <MarkAdvantage />
+      {/* <MarkAdvantage /> */}
       <MeetMark />
       <FeaturedIn />
-      <Diversity />
+      {/* <Diversity /> */}
       <CTA
         headline="take the leap!"
         subhead="We'll catch you!"

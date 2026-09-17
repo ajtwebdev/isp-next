@@ -56,7 +56,7 @@ export default function BeyondSexy() {
           src="/beyond-sexy-nude-photos.jpg"
           alt="we go beyond taking just sexy nude photos"
           width={1500}
-          height={100}
+          height={551}
         />
       </Wrapper>
     </Section>

@@ -4,7 +4,7 @@ import { Container, Section } from "../components/layoutComponents";
 import Link from "next/link";
 import styled from "styled-components";
 import Seo from "../components/seo";
-import { getAllPosts, postPathBySlugCategory } from "../lib/posts";
+import { getAllPosts, postPathBySlug } from "../lib/posts";
 
 const BannerWrapper = styled.div`
   grid-row: 1 / span 2;
@@ -84,15 +84,11 @@ export default function Recent({ posts }) {
               <h2>{catgoryPost?.categoryName}</h2>
               <CategoryPostContainer>
                 {catgoryPost?.posts?.slice(0, 6)?.map((post, index) => {
-                  const categorySlug =
-                    post?.categories?.length > 0
-                      ? post?.categories[0]?.slug
-                      : "";
                   return (
                     <StyledCard key={index}>
                       <Link
                         className="spacing accent"
-                        href={postPathBySlugCategory(post.slug, categorySlug)}
+                        href={postPathBySlug(post.slug)}
                       >
                         <img
                           src={post?.featuredImage?.sourceUrl}

@@ -152,7 +152,7 @@ export default function HeaderBasic() {
                 <Image
                   src="/project-landscape-logo-light.svg"
                   alt="landscape company calgary logo"
-                  height={100}
+                  height={59}
                   width={170}
                 />
               </Link>

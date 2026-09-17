@@ -6,6 +6,11 @@ import { ButtonUnderline } from "../buttons";
 import { FaStar } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+const Frill = styled(Image)`
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const Wrapper = styled.div`
   display: grid;
   grid-template-rows: auto 2em auto;
@@ -62,14 +67,13 @@ const ReviewBox = (props) => {
   return (
     <ReviewWrapper className="spacing">
       <div>
-        <center>
-          <Image
-            src="/frill.jpg"
-            alt="review of boudoir studio in Calgary"
-            height={100}
-            width={300}
-          />
-        </center>
+
+        <Frill
+          src="/frill.jpg"
+          alt="review of boudoir studio in Calgary"
+          height={22}
+          width={300}
+        />
         <FlexStars>
           <FaStar />
           <FaStar />

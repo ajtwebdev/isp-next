@@ -48,6 +48,9 @@ const Text = styled.div`
 `;
 
 export default function CTA(props) {
+  const buttonLabel = props.buttonLabel || "yes, i want to take the leap \u2192";
+  const buttonHref = props.buttonHref || "/contact";
+
   return (
     <Wrapper>
       <Section>
@@ -55,8 +58,10 @@ export default function CTA(props) {
           <Flex>
             <Image
               className="stretch cta-image"
-              fill={true}
-              style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius:'5px', border:'1px solid white' }}
+              width={662}
+              height={880}
+              sizes="(max-width: 57em) 100vw, 50vw"
+              style={{ width: "100%", height: "auto", objectFit: "cover", borderRadius:'5px', border:'1px solid white' }}
               src="/book-your-calgary-boudoir-session.jpg"
               alt="calgary boudoir session"
             />
@@ -66,8 +71,8 @@ export default function CTA(props) {
                 <h3 className="subhead caps">{props.subhead}</h3>
               </div>
               <p>{props.description}</p>
-              <ButtonPrimary href="/book-now">
-                yes, i want to take the leap &#x2192;
+              <ButtonPrimary href={buttonHref}>
+                {buttonLabel}
               </ButtonPrimary>
             </Text>
           </Flex>

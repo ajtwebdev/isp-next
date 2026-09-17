@@ -1,44 +1,69 @@
+/*
+ * Font faces.
+ *
+ * src now points at /fonts/<file>.woff in the public directory — the same
+ * stable URL the <link rel="preload"> tags in pages/_document.tsx request.
+ * Previously these were relative ("../fonts/...") which webpack rewrote to a
+ * hashed /_next/static/media/ URL, so the preloads could never match and the
+ * fonts arrived late, swapping in around 1.8s and shifting the layout.
+ *
+ * font-display: optional means the browser either has the font ready almost
+ * immediately (it will, because the two used above the fold are preloaded) or
+ * keeps the fallback for that page load and never swaps — so a slow font can
+ * no longer move the layout.
+ */
 @font-face {
-    font-family: 'Trajan Pro Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: url('../fonts/TrajanPro-Regular.woff') format('woff');
-    }
-    
-    @font-face {
-    font-family: 'Trajan Pro Bold';
-    font-style: normal;
-    font-weight: normal;
-    src: url('../fonts/TrajanPro-Bold.woff') format('woff');
-    }
+  font-family: "Trajan Pro Regular";
+  font-style: normal;
+  font-weight: normal;
+  /* swap, not optional: this is the brand headline face and it is preloaded,
+     so it resolves almost immediately. Under `optional` a cold load kept the
+     sans-serif fallback for the whole page view. */
+  font-display: swap;
+  /* WOFF2 first: 55.9 KB against 134.7 KB for the same 504 glyphs. Every
+     browser that supports WOFF2 takes it; the WOFF1 file stays as the
+     fallback for anything older, which reads the second src only when the
+     first format is unsupported - it is never a second download. */
+  src: url("/fonts/TrajanPro-Regular.woff2") format("woff2"),
+    url("/fonts/TrajanPro-Regular.woff") format("woff");
+}
 
-    @font-face {
-        font-family: 'Optima';
-        font-style: normal;
-        font-weight: normal;
-        src: url('../fonts/OPTIMA.woff') format('woff');
-        }
-        
-    
-        @font-face {
-        font-family: 'Optima Italic';
-        font-style: normal;
-        font-weight: normal;
-        src: url('../fonts/Optima_Italic.woff') format('woff');
-        }
-        
-    
-        @font-face {
-        font-family: 'Optima Medium';
-        font-style: normal;
-        font-weight: normal;
-        src: url('../fonts/Optima-Medium.woff') format('woff');
-        }
-        
-    
-        @font-face {
-        font-family: 'Optima Bold';
-        font-style: normal;
-        font-weight: normal;
-        src: url('../fonts/OPTIMA_B.woff') format('woff');
-        }
+@font-face {
+  font-family: "Trajan Pro Bold";
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+  src: url("/fonts/TrajanPro-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima";
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+  src: url("/fonts/OPTIMA.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima Italic";
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+  src: url("/fonts/Optima_Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima Medium";
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+  src: url("/fonts/Optima-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima Bold";
+  font-style: normal;
+  font-weight: normal;
+  font-display: optional;
+  src: url("/fonts/OPTIMA_B.woff") format("woff");
+}

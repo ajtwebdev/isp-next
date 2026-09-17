@@ -6,6 +6,12 @@ import { ButtonUnderline } from "../buttons";
 import { FaStar } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 
+const Frill = styled(Image)`
+
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const Wrapper = styled.div`
   display: grid;
   grid-template-rows: auto 2em auto;
@@ -14,11 +20,17 @@ const Wrapper = styled.div`
     grid-row: 1 / span 2;
     grid-column: 1 / -1;
     z-index: 1;
-    border-radius: var(--br);
+    display: block;
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--br);
+    }
   }
 
   .review-box {
-    // i was trying to put grid row on this but it wasn't working - needs to be on the component
   }
 `;
 
@@ -62,14 +74,12 @@ const ReviewBox = (props) => {
   return (
     <ReviewWrapper className="spacing">
       <div>
-        <center>
-          <Image
-            src="/frill.jpg"
-            alt="review of boudoir studio in Calgary"
-            height={100}
-            width={300}
-          />
-        </center>
+        <Frill
+          src="/frill.jpg"
+          alt="review of boudoir studio in Calgary"
+          height={22}
+          width={300}
+        />
         <FlexStars>
           <FaStar />
           <FaStar />
@@ -89,13 +99,27 @@ export default function MercedesTestimonial(props) {
     <Section>
       <Container>
         <Wrapper>
-          <Image
-            className="review-img"
-            src="/calgary-boudoir-mercedes-review.jpg"
-            alt="review of calgary boudoir photographer"
-            height={2000}
-            width={2000}
-          />
+          <picture className="review-img">
+            <source
+              media="(max-width: 43em)"
+              srcSet="/calgary-boudoir-mercedes-review-mobile.webp"
+              width="900"
+              height="600"
+            />
+            <source
+              srcSet="/calgary-boudoir-mercedes-review.webp"
+              width="1600"
+              height="1066"
+            />
+            <img
+              src="/calgary-boudoir-mercedes-review.webp"
+              width="1600"
+              height="1066"
+              loading="lazy"
+              decoding="async"
+              alt="review of calgary boudoir photographer"
+            />
+          </picture>
           <ReviewBox review={props.review} name={props.name} />
         </Wrapper>
       </Container>

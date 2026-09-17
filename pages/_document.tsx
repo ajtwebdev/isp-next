@@ -1,32 +1,70 @@
-import { Html, Head, Main, NextScript } from "next/document"
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document";
+import { ServerStyleSheet } from "styled-components";
 
-export default function Document() {
-  return (
+/**
+ * styled-components server-side rendering.
+ *
+ * The babel plugin (.babelrc) only makes class names deterministic; it does
+ * not put any CSS in the server response. Without this collector the HTML
+ * shipped ~129 sc-* class names and zero stylesheets, so every page painted
+ * unstyled and snapped into layout at hydration - a ~1.0 layout shift on
+ * every page. This extracts the styles during the server render and injects
+ * them into <head>.
+ *
+ * Note: next.config.js `compiler.styledComponents` is an SWC option and is
+ * ignored while a custom .babelrc exists, so it is deliberately not used.
+ */
+export default class MyDocument extends Document {
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
+  }
+
+  render() {
+    return (
     <Html lang="en">
       <Head>
       <link rel="icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       {/* Preconnects and font preloads for faster first paint */}
       <link rel="preconnect" href="https://www.googletagmanager.com" />
-      <link rel="preload" href="/fonts/OPTIMA_B.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-      <link rel="preload" href="/fonts/Optima_Italic.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-      <link rel="preload" href="/fonts/TrajanPro-Regular.woff" as="font" type="font/woff" crossOrigin="anonymous" />
-      <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(w,d,s,l,i){
-                w[l]=w[l]||[];
-                w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-                var f=d.getElementsByTagName(s)[0],
-                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-                j.async=true;
-                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-                f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-NW9ZRS3G');
-            `,
-          }}
-        />
-      
+      {/* Only the two faces actually used above the fold are preloaded:
+          Trajan Pro Regular (--ff-trajan, all headings and banner text) and
+          Optima (--ff-optima-r, body copy). Optima_Italic and OPTIMA_B were
+          previously preloaded but their families are barely referenced. */}
+      <link rel="preload" href="/fonts/TrajanPro-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+      <link rel="preload" href="/fonts/OPTIMA.woff" as="font" type="font/woff" crossOrigin="anonymous" />
         {/* <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -64,5 +102,6 @@ export default function Document() {
         </noscript>
       </body>
     </Html>
-  )
+    );
+  }
 }
