@@ -1,0 +1,22 @@
+# Netlify redirects.
+#
+# Format:  <from-path>  <to-path>  <status>
+# One rule per line; add new lines at the bottom. Rules are matched top to
+# bottom, first match wins.
+#
+# This file lives here rather than in netlify.toml or next.config.js on
+# purpose: both of those are modified on feature/staging-changes, so editing
+# them here would conflict when that branch is merged. Nothing on staging
+# touches this file, so it merges cleanly.
+
+# ---------------------------------------------------------------------------
+# Renamed posts
+# ---------------------------------------------------------------------------
+
+# "5 Dragon Women" was renamed once it was clear the piece covers six women,
+# which changed its slug. A newsletter had already gone out with the old link.
+/creative-experiences-behind-the-image/5-women-become-a-fire-breathing-dragon  /creative-experiences-behind-the-image/6-women-become-a-fire-breathing-dragon  301!
+
+# Same post under the /blog/ prefix. Inert today (main has no /blog/ routes)
+# but correct once feature/staging-changes lands and posts move there.
+/blog/5-women-become-a-fire-breathing-dragon  /blog/6-women-become-a-fire-breathing-dragon  301!
