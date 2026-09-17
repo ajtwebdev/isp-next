@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Container } from "./layoutComponents";
 
-
 const Wrapper = styled.div`
-
   background: linear-gradient(
     180deg,
     var(--clr-accent) 0%,
@@ -27,23 +25,26 @@ const StatGrid = styled.div`
   align-items: center;
   padding: 0.15em 0;
 
-  @media screen and (max-width: 48em) {
-    /* Two columns with the third centred beneath. This was stacked to a single
-       column when the labels went to 16px, because "Contributed to Charities"
-       could not fit a ~142px cell. "Charity Contributions" is shorter and the
-       top-row labels fit again. */
+
+  @media screen and (max-width: 47.9375em) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    row-gap: 0.55em;
+    row-gap: 1.2em;
     padding: 0.1em 0;
-    /* Top-aligned, not centred. "Women Photographed" needs two lines in a
-       ~150px cell at 16px while "Calgary Studio" needs one, so the two cells
-       are different heights. Centring each one in the row then pushed their
-       numerals onto different lines; aligning to the top keeps the numerals
-       level and lets only the labels differ in depth. */
     align-items: start;
 
-    & > :last-child {
+    & > :first-child {
       grid-column: 1 / -1;
+      margin-bottom: 0.2em;
+    }
+  }
+
+
+  @media screen and (max-width: 23.4375em) {
+    grid-template-columns: 1fr;
+    row-gap: 0.9em;
+
+    & > :first-child {
+      margin-bottom: 0;
     }
   }
 `;
@@ -65,13 +66,38 @@ const StatItem = styled.p`
     background: rgba(255, 255, 255, 0.18);
   }
 
-  @media screen and (max-width: 48em) {
+  @media screen and (max-width: 47.9375em) {
+    padding: 0 0.5em;
+
+    &::after {
+      display: none !important;
+    }
+
+    /* Only the two cells sharing the second row are divided. */
+    &:nth-child(2) {
+      border-right: 1px solid rgba(255, 255, 255, 0.18);
+      padding-right: 0.5em;
+    }
+    &:nth-child(3) {
+      padding-left: 0.5em;
+    }
+  }
+
+
+  @media screen and (max-width: 23.4375em) {
     padding: 0 0.75em;
 
-    /* Only the divider between the two top cells remains. */
-    &:nth-child(2)::after,
-    &:last-child::after {
-      display: none;
+    &:nth-child(2) {
+      border-right: none;
+      padding-right: 0.75em;
+    }
+    &:nth-child(3) {
+      padding-left: 0.75em;
+    }
+
+    &:not(:last-child) {
+      padding-bottom: 0.9em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     }
   }
 `;
@@ -80,15 +106,13 @@ const Value = styled.span`
   display: block;
   font-family: var(--ff-trajan);
   font-weight: 300;
-  /* Capped at 1.4rem (22.4px), down from 1.85rem: at the old size the
-     numeral overwhelmed the label rather than leading it. */
   font-size: clamp(1.2rem, 1.1vw + 0.6rem, 1.4rem);
   line-height: 1.15;
   letter-spacing: 0.01em;
   color: var(--txt-light);
 
   @media screen and (max-width: 48em) {
-    font-size: clamp(1.2rem, 5vw, 1.45rem);
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
     white-space: nowrap;
   }
 `;
@@ -96,16 +120,15 @@ const Value = styled.span`
 const Label = styled.span`
   display: block;
   margin-top: 0.28em;
-  /* 0.94rem (15px), up from 0.82rem. With the numeral at 22.4px this is a
-     1.5x ratio - the numeral still leads, the label is comfortably legible. */
   font-size: 0.94rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: rgba(255, 255, 255, 0.85);
 
   @media screen and (max-width: 48em) {
-    font-size: 1rem; /* 16px */
-    letter-spacing: 0.04em;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
   }
 `;
 

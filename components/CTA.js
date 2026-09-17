@@ -48,7 +48,7 @@ const Text = styled.div`
 `;
 
 export default function CTA(props) {
-  const buttonLabel = props.buttonLabel || "yes, i want to take the leap &#x2192;";
+  const buttonLabel = props.buttonLabel || "yes, i want to take the leap \u2192";
   const buttonHref = props.buttonHref || "/contact";
 
   return (
