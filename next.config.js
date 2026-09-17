@@ -118,6 +118,22 @@ module.exports = withBundleAnalyzer({
         destination: "/portfolios/wall-art",
         statusCode: 301,
       },
+      // The post was renamed once it was clear it covers six women, changing
+      // its slug. A newsletter had already gone out with the old slug. Both
+      // URL shapes are covered because the live site currently serves posts
+      // under /creative-experiences-behind-the-image/ while this branch moves
+      // them to /blog/, so recipients may land on either.
+      {
+        source:
+          "/creative-experiences-behind-the-image/5-women-become-a-fire-breathing-dragon",
+        destination: "/blog/6-women-become-a-fire-breathing-dragon",
+        permanent: true,
+      },
+      {
+        source: "/blog/5-women-become-a-fire-breathing-dragon",
+        destination: "/blog/6-women-become-a-fire-breathing-dragon",
+        permanent: true,
+      },
       ...blogRedirects,
     ];
   },

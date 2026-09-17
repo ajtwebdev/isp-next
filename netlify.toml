@@ -1,17 +1,3 @@
-# ---------------------------------------------------------------------------
-# Redirects
-# ---------------------------------------------------------------------------
-# The post "5 Dragon Women" was renamed once it was clear the piece covers six
-# women, which changed its slug. A newsletter had already gone out pointing at
-# the old slug, so that link 404s for every recipient who has not opened it
-# yet. 301 so the corrected post inherits the original URL's search equity.
-
-[[redirects]]
-  from = "/creative-experiences-behind-the-image/5-women-become-a-fire-breathing-dragon"
-  to = "/creative-experiences-behind-the-image/6-women-become-a-fire-breathing-dragon"
-  status = 301
-  force = true
-
 # Cache headers for static assets.
 #
 # Netlify's default for this site is `public,max-age=0,must-revalidate` on
