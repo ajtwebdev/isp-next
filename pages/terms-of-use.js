@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import LayoutJs from '../components/layoutJs'
 import Seo from '../components/seo'
 import { Container, HeroBannerPadding } from '../components/layoutComponents'
@@ -15,7 +16,7 @@ const TermOfUser = () => {
                 <h1>Welcome to Inner Spirit Photography</h1>
                 <p>
                     These terms and conditions outline the rules and regulations for the use of Inner Spirit Photography&#39;s
-                    Website, located at [<span><a style={{ display: 'table-cell' }} href="/" >www.innerspiritphoto.com</a></span>].
+                    Website, located at [<span><Link style={{ display: 'table-cell' }} href="/">www.innerspiritphoto.com</Link></span>].
                 </p>
                 <p>By accessing this website, we assume you accept these terms and conditions. Do not continue to use
                     Inner Spirit Photography if you do not agree to take all of the terms and conditions stated on this page.</p>
