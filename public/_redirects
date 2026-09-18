@@ -30,3 +30,12 @@
 # Old slug under the current prefix, for anyone who has the renamed post
 # bookmarked at its pre-rename slug.
 /blog/5-women-become-a-fire-breathing-dragon  /blog/6-women-become-a-fire-breathing-dragon  301!
+
+# ---------------------------------------------------------------------------
+# Retired page URLs
+# ---------------------------------------------------------------------------
+# Both 404 today and appeared in a site audit. /contact-us is the old spelling
+# of the contact page; /wall is a truncated form of /wall-art, which already
+# redirects to /gallery.
+/contact-us  /contact   301!
+/wall        /gallery   301!
