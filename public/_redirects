@@ -4,19 +4,29 @@
 # One rule per line; add new lines at the bottom. Rules are matched top to
 # bottom, first match wins.
 #
-# This file lives here rather than in netlify.toml or next.config.js on
-# purpose: both of those are modified on feature/staging-changes, so editing
-# them here would conflict when that branch is merged. Nothing on staging
-# touches this file, so it merges cleanly.
+# Netlify serves these at the CDN edge, before the request reaches Next, so
+# they win over next.config.js redirects and over the SSR 404 handler. The
+# trailing "!" forces the rule, which is what makes it beat that handler.
+#
+# Note: these cannot be tested with `npm run dev` - there is no Netlify edge in
+# front of it, so the file is simply never read. Use `npx netlify dev`, or
+# verify on a deploy.
 
 # ---------------------------------------------------------------------------
-# Renamed posts
+# Old category-path URLs -> /blog/<slug>
 # ---------------------------------------------------------------------------
+# Posts used to live under /creative-experiences-behind-the-image/<slug>. They
+# now live under /blog/<slug>, so the old paths 404. These rules point the
+# links that are already out in the world (newsletters, search results) at the
+# posts' current homes.
 
-# "5 Dragon Women" was renamed once it was clear the piece covers six women,
-# which changed its slug. A newsletter had already gone out with the old link.
-/creative-experiences-behind-the-image/5-women-become-a-fire-breathing-dragon  /creative-experiences-behind-the-image/6-women-become-a-fire-breathing-dragon  301!
+# "5 Dragon Women" was also renamed - the piece covers six women - so the slug
+# changed as well as the prefix.
+/creative-experiences-behind-the-image/5-women-become-a-fire-breathing-dragon  /blog/6-women-become-a-fire-breathing-dragon  301!
+/creative-experiences-behind-the-image/6-women-become-a-fire-breathing-dragon  /blog/6-women-become-a-fire-breathing-dragon  301!
 
-# Same post under the /blog/ prefix. Inert today (main has no /blog/ routes)
-# but correct once feature/staging-changes lands and posts move there.
+/creative-experiences-behind-the-image/our-51st-wedding-anniversary  /blog/our-51st-wedding-anniversary  301!
+
+# Old slug under the current prefix, for anyone who has the renamed post
+# bookmarked at its pre-rename slug.
 /blog/5-women-become-a-fire-breathing-dragon  /blog/6-women-become-a-fire-breathing-dragon  301!

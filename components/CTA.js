@@ -27,6 +27,17 @@ const Flex = styled.div`
 
   & > * {
     width: 100%;
+    /* A flex item defaults to min-width:auto, which for a replaced element
+       resolves to its intrinsic width - so the image refuses to shrink below
+       the natural width of the file it was served. On Netlify next/image
+       optimization is disabled, so the raw 662px-wide original is served and
+       the image held 662px of a 748px row, pushing the text column off the
+       right edge. Locally the optimizer returns a smaller rendition, the floor
+       is lower, and it happened to fit - which is why this only broke on the
+       deployed site. min-width: 0 lets the image shrink; flex: 1 1 0 makes the
+       two columns split the row evenly regardless of intrinsic size. */
+    min-width: 0;
+    flex: 1 1 0;
   }
 
   & > * + * {
