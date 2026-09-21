@@ -23,33 +23,31 @@ try {
 
 module.exports = withBundleAnalyzer({
   images: {
-    // Image Optimization stays OFF on Netlify. The deployed plugin is
-    // @netlify/plugin-nextjs v4, which serves /_next/image through its own
-    // IPX function; that function cannot load sharp's native library on
-    // Linux and returns 500 for every optimized image:
+    // Image Optimization is ON everywhere, Netlify included.
     //
-    //   /_next/image?... -> 301 -> /_ipx/... -> 500
-    //   "IPX Error: libvips-cpp.so.42: cannot open shared object file"
+    // It used to be forced off under NETLIFY: @netlify/plugin-nextjs v4 served
+    // /_next/image through its own IPX function, which could not load sharp's
+    // native library on Linux and returned 500 for every optimized image
+    // ("IPX Error: libvips-cpp.so.42: cannot open shared object file"). v5
+    // drops IPX for the Netlify Image CDN, so the workaround is no longer
+    // needed. v5 requires Next >= 13.5, which is why the two were upgraded
+    // together.
     //
-    // Not a lockfile problem - package-lock.json carries all the Linux sharp
-    // binaries; they are dropped when the plugin bundles the IPX function.
-    // The native optimizer needs plugin v5, which requires Next >= 13.5 (this
-    // project is on 13.4.3), so that is a separate upgrade. Until then the
-    // large source images are pre-resized in public/ instead.
-    unoptimized: !!process.env.NETLIFY,
-    domains: [
-      process.env.WORDPRESS_API_URL.match(/(?!(w+)\.)\w*(?:\w+\.)+\w+/)[0], // Valid WP Image domain.
-      "0.gravatar.com",
-      "1.gravatar.com",
-      "2.gravatar.com",
-      "secure.gravatar.com",
-    ],
+    // `domains` is deprecated in favour of `remotePatterns`; every host that
+    // was listed there is reproduced below, so nothing lost access.
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "res.cloudinary.com",
-        port: "",
+        // Valid WP image domain, derived from WORDPRESS_API_URL.
+        hostname: process.env.WORDPRESS_API_URL.match(
+          /(?!(w+)\.)\w*(?:\w+\.)+\w+/
+        )[0],
       },
+      { protocol: "https", hostname: "0.gravatar.com" },
+      { protocol: "https", hostname: "1.gravatar.com" },
+      { protocol: "https", hostname: "2.gravatar.com" },
+      { protocol: "https", hostname: "secure.gravatar.com" },
+      { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
   swcMinify: true,
