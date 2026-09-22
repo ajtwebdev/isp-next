@@ -22,19 +22,10 @@ try {
 }
 
 module.exports = withBundleAnalyzer({
+
+  outputFileTracingRoot: __dirname,
   images: {
-    // Image Optimization is ON everywhere, Netlify included.
-    //
-    // It used to be forced off under NETLIFY: @netlify/plugin-nextjs v4 served
-    // /_next/image through its own IPX function, which could not load sharp's
-    // native library on Linux and returned 500 for every optimized image
-    // ("IPX Error: libvips-cpp.so.42: cannot open shared object file"). v5
-    // drops IPX for the Netlify Image CDN, so the workaround is no longer
-    // needed. v5 requires Next >= 13.5, which is why the two were upgraded
-    // together.
-    //
-    // `domains` is deprecated in favour of `remotePatterns`; every host that
-    // was listed there is reproduced below, so nothing lost access.
+
     remotePatterns: [
       {
         protocol: "https",
@@ -50,7 +41,7 @@ module.exports = withBundleAnalyzer({
       { protocol: "https", hostname: "res.cloudinary.com" },
     ],
   },
-  swcMinify: true,
+
   async redirects() {
     return [
       {
@@ -89,15 +80,12 @@ module.exports = withBundleAnalyzer({
         permanent: true,
       },
       {
-        // FAQ is a top-level nav item now, so it lives at /faq rather than
-        // under the Resources section. /resources itself is still live.
+
         source: "/resources/faq",
         destination: "/faq",
         statusCode: 301,
       },
-      // Content/SEO cleanup: 301s added only where a clear, relevant
-      // replacement exists. Verified against the build that every destination
-      // returns 200, so none of these create a redirect chain or loop.
+
       {
         // Internal utility listing superseded by the real blog index.
         source: "/recent-posts",
@@ -116,11 +104,7 @@ module.exports = withBundleAnalyzer({
         destination: "/portfolios/wall-art",
         statusCode: 301,
       },
-      // The post was renamed once it was clear it covers six women, changing
-      // its slug. A newsletter had already gone out with the old slug. Both
-      // URL shapes are covered because the live site currently serves posts
-      // under /creative-experiences-behind-the-image/ while this branch moves
-      // them to /blog/, so recipients may land on either.
+
       {
         source:
           "/creative-experiences-behind-the-image/5-women-become-a-fire-breathing-dragon",
