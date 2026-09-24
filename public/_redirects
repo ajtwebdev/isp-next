@@ -39,3 +39,38 @@
 # redirects to /gallery.
 /contact-us  /contact   301!
 /wall        /gallery   301!
+
+# ---------------------------------------------------------------------------
+# Specific rules (must stay ABOVE the wildcards below - first match wins)
+# ---------------------------------------------------------------------------
+
+# "portriat" is a misspelling that never existed as a post. data/blog-redirects.json
+# maps these three old prefixes to /blog/<same-typo-slug>, which 404s - so today
+# they are a 301 into a dead end. These rules land on the correctly spelled post
+# instead, and being edge rules they run before that next.config.js redirect.
+/confidence/chandra-and-the-playful-tiger-a-calgary-portriat-session  /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+/boudoir/chandra-and-the-playful-tiger-a-calgary-portriat-session     /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+/blogs/chandra-and-the-playful-tiger-a-calgary-portriat-session       /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+
+# Legacy URL carrying a literal colon and mixed case in the slug.
+/blogs/from-heartbreak-to-healing:-Boudoir-after-Divorce  /blog/from-heartbreak-to-healing-boudoir-after-divorce  301!
+
+# Capitalised variant of /yoga. The lowercase /yoga is a Next page that issues
+# its own redirect to the same place; path matching here is case-sensitive, so
+# this rule only ever sees the uppercase form and the two do not collide.
+/Yoga  https://yoga.innerspiritphoto.com/  301!
+
+# Old blog index slug.
+/blog/nude-blog  /blog  301!
+
+# ---------------------------------------------------------------------------
+# Wildcards (must stay LAST)
+# ---------------------------------------------------------------------------
+# Every post under these four category prefixes now lives at /blog/<same-slug>;
+# verified across all 96 posts that the slug is identical on both sides, so the
+# splat maps cleanly. Renamed posts (the dragon above) and the misspelled slug
+# are handled by the specific rules earlier in this file, which win.
+/planning-your-session/*                  /blog/:splat   301!
+/creative-experiences-behind-the-image/*  /blog/:splat   301!
+/confidence-healing-body-image/*          /blog/:splat   301!
+/client-stories/*                         /blog/:splat   301!
