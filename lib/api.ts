@@ -1,4 +1,55 @@
 
+const pLimit = require("p-limit");
+
+
+const CONCURRENCY = Number(process.env.WP_FETCH_CONCURRENCY || 1);
+const limit = pLimit(CONCURRENCY);
+
+// Delay before each retry. Three attempts total, so a single request rides out
+// roughly 9s of instability before it is treated as a real failure.
+const RETRY_DELAYS_MS = [1000, 3000, 5000];
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+async function fetchWithRetry(url: string, init: any): Promise<Response> {
+  let lastError: any;
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS_MS.length; attempt++) {
+    try {
+      const res = await fetch(url, init);
+
+      if (res.status >= 500 || res.status === 429) {
+        if (attempt < RETRY_DELAYS_MS.length) {
+          const wait = RETRY_DELAYS_MS[attempt];
+          console.warn(
+            `[wp] HTTP ${res.status} from WordPress - retry ${attempt + 1}/${RETRY_DELAYS_MS.length} in ${wait}ms`
+          );
+          await sleep(wait);
+          continue;
+        }
+        console.error(
+          `[wp] HTTP ${res.status} from WordPress after ${RETRY_DELAYS_MS.length} retries - giving up`
+        );
+      }
+
+      return res;
+    } catch (error) {
+
+      lastError = error;
+      if (attempt < RETRY_DELAYS_MS.length) {
+        const wait = RETRY_DELAYS_MS[attempt];
+        console.warn(
+          `[wp] ${(error as Error).message} - retry ${attempt + 1}/${RETRY_DELAYS_MS.length} in ${wait}ms`
+        );
+        await sleep(wait);
+        continue;
+      }
+    }
+  }
+
+  throw lastError;
+}
+
 const API_URL = process.env.WORDPRESS_API_URL || "https://www.content.shelterinplace3.ca/graphql";
 async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   const headers = { "Content-Type": "application/json" };
@@ -9,15 +60,21 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
     ] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
   }
 
-  // WPGraphQL Plugin must be enabled
-  const res = await fetch(API_URL, {
-    headers,
-    method: "POST",
-    body: JSON.stringify({
-      query,
-      variables,
-    }),
-  });
+  // WPGraphQL Plugin must be enabled.
+  //
+  // Every request goes through a shared limiter and a retry loop. The build
+  // prerenders -190 pages and each getStaticProps issues several GraphQL
+  // calls, with Next running one worker per CPU core - previously all of that
+  // hit WordPress at once, which answered a growing share with 503 HTML error
+  // pages. A failed fetch makes getStaticProps return notFound, so a transient
+  // 503 was being baked into the build as a permanent 404.
+  const res = await limit(() =>
+    fetchWithRetry(API_URL, {
+      headers,
+      method: "POST",
+      body: JSON.stringify({ query, variables }),
+    })
+  );
 
   const json = await res.json();
   if (json.errors) {

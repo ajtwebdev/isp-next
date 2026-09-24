@@ -1,3 +1,18 @@
+# Build environment.
+#
+# Node is pinned so local, CI and Netlify all build on the same runtime. It
+# must stay in step with .nvmrc - change both together.
+[build.environment]
+  NODE_VERSION = "20.19.2"
+
+# @netlify/plugin-nextjs v5 serves next/image through the Netlify Image CDN.
+# v4 routed it through an IPX function that could not load sharp's native
+# library on Linux and returned 500 for every optimized image, which is why
+# images.unoptimized used to be forced on for Netlify builds. v5 requires
+# Next >= 13.5.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 # Cache headers for static assets.
 #
 # Netlify's default for this site is `public,max-age=0,must-revalidate` on
