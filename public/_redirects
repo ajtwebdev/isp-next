@@ -52,6 +52,26 @@
 /boudoir/chandra-and-the-playful-tiger-a-calgary-portriat-session     /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
 /blogs/chandra-and-the-playful-tiger-a-calgary-portriat-session       /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
 
+# The same misspelling under the four category prefixes. The wildcards at the
+# bottom would otherwise map these to /blog/<same-typo-slug>, which 404s - a
+# 301 into a dead end. Only the creative-experiences one is a URL the post ever
+# had (that is its category); the other three are defensive, since the slug is
+# the part that is wrong and any prefix could have been crawled.
+/planning-your-session/chandra-and-the-playful-tiger-a-calgary-portriat-session          /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+/creative-experiences-behind-the-image/chandra-and-the-playful-tiger-a-calgary-portriat-session  /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+/confidence-healing-body-image/chandra-and-the-playful-tiger-a-calgary-portriat-session  /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+/client-stories/chandra-and-the-playful-tiger-a-calgary-portriat-session                 /blog/chandra-and-the-playful-tiger-a-calgary-portrait-session  301!
+
+# No post has ever used the slug "what-to-wear" - searched every title and slug
+# in WordPress and there is no wardrobe/outfit article. The nearest real content
+# is an FAQ entry ("Can I bring my own outfits?"). Rather than let the wildcard
+# send these to /blog/what-to-wear (a 404), each lands on its own category
+# archive, which is topically the closest page that returns 200.
+/planning-your-session/what-to-wear                  /blog/planning-your-session                  301!
+/creative-experiences-behind-the-image/what-to-wear  /blog/creative-experiences-behind-the-image  301!
+/confidence-healing-body-image/what-to-wear          /blog/confidence-healing-body-image          301!
+/client-stories/what-to-wear                         /blog/client-stories                         301!
+
 # Legacy URL carrying a literal colon and mixed case in the slug.
 /blogs/from-heartbreak-to-healing:-Boudoir-after-Divorce  /blog/from-heartbreak-to-healing-boudoir-after-divorce  301!
 

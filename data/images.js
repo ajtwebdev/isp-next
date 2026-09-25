@@ -11,6 +11,11 @@ export const QUERY_ALL_GALLERY_IMAGES = gql`
           ACF_GalleryPage {
             gallery {
               sourceUrl
+              altText
+              mediaDetails {
+                width
+                height
+              }
             }
           }
         }

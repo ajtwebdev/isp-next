@@ -89,12 +89,15 @@ export default function BannerSecondary(props) {
     <Wrapper>
       <HeroBannerPadding />
       <Container className="container">
+
         <Image
           className="stretch clip-img "
           height={634}
           width={580}
           src={props.img}
-          alt={props.alt}
+          alt={props.alt || ""}
+          priority
+          sizes="(max-width: 62em) 100vw, 580px"
         />
         <Text className="spacing">
           <div>
