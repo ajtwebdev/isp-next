@@ -40,7 +40,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: ${GALLERY.containerWidth}%;
   margin: 0 auto;
-  max-width: 95rem;``
+  max-width: 95rem;
 `;
 
 const Grid = styled.div`
