@@ -84,6 +84,28 @@
 /blog/nude-blog  /blog  301!
 
 # ---------------------------------------------------------------------------
+# Retired WordPress service pages
+# ---------------------------------------------------------------------------
+# Linked from many blog posts but never carried over, so they 404. Each goes to
+# the page that now covers it: the "Get More Info" consultation page to the
+# contact page, and the Adventure / Empowerment Experience sessions to /experience.
+/free-consultation  /contact     301!
+/an-adventure       /experience  301!
+/empower            /experience  301!
+
+# Post was renamed. data/blog-redirects.json (generated) maps the old
+# body-painting URL to /blog/<old-long-slug>, which 404s; this edge rule runs
+# first and lands on the post's current slug instead.
+/body-painting/body-painting-is-having-a-very-sheer-second-skin-covering-your-nude-body-the-whole-body-could-be-covered-when-the-art-is-finished-or-bits-of-skin-might-still-peek-through-when-you-look-into-the-mir  /blog/body-painting-sheer-second-skin  301!
+/blog/body-painting-is-having-a-very-sheer-second-skin-covering-your-nude-body-the-whole-body-could-be-covered-when-the-art-is-finished-or-bits-of-skin-might-still-peek-through-when-you-look-into-the-mir  /blog/body-painting-sheer-second-skin  301!
+
+# Old WordPress media paths. Some posts still embed images as
+# www.innerspiritphoto.com/wp-content/uploads/..., which this Next site does not
+# serve. The files still exist on the WordPress media host the site uses for
+# every other image.
+/wp-content/uploads/*  https://staging.innerspiritphoto.com/wp-content/uploads/:splat  301!
+
+# ---------------------------------------------------------------------------
 # Wildcards (must stay LAST)
 # ---------------------------------------------------------------------------
 # Every post under these four category prefixes now lives at /blog/<same-slug>;
