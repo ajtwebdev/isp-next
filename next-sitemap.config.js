@@ -55,6 +55,12 @@ const DUPLICATE_PORTFOLIO_PATHS = [
   "/portfolio/wall-art",
 ];
 
+// Retired Be Bold contest (closed Oct 15). The pages stay up as a historical
+// record, but they are no longer advertised in the sitemap. Deliberately NOT
+// added to robots.txt: blocking crawling would stop Google seeing the pages'
+// noindex/closed state and could leave stale results in the index.
+const RETIRED_CONTEST_PATHS = ["/contest", "/contest-rules"];
+
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   siteUrl: process.env.SITE_URL || "https://innerspiritphoto.com",
@@ -64,6 +70,7 @@ module.exports = {
     ...NOINDEX_PATHS,
     ...UNWANTED_PATHS,
     ...DUPLICATE_PORTFOLIO_PATHS,
+    ...RETIRED_CONTEST_PATHS,
     // /blog/page/1 is a duplicate of /blog, and the rest are paginated views of
     // articles that are already listed individually.
     "/blog/page/*",
