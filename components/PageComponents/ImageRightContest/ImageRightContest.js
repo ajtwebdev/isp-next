@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Section, Flex } from "components/layoutComponents";
-import { ButtonPrimary,ButtonSecondary } from "components/buttons";
 import Image from "components/Image";
 import  { useState } from "react";
 
@@ -43,15 +42,10 @@ export default function ImageRightContest({
               <p className="subheader accent">{subheader}</p>
               <h2 className="title">{title}</h2>
             </div>
-            <div className="buttonGroup" style={{ display:'flex', gap: "1rem" }}>
-  <ButtonPrimary href="/contest-form">
-    Yes - Enter & Subscribe Me
-  </ButtonPrimary>
-
-  <ButtonSecondary href="/sorry-page">
-    No thanks - I don't want to enter
-  </ButtonSecondary>
-</div>
+            {/* Contest closed: entry buttons (/contest-form, /sorry-page) removed. */}
+<p className="subText bold">
+  The Be Bold Contest has closed and is no longer accepting entries.
+</p>
 {body ? (
   <div
     className="injected-html"

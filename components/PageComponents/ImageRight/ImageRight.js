@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Section, Flex } from "components/layoutComponents";
-import { ButtonPrimary,ButtonSecondary } from "components/buttons";
 import Image from "components/Image";
 import  { useState } from "react";
 
@@ -58,19 +57,10 @@ export default function ImageRight({
             >
               Enter Contest Here
             </ButtonPrimary> */}
-            <p className="subText">
-  Would you like to subscribe to our newsletter to enter the contest?
+            {/* Contest closed: newsletter/contest entry buttons removed. */}
+<p className="subText bold">
+  The Be Bold Contest has closed and is no longer accepting entries.
 </p>
-
-<div className="buttonGroup" style={{ display:'flex', gap: "1rem" }}>
-  <ButtonPrimary href="/contest-form">
-    Yes, subscribe & enter
-  </ButtonPrimary>
-
-  <ButtonSecondary href="/sorry-page">
-    No, I decline
-  </ButtonSecondary>
-</div>
           </Text>
           <Img>
             <Image
