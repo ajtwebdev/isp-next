@@ -38,14 +38,13 @@ export default function ImageRightContest({
       <Container>
         <Flex>
           <Text className="spacing">
+            {/* Contest closed: entry buttons (/contest-form, /sorry-page) removed.
+                The "Contest closed." notice is rendered above the page banner
+                in pages/[slugParent]/[[...slugChild]].js. */}
             <div>
               <p className="subheader accent">{subheader}</p>
               <h2 className="title">{title}</h2>
             </div>
-            {/* Contest closed: entry buttons (/contest-form, /sorry-page) removed. */}
-<p className="subText bold">
-  The Be Bold Contest has closed and is no longer accepting entries.
-</p>
 {body ? (
   <div
     className="injected-html"

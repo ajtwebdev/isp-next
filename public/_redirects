@@ -83,6 +83,10 @@
 # Old blog index slug.
 /blog/nude-blog  /blog  301!
 
+# Old service URLs. Destination confirmed by the client (2026-11-19).
+/adventure  /experience  301!
+/heal       /experience  301!
+
 # ---------------------------------------------------------------------------
 # Retired WordPress service pages
 # ---------------------------------------------------------------------------

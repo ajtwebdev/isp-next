@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { ButtonPrimary } from "../components/buttons";
 import CTA from "../components/CTA";
 import Diversity from "../components/diversity";
@@ -24,6 +25,19 @@ export default function Index() {
         title="Boudoir Photography Calgary | See How Amazing You Truly Are | Inner Spirit Photo"
         description="Encouraging, supportive, life-changing. Calgary boudoir photography to build your self-esteem, love yourself more deeply, and see how amazing you truly are!"
       />
+      <Head>
+        {/* Preload the mobile hero (the mobile LCP image). The media query
+            matches the <source> in components/Heros/hero.js, so desktop never
+            fetches it. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/_Home-hero-mobile.webp"
+          type="image/webp"
+          media="(max-width: 43em)"
+          fetchPriority="high"
+        />
+      </Head>
       <HeroBasic />
       <HeroQuote />
       <Stats />

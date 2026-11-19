@@ -6,6 +6,7 @@ import { getPageByUri, getAllPages, getBreadcrumbsByUri } from "lib/pages";
 import LayoutJs from "../../components/layoutJs";
 import Seo from "../../components/seo";
 import styled from "styled-components";
+import { Section, Container } from "../../components/layoutComponents";
 
 export default function Page(props) {
   const { page } = props;
@@ -28,6 +29,16 @@ export default function Page(props) {
     <LayoutJs>
       <Seo title={title} description={description} />
       <div>
+        {/* The Be Bold contest has ended. The page stays published as a record;
+            this notice sits above its banner ("Be Bold Contest"). */}
+        {slug === "contest" && (
+          <Section>
+            <Container>
+              <p className="subText bold center">Contest closed.</p>
+            </Container>
+          </Section>
+        )}
+
         {/* Iterate over ACF flexible fields and pass props to imported component */}
         {hasFlexibleFields && (
           <div>

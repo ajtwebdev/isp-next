@@ -241,7 +241,6 @@ export default function HeroBasic() {
               width="2500"
               height="1125"
               fetchPriority="high"
-              decoding="async"
               alt="Blonde woman in brown lingerie sits on bed looking up at camera in her Calgary Boudoir Session."
             />
           </picture>
