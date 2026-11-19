@@ -311,7 +311,10 @@ export default function HeaderBasic() {
                   alt="inner spirit photography logo"
                   height={40}
                   width={250}
-                  priority
+                  // Not `priority`: that preloads the logo on every page, and on
+                  // the homepage it competed with the mobile hero (the LCP image).
+                  // Eager, so it still isn't lazy-loaded above the fold.
+                  loading="eager"
                 />
               </Link>
             </LogoContainer>

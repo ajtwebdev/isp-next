@@ -31,7 +31,7 @@ export default function Investment() {
               Our Connoisseur Experience 2-hour Session is $395
             </p>
             <p>
-              Our  Essence Experience $795- 1 hour session with 3 prints.
+              Our Essence Experience $795 (includes 3 prints) - 1 hour session.
             </p>
             <p>
               Image collections, framed prints, bound books and digital images

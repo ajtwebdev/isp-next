@@ -102,7 +102,7 @@ export default function FullFaq() {
             />
             <AccordionItem
               question="What is the investment range?"
-              answer={`Clients typically invest $1,500 to $5,000 for their session and images.\n\nThat includes a four-hour session, plus professional hair and makeup. Choose from wall art, books, digital images, and loose prints.\n\nWe also offer a $795 Teaser session that includes prints.`}
+              answer={`Clients typically invest $1,500 to $5,000 for their session and images.\n\nThat includes a four-hour session, plus professional hair and makeup. Choose from wall art, books, digital images, and loose prints.\n\nWe also offer a $795 Essence session, which includes 3 prints.`}
             />
             <AccordionItem
               question="Is there a planning session, or do we wing it?"

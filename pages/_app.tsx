@@ -14,7 +14,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={client}>
-      <Script id="gtm-base" strategy="afterInteractive">
+      {/* lazyOnload: GTM (and the GA4 and Facebook tags it injects) starts after
+          the window load event, so its ~430 KB of script no longer competes with
+          the homepage hero for the main thread. Tags and container are unchanged. */}
+      <Script id="gtm-base" strategy="lazyOnload">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
