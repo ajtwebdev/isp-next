@@ -6,7 +6,38 @@ import { getPageByUri, getAllPages, getBreadcrumbsByUri } from "lib/pages";
 import LayoutJs from "../../components/layoutJs";
 import Seo from "../../components/seo";
 import styled from "styled-components";
-import { Section, Container } from "../../components/layoutComponents";
+import { Container } from "../../components/layoutComponents";
+
+/**
+ * "Contest closed." band at the top of /contest.
+ *
+ * The site header (components/headers/headerBasic.js) is position: fixed and
+ * 73px tall: a 40px logo + 1em padding top and bottom + a 1px border. Below
+ * 22em the logo drops to 30px, so the header is 63px - the same two values the
+ * header's mobile nav uses for its `top`. The band's top padding clears that
+ * height, then adds its own breathing room.
+ *
+ * Dark ground so it runs straight into the dark Banner beneath it. White
+ * Trajan rather than burgundy: burgundy on black is only 1.74:1.
+ */
+const ContestClosedNotice = styled.div`
+  background: var(--clr-dark);
+  color: var(--txt-light);
+  padding: calc(73px + 2.5rem) 0 1.5rem;
+
+  @media screen and (max-width: 22em) {
+    padding-top: calc(63px + 2rem);
+  }
+
+  p {
+    margin: 0;
+    text-align: center;
+    font-family: var(--ff-trajan);
+    font-size: clamp(1.5rem, 1.1rem + 2vw, 2.25rem);
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+  }
+`;
 
 export default function Page(props) {
   const { page } = props;
@@ -32,11 +63,11 @@ export default function Page(props) {
         {/* The Be Bold contest has ended. The page stays published as a record;
             this notice sits above its banner ("Be Bold Contest"). */}
         {slug === "contest" && (
-          <Section>
+          <ContestClosedNotice>
             <Container>
-              <p className="subText bold center">Contest closed.</p>
+              <p>Contest closed.</p>
             </Container>
-          </Section>
+          </ContestClosedNotice>
         )}
 
         {/* Iterate over ACF flexible fields and pass props to imported component */}
